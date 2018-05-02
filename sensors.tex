@@ -223,8 +223,8 @@ Other regular characterizations which are based on shape features may include:
 
 \begin{itemize}
 \item Attenuation: Also called suppression or depression. Reduction of amplitude of EEG activity resulting from decreased voltage. When activity is attenuated by stimulation, it is said to have been "blocked" or to show "blocking".
-\item Hypersynchrony. Seen as an increase in voltage and regularity of rhythmic activity, or within the alpha, beta, or theta range. The term implies an increase in the number of neural elements contributing to the rhythm.
-\item Paroxysmal. Activity that emerges from background with a rapid onset, reaching (usually) quite high voltage and ending with an abrupt return to lower voltage activity. Though the term does not directly imply abnormality, much abnormal activity is paroxysmal.
+\item Hypersynchrony: Seen as an increase in voltage and regularity of rhythmic activity, or within the alpha, beta, or theta range. The term suggest an increase in the number of neural elements contributing to the rhythm.
+\item Paroxysmal: Activity that emerges from background with a rapid onset, reaching (usually) quite high voltage and ending with an abrupt return to lower voltage activity. Though the term does not directly imply abnormality, much abnormal activity is paroxysmal.
 \end{itemize}
 
 \begin{itemize}
@@ -317,7 +317,7 @@ One of the earliest approach to automatically process EEG data is the Peak Picki
 
 A related method is used in \citep{Alvarado-Gonzalez2016} where the area under the curve of the EEG is sumarized to derive a feature.  This was even used in the seminal work of Farwell and Donchin on P300 \citep{Farwell1988,WolpawJonathanR2012}. Additionally, a logarithmic graph of the peak-to-peak amplitude which is called amplitude integrated EEG (aEEG) \citep{Shah2015} is used nowadays in Neonatal Intensive Care Units.
 
-Other works on EEG explored the idea to extend human capacities analyzing EEG waveforms \citep{Klein1976} where a feature from the amplitude and frequency of its signal and its derivative in time-domain is used.  Moreover, other works explored the use of Mathematical Morphology \citep{Yamaguchi2009}, where the time-domain structure of contractions and dilations were studied, and finally the seminal proposals of Fujimori, Uchida and the PAA algorithm as few of the earliest proposals where the idea of capturing the shape of the signal were established.
+Other works on EEG explored the idea to extend human capacities analyzing EEG waveforms \citep{Klein1976} where a feature from the amplitude and frequency of its signal and its derivative in time-domain is used.  Moreover, other works explored the use of Mathematical Morphology \citep{Yamaguchi2009}, where the time-domain structure of contractions and dilations were studied, and finally the proposals of Fujimori, Uchida and the PAA algorithm as few of the earliest proposals where the idea of capturing the shape of the signal were established.
 
 %Althought CASENET REFERENCe explored "waveform" structure they were purely based on spike detection based on feeding artificial neural networks.  
 
@@ -363,7 +363,9 @@ All these methods provide a feature that can be used as a template, whereas all 
 
 Pursuit algorithms refer, in their many variants, as blind source separation(REF) techniques that assume that the EEG signal is a linear combination of different sources that comes from template's dictionaries.  The underlying idea is to find the best template out of a dictionary that matches against the signal.  The algorithm works iteratively, starting from the raw signal and then, the template is substracted from the signal in Graham-Schmidt approach and the process iterates. (ref Cohen book, Sanei book, Mallat and Zhang 1993).
 
-On the other hand, Morphological Component Analysis is a variant form of Blind Source Separation which can be considered the extension of Matching Pursuit algorithm. (cita a esa parte del paper).
+Two variants of this algorithm are evaluated. In \textit{MP 1} the dictionary is directly constructed with the normalized templates from Fig \ref{fig:dictionaryfig}.  In \textit{MP 2} the coefficients of  Daubechies least-asymetric wavelet with 2 vanishing moments atoms are used to construct the dictionary.  To construct each feature a signal is decomposed in its coefficients and then they can be compared by any distance function.
+
+%On the other hand, Morphological Component Analysis is a variant form of Blind Source Separation which can be considered the extension of Matching Pursuit algorithm. (cita a esa parte del paper).
 
 \subsection{Permutation Entropy - PE}
 
@@ -424,9 +426,9 @@ Fig. \ref{fig:gaincheck} shows the result of superimposing the template signal i
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=10cm]{images/doublegain.eps}
-\includegraphics[width=10cm]{images/triplegain.eps}
-\caption{8-Channel EEG signal superimposed with the ERP Template.  Left show the signal with single gain and right the same signal with double gain.}
+\includegraphics[width=5cm]{images/doublegain.eps}
+\includegraphics[width=5cm]{images/triplegain.eps}
+\caption{8-Channel EEG signal superimposed with the ERP Template.  (Left) EEG trace of the original signal. (Right) The same signal segment with the superimposed template.}
 \label{fig:doubleandtriplegain}
 \end{figure}
 
@@ -469,8 +471,8 @@ By computing the aforementioned equations, the letter of the matrix can be deter
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/dictionary.eps}
-\caption{Coherently averaged signals containing the superimposed ERP.  Each one is extracted from the 15 first trials (2 signals from each trial, one belonging to the column and the other to the row).  These are the templates that are used by the classification algorithm described in \ref{section:classification}.}
-\label{fig:amplitudenoise}
+\caption{Coherently averaged signals containing the superimposed ERP.  Each one is extracted from the 15 first trials (2 signals from each trial, one belonging to the column and the other to the row).  These are the templates used to build the dictionary $T$ and that are used by the classification algorithm described in \ref{section:classification}.}
+\label{fig:dictionaryfig}
 \end{figure}
 
 
@@ -478,11 +480,11 @@ By computing the aforementioned equations, the letter of the matrix can be deter
 \section{Results}
 \label{section:results}
 
-Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{section:results} shows the single-trial performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance was obtained.   Figure \ref{fig:performancetest} shows the performance curves for eight algorithms.  Each one represents the percentage of letters that were actually predicted by the combination of feature plus a classification method.  The data were divided in two, and the first 15 letters were used to derive the dictionary of templates $T$ while the remaining 20 letters were used to measure the classification accuracy.   Figure \ref{fig:performancetestlatency} shows the same results obtained when a random uniform latency shift was added to each trial.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained when the amplitude of the N1 and P3 component of the template are randomly reduced (uniform distribution).
+Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{tab:results} shows the single-trial performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance was obtained.   Figure \ref{fig:performancetest} shows the performance curves for eight algorithms.  Each one represents the percentage of letters that were actually predicted by the combination of feature plus a classification method.  The data were divided in two, and the first 15 letters were used to derive the dictionary of templates $T$ while the remaining 20 letters were used to measure the classification accuracy.   Figure \ref{fig:performancetestlatency} shows the same results obtained when a Gaussian latency shift was added to each trial.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained when the amplitude of the N1 and P3 component of the template are randomly reduced (uniform distribution).
 
 
 \begin{table}[H]
-\caption{Classification performance obtained for all the waveform-based algorithms.  All the methods process the signal on a channel-by-channel basis, so the best performing channel is also shown.  It can be understood as the channel that adds less noise to the ERP template. All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal that was used to obtain the feature that was finally classified.}
+\caption{Classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, HGO Histogram of Gradient Orientation, PE Permutation Entropy, SHCC Slope Horizontal Code Chain, RS Raw Signal, NN Neural Network, SVM Support Vector Machines.  All the methods that process the signal on a channel-by-channel basis, so the best performing channel is also shown. The mark $m-c$ is used on the control algorithms to identify that the feature was constructed using all the channels.  It can be understood as the channel that adds less noise to the ERP template. All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal that was used to obtain the feature that was finally classified.}
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
 \begin{tabular}{ccc}
@@ -496,6 +498,9 @@ PE     & Cz & $20\%$ \\
 SHCC & P4 & $10\%$ \\
 RS     & Fz & $15\%$ \\
 RS m-c &   & $15\%$ \\
+NN s-c & Fz & $10\%$ \\
+NN m-c & Cz & $45\%$ \\
+SVM m-c & Cz & $50\%$ \\
 \bottomrule
 \end{tabular}
 \label{tab:results}
@@ -529,41 +534,33 @@ RS m-c &   & $15\%$ \\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 
-Findings
+The classification methods Support Vector Machine SVM and Artificial Neural Networks NN are added for comparison using the feature of Kasinksky (REF).  Additionally, the Kasinksky feature is used with the same classification algorithm as detailed in \ref{section:classification}.
 
-The shape of the signal is absolutely related to the single trial latency.
-However the methods are more robust to changes in peak amplitudes.
+All the methods show a significant reduction of performance when the latency noise is added, and at the same time all the methods show resistance to noise in peak amplitudes.
 
-The multichannel approach provides better information, except for the raw signal.
+Except for the raw signal, using a multichannel feature provides a better synthesis of the differentiation information that provides a better accuracy.  This can be seen in Fig \ref{fig:performancetest} where the performance of the control algorithm NN is improved by using a multichannel feature.  The poor raw signal performance while using a multichannel feasture is likely to the curse of dimensionality due to the fact that the feature is simple too large.
 
-The conventional clinical method of observing the waveform is understood to be subjective and laborious because results depend on the technicians' experience and expertise.  The need for more objective measurements pushed the adoption of more automated means of decoding the signals and demanded a need for replication \citep{Thakor2004}.  This lead to the initial development of quantitative EEG, which however didn't replaced clinically the traditional approach which is still widespread.
+Using a straightforward dictionary of templates for MP-1 proved more beneficial in terms of performance than the standard approach of using a Hilbert base of Wavelets atoms.
 
-This approach is relative common in chemical analysis (i.e. chemometrics Skoog, D.; West, D.; Holler, F. Analtyical Chemistry, An Introduction; Saunders: Philadelphia, 1994.), geology (sismic analysis), and quantitive financial analysis.  EKG, or Electrocardiogram, on the other hand, has been extensively processed and analyzed by waveform methods.
-P,Q,R,S,T peaks in EKG analysis (REFERENCE).  Additionally, the same problem can be found in Intelligent Character Recognition.
+The methods \textit{HGO} and \textit{SHCC} performed much better than the other algorithms including when the latency and the amplitudes are noisy.
 
-Dimensionality reduction which is truly applied when the waveform is actually formed (curse of dimensionality).
-
-Segmetation or identification is not considered.  Where should I look from within the EEG trace ?  This is clear the problem of detection and not feature extraction.
+It is important to remark that Segmentation or identification is not considered in these experiments. The  problem of segmentation is related to the detection of a feature within an EEG trace and not to the feature extraction problem.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 
-The purpose of this work was twofold, (1) raise awareness about the utility of using automatic waveform-based methods to study EEG signals, (2) to provide an overview of the state-of-the-art of those methods, and (3) to compare those methods and verify if it is possible to obtain classification accuracies based exclusively on the signal's waveform.
+The conventional clinical method of observing the waveform is understood to be subjective and laborious because results depend on the technicians' experience and expertise.  The need for more objective measurements pushed the adoption of more automated means of decoding the signals and demanded a need for replication \citep{Thakor2004}.  This lead to the initial development of quantitative EEG, which however didn't replaced clinically the traditional approach which is still widespread.
 
-Invasive methods remains an issue (referencia del paper de nature que muestra como causan deficits los implantes)
+The purpose of this work was threefold, (1) raise awareness about the utility of using automatic waveform-based methods to study EEG signals, (2) to provide an overview of the state-of-the-art of those methods, and (3) to compare those methods and verify if it is possible to obtain classification accuracies based exclusively on the signal's waveform.
 
-BCI as Assistive technology and BCI supplement natural motor output
-The value of clinical focus, 
-BCI reliability (WOkpaw and wolpaw).  Clinical EEG diagnosis may support a vast set of already understood knowledge which is based on identifying EEG patterns by their shape and that can lead to more robust implementation of BCI devices.
+One of the main goals of the BCI discipline is to provide assistance to patients and to provide alternative tools to be used in diagnostics and rehabilitation procedure.  This requires a clinical focus which is often neglected in BCI research (ref).  At the same time, BCI reliability and the avoidance of the black box phenomena are goals that are still unfulfilled in this discipline(WOkpaw and wolpaw). The benefits of analysing or including metrics about the shape of the EEG, are that clinical EEG diagnosis may support a vast set of already understood knowledge which is based on identifying EEG patterns by their shape and that can lead to more robust implementation of BCI devices.
 
-Let us now turn to the question posed in the title of this paper.
+Successful approaches in Computer Vision or pattern recognition in other areas use a set of different features to compound ensemble classifiers.  All these methods had the advantage that they can truly map a visual component with a clinical meaning, assessed by a physician, and provide an automatic identification which can be constructed by the set of methods.  
 
-Successful approaches in Computer Vision or pattern recognition in other areas use a set of different features to compount ensemble classifiers.  All these methods had the advantage 
-that they can truly map a visual component with a clinical meaning, assessed by a physician, and provide an automatic identification which can be constructed by the set of methods.  We believe this approach can be used to provide tools which are more meaningful to the clinical set.
+More work has to be conducted in order to extend this methods to other patterns of waves.
 
-Particularly considering BCI, this approach, in line with the general idea, can be used to foster BCI solutions that can help clinical settings.  Precisely for the same reasons.
-
-More work has to be conducted in order to extend this methods to other patterns of waves.  
+The procedure of analysing signals by their waveforms is relative common in chemical analysis (i.e. chemometrics Skoog, D.; West, D.; Holler, F. Analtyical Chemistry, An Introduction; Saunders: Philadelphia, 1994.), geology (sismic analysis), and quantitive financial analysis.  EKG, or Electrocardiogram, on the other hand, has been extensively processed and analysed by waveform methods.
+Additionally, the same problem can be found in Intelligent Character Recognition.
 
 %Berger H: tiber das Elektrenkephalogramm des Menschen, Archiv Psychiatr, 87 (1929) pp. 527-570.
 
@@ -598,7 +595,7 @@ More work has to be conducted in order to extend this methods to other patterns 
 %\supplementary{The following are available online at www.mdpi.com/link, Figure S1: title, Table S1: title, Video S1: title.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\acknowledgments{This project was supported by the ITBACyT-15 funding program issued by ITBA University.}
+\acknowledgments{This project was supported by the ITBACyT-15 funding program issued by ITBA University. We would like to thank to Dr. Jian Zhang for providing details of the MIDS algorithm, to Dr. Valentina Unakafova for providing the Permutation Entropy algorithm and to Dr. Montserrat-Alvarado González for providing the source code and a detailed description of the SHCC algorithm.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \authorcontributions{This projects is part of a the first author's PhD Thesis which is directed by Juan Miguel Santos and codirected by Ana Julia Villar.}
