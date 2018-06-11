@@ -4,7 +4,7 @@
 % You need to save the "mdpi.cls" and "mdpi.bst" files into the same folder as this template file.
 
 %=================================================================
-\documentclass[sensors,article,submit,moreauthors,pdftex,10pt,a4paper]{mdpi} 
+\documentclass[brainsci,article,submit,moreauthors,pdftex,10pt,a4paper]{mdpi} 
 
 %
 %--------------------
@@ -129,7 +129,7 @@ $^{1}$ \quad Computer Engineering Department, Instituto Tecnológico de Buenos A
 
 %So far the interaction with devices has been based on muscular movement, but these trends are pushing the boundary beyond the confines of the body.
 
-Current society is demanding technology to provide the means to realize the utopia of social inclusion for people with disabilities\citep{Wolpaw2002}.  Additionally, as societies are aging \citep{Lutz2008} the incidence of neuromuscular atrophies, strokes and other invalidating diseases is increasing.  Concurrently, the digital revolution and the pervasiveness of digital gadgets have modified the way people interact with the environment through these devices \citep{Domingo2012}.  All this communication is based on muscular movement \citep{Guger2017}, but these trends are pushing this boundary beyond the confines of the body and beyond the limitation of human movement.  A new form of Human Machine communication which directly connects the Central Nervous System (CNS) to a machine or computer device is currently being developed: Brain Machine Interfaces (BMI), Brain Computer Interfaces (BCI) or Brain-Neural Computer Interfaces (BNCI).
+Current society is demanding technology to provide the means to realize the utopia of social inclusion for people with disabilities\citep{Wolpaw2002}.  Additionally, as societies are aging \citep{Lutz2008} the incidence of neuromuscular atrophies, strokes and other invalidating diseases is increasing.  Concurrently, the digital revolution and the pervasiveness of digital gadgets have modified the way people interact with the environment through these devices \citep{Domingo2012}.  All this communication is based on muscular movement \citep{Guger2017}, but these trends are pushing this boundary beyond the confines of the body and beyond the limitation of human motion.  A new form of Human Machine communication which directly connects the Central Nervous System (CNS) to a machine or computer device is currently being developed: Brain Machine Interfaces (BMI), Brain Computer Interfaces (BCI) or Brain-Neural Computer Interfaces (BNCI).
 
 At the center of all this hype, we can find a hundredth year old technology, rock-solid as a diagnosis tool, which greatly benefited from the shrinkage of sensors, the increase in computer power and the widespread development of wireless protocols and advanced electronics: the Electroencephalogram (EEG) \citep{Schomer2010}.
 
@@ -137,7 +137,7 @@ EEG sensors are wearable \citep{Puce2017} non-invasive, portable and mobile \cit
 
 The clinical and historical tactic to analyze EEG signals were based on detecting visual patterns out of the EEG trace or polygraph\citep{Hartman2005}: multichannel signals were extracted and continuously plotted over a piece of paper. Electroencephalographers or Electroencephalography technician have decoded and detected patterns along the signals by visually inspecting them \citep{Schomer2010}.   Nowadays clinical EEG still remains a visually interpreted test \citep{Hartman2005}.
 
-In contrast, automatic processing, or quantitative EEG, was based first on analog electronic devices and later on computerized digital processing methods \citep{Jansen1991}.  They implemented mathematically and algorithmically complex procedures to decode the information with good results \citep{Yuste2017}.  The best materialization of the automatic processing of EEG signals rests in the BCI discipline, where around $71.2\%$ is based on noninvasive EEG \citep{Guger2017}.  
+In contrast, automatic processing, or quantitative EEG (qEEG), was based first on analog electronic devices and later on computerized digital processing methods \citep{Jansen1991}.  They implemented mathematically and algorithmically complex procedures to decode the information associated with a clinical condition, or even some higher cognitive state \citep{Yuste2017}.  The best materialization of the automatic processing of EEG signals rests in the BCI discipline, where around $71.2\%$ is based on noninvasive EEG \citep{Guger2017}.  
 
 %rich clinical literature
 
@@ -145,11 +145,12 @@ Hence, the traditional and knowledgeable approach was mainly overshadow particul
 
 The aim of this study is twofold: first to review current literature of EEG processing techniques which are based on analysis of the waveform.  The second is to evaluate and study these methods by analyzing its classification performance against a pseudo-real dataset. We believe that the importance of waveform analysis methods, as described here, is that by using this methodology, collaboration could be fostered because there is a clear description and characterization of the signal, where the extensive literature which explores clinical EEG can be reviewed from the same shared perspective \citep{Nijboer2009,Wei2017}. 
 
-This article unfolds as follows: Section 1 will provide a brief introduction to EEG characterization and the particularities of the EEG waveform characterization.  Section 3 will explain the algorithms based on the waveform that will be used to perform the benchmark.  Section 4 the experimentation procedure will be explained.  Results will be presented in Section 5 and finally Discussion and Conclusions will be established in the final sections.
+This article unfolds as follows: Section \ref{EEG} will provide a brief introduction to EEG and the particularities of the EEG waveform characterization.  Section \ref{Algorithms} will explain the algorithms based on the waveform that will be analyzed.  In Section \ref{Experimental} the experimentation procedure will be explained.  Results will be presented in Section \ref{section:results} and finally Discussion and Conclusions will be established in the final sections.
 
 \section{Electroencephalography}
+\label{EEG}
 
-The Electroencephalography consists on the measurement of small variations of electrical currents over the scalp.  It is one of the most widespread used method to capture brain signals and was initially developed by Hans Berger in 1924 and has been extensively used for decades to diagnose neural diseases and other medical conditions.
+The Electroencephalography consists on the measurement of small variations of electrical currents over the scalp.  It is one of the most widespread used methods to capture brain signals and was initially developed by Hans Berger in 1924 and has been extensively used for decades to diagnose neural diseases and other medical conditions.
 
 The first characterization that Dr. Berger detected was the Visual Cortical Alpha Wave, the \textit{Berger Rythm} \citep{Jansen1991}.  He understood that the amplitude and shape of this rhythm was coherently associated to a cognitive action (eyes closing).  
 We should ask ourselves if the research advancement that came after that discovery would have happened if it weren't so evident that the shape alteration was due to a very simple and verifiable cognitive process.
@@ -158,19 +159,21 @@ The EEG signal is a highly complex multi-channel time-series.  It can be modeled
  
 \begin{figure}[H]
 \centering
-\includegraphics[height=6cm,width=12cm]{images/eegsample.png}
-\caption{Sample EEG signal captured and plotted on a 2D image using the popular and commercial EPOC Emotiv using EEGLAB.}
+\includegraphics[height=6cm,width=12cm]{images/sampleeeg.eps}
+\caption{Sample EEG signal obtained from g.Tec g.Nautilus.  Time axis is in seconds and five seconds are displayed.  The eight channels provided by this device are shown.}
 \label{fig:sampleeeg}
 \end{figure}
+
+%locations.eps
 
 The device that captures these small variations in current potentials over the scalp is called the Electroencephalograph.  Electrodes are located in predetermined positions over the head, usually embedded in saline solutions to facilitate the electrophysiological interface and are connected to a differential amplifier with a high gain which allowed the measurement of tiny signals. Although initially analog devices were developed and used, nowadays digital versions connected directly to a computer are pervasive.  A detailed explanation on the particularities and modeling of EEG can be obtained from \citep{Jackson2014}, and a description of its electrophysiological aspects from \citep{Haberman2012}.
 
 Overall, EEG signals can be described by their phase, amplitude,  frequency and \textit{waveform}.  The following components regularly  characterize EEG signals:
 
 \begin{itemize}
-\item Artifacts:  These are signal sources which are not generated from the CNS, but can be detected from the EEG signal.  These are called endogeneous or physiological when they are generated from a biological source like muscles, ocular movements, etc., and exogeneous or non-physiological when they have an external electromagnetic source like line induced currents or electromagnetic noise\citep{Weeda2012}.
+\item Artifacts:  These are signal sources which are not generated from the CNS, but can be detected from the EEG signal.  They are called endogeneous or physiological when they are generated from a biological source like muscles, ocular movements, etc., and exogeneous or non-physiological when they have an external electromagnetic source like line induced currents or electromagnetic noise\citep{Weeda2012}.
 \item Non-Stationarity: the statistical parameters that describe the EEG as a random process are not conserved through time, i.e. its mean and variance, and any other higher-order moments are not time-invariant \citep{Jansen1991}.
-\item DC drift and trending: in EEG jargon, which is derived from concepts of electrical amplifiers theory, Direct Current (DC) refers to very low frequency components of the EEG signal which varies around a common center, usually the zero value.  DC drift means that this center value drifts in time.  Although sometimes considered as a nuisance that needs to get rid of, it is known that very important cognitive phenomena like Slow Cortical Potentials or Slow Activity Transients in innates do affect the drift and can be used to understand some particular brain functioning \cite{Schomer2010}.
+\item DC drift and trending: in EEG jargon, which is derived from concepts of electrical amplifiers theory, Direct Current (DC) refers to very low frequency components of the EEG signal which varies around a common center, usually the zero value.  DC drift means that this center value drifts in time.  Although sometimes considered as a nuisance that needs to get rid of, it is known that very important cognitive phenomena like Slow Cortical Potentials or Slow Activity Transients in infants do affect the drift and can be used to understand some particular brain functioning \cite{Schomer2010}.
 \item Basal EEG activity: the EEG is the compound summation of myriads of electrical sources from the CNS.  These sources generate a baseline EEG which shows continuous activity with a small or null relation with any concurrent cognitive activity or task.
 \item Inter-subject and intra-subject variability: EEG can be affected by the person's behavior like sleep hygiene, caffeine intake, smoking habit or alcohol intake previously to the signal measuring procedure \citep{Farzan2017}.
 \end{itemize}
@@ -179,15 +182,15 @@ Regarding how the EEG activity can be related to an external stimulus that is af
 
 \begin{itemize}
 \item Spontaneous: generally treated as noise or basal EEG.
-\item Evoked: activity that is time-locked to an incoming stimulus or an executed motor action.  In contrast it is often called Induced activity
+\item Evoked: activity that can be detected synchronously after some specific amount of time after the onset of the stimulus.  This is usually referred as time-locked.  In contrast to the previous one, it is often called Induced activity.
 \end{itemize}
 
 \noindent Additionally, according to the existence of a repeated rhythm, the EEG activity can be understood as
 
 \begin{itemize}
-\item Rhythmic: EEG activity consisting in waves of approximately constant frequency.  It is often abbreviated RA (regular rythmic activity).
-\item Arrhythmic: EEG activity in which no stable rhythms are present.
-\item Dysrhythmic: Rhythms and/or patterns of EEG activity that characteristically appear in patient groups or rarely or seen in healthy subjects.
+\item Rhythmic: EEG activity consisting in waves of approximately constant frequency.  It is often abbreviated RA (regular rythmic activity). They are loosely classified by their frequencies, and their naming convention was derived from the original naming used by Hans Berger himself, and after Alpha Waves (10 Hz), it came Delta (4 Hz), Theta (4-7 Hz), Sigma (12-16 Hz), Beta (12-30 Hz) and Gamma (30-100 Hz).  
+\item Arrhythmic: EEG activity in which no stable rhythms are present.  
+\item Dysrhythmic: Rhythms and/or patterns of EEG activity that characteristically appear in patient groups and rarely seen in healthy subjects.
 \end{itemize}
 
 The number of electrodes and their positions over the scalp determines a \textbf{Spatial Structure}: signal elements can be generalized, focal or lateralized, depending on in which channel (i.e. electrode) they are found.
@@ -272,17 +275,15 @@ Other regular characterizations which are based on shape features may include:
 %
 %ACA VA EL RESTO DE LOS METODOS (fujimori, PAA, etc).  Uchida 1999
 
-The traditional clinical approach consisted in analyzing the paper strip that was generated by the plot of the signal obtained from the device.  Expert technician and physicians analyzed visually the plots looking for specific patterns that may give a hint of the underlying cognitive process or pathology.   Atlases and guidelines were created in order to help in the recognition of these complex patterns.   Even Video-electroencephalography scalp recordings are routinely used as a diagnostic tools \citep{Giagante2003} .  The clinical EEG research has also focused on temporal waveforms, and a whole branch of electrophenomenology has arisen around EEG \textit{graphoelements} \citep{Schomer2010}.  
+The traditional clinical approach consists in analyzing the paper strip that is generated by the plot of the signal obtained from the device.  Expert technician and physicians analyze visually the plots looking for specific patterns that may give a hint of the underlying cognitive process or pathology.   Atlases and guidelines were created in order to help in the recognition of these complex patterns.   Even Video-electroencephalography scalp recordings are routinely used as a diagnostic tools \citep{Giagante2003} .  The clinical EEG research has also focused on temporal waveforms, and a whole branch of electrophenomenology has arisen around EEG \textit{graphoelements} \citep{Schomer2010}.  
 
-Sleep Research has been studied in this way by performing Polysomnographic recordings (PSG)  \citep{Rodenbeck2006}, where the different sleep stages are evaluated by visually marking waveforms or graphoelements in long-running electroencephalographic recordings, looking for patterns based on standardized guidelines.   Visual characterization includes the identification or classification of certain waveform components, or transient events, based on a subjective characterization (e.g. positive or negative peak polarity) or the location within the strip.  It is regular to establish an amplitude difference between different waveforms from which a relation between them is established and a structured index are created (e.g. sleep K-Complex is well characterized based on rates between positive vs negative amplitude) (REFERENCE).  Other relevant EEG patterns for sleep stage scoring are alpha, theta, and delta waves,  sleep spindles, polysplindles, K-complexes, vertex sharp waves (VSW), and sawtooth waves (REM Sleep).
+Sleep Research has been studied in this way by performing Polysomnographic recordings (PSG)  \citep{Rodenbeck2006}, where the different sleep stages are evaluated by visually marking waveforms or graphoelements in long-running electroencephalographic recordings, looking for patterns based on standardized guidelines.   Visual characterization includes the identification or classification of certain waveform components, or transient events, based on a subjective characterization (e.g. positive or negative peak polarity) or the location within the strip.  It is regular to establish an amplitude difference between different waveforms from which a relation between them is established and a structured index are created (e.g. sleep K-Complex is well characterized based on rates between positive vs negative amplitude) \citep{Uchida1999}.  Other relevant EEG patterns for sleep stage scoring are alpha, theta, and delta waves,  sleep spindles, polysplindles, vertex sharp waves (VSW), and sawtooth waves (REM Sleep).
 
 Moreover, EEG data acquisition is a key procedure during the assessment of patients with focal Epilepsy for potential seizure surgery, where the source of the seizure activity must be reliably identified. The onset of the Epileptic Seizure is defined as the first electrical change seen in the EEG rhythm which can be visually identified from the context and it is verified against any clinical sign indicating seizure onset.  The interictal epileptiform discharges (IEDs) are visually identified from the paper strip, and they are also named according to their shape: spike, spike and wave or sharp-wave discharges\citep{EEGIntro}.  
 
 %Seizures captured in their entirety typically show progression from low-voltage, high-frequency spikes to high-voltage, low-fre- quency spike-and-slow wave activity, before stopping abruptly and being replaced by background slowing or suppression (Fig. 29.9). Usual morphologic features include typical rhythmic, gen- eralized, symmetric spike-and-waves or polyspikes and waves at 2 to 3.5 Hz; atypical spike and wave with lower frequency and less symmetry; multiple spike-and-wave (repetitive complexes of two or more spikes followed by a slow wave); and high-voltage, repetitive, rhythmic, focal or generalized delta activity with inter- mixed spikes, sharp waves, or sharp components (Fig. 29.24) (45). Diagnosis is more difficult when the seizure (or SE) pre- cedes the beginning of the tracing and continues beyond its end. In such cases, rhythmic sharp features, typically faster than 1 Hz, may be seen, often with variability.
 
 %Finally, there are specific EEG patterns that can be used to determine Depth of anestisia. 
-
-%Evoked Potentials (EPs) and Event Related Potentials (ERPs) are in general characterized by the waveforms.
 
 %The waveform of the EEG depends on the settings of the capturing device.  The most important part to consider is that of montage.  It could be bipolar or referencial.  The traditional convention, somehow maintained in neuro research, downward polarity was considered negative and upward deflection for negative (Knott, 1985)  It is of utmost importance to remark that  EEG waveforms represent the differential voltage between a given electrode and the recording reference. It is therefore clear that the choice of reference completely determines EEG waveforms (Lehmann, 1987; Dien, 1998), an important methodological consideration that all too often is still not recognized in the EEG literature. For example, recording with a vertex (Cz) reference would lead to small EEG deflections in the proximity of Cz due to potential synchronization of firing activities within closely spaced brain regions and volume propagation of the EEG signal. Similarly, recording with mastoid or linked ears montage would lead to rather small waveforms at electrodes positioned over temporal brain regions (Pivik et al., 1993). Digital EEG can be rereferenced offline.  
 
@@ -296,6 +297,8 @@ Moreover, EEG data acquisition is a key procedure during the assessment of patie
 
 \section{Materials and Methods}
 
+The search of methods based on waveforms is conducted by following the PRISMA~\citep{Moher2009} guidelines.  Search is performed on Google Scholar, Semantic Web and IEEE Xplore search engines by the terms "Waveforms" OR "Shape" OR "Morphology" OR "Visual inspection" + "EEG".
+
 The following criteria is proposed to identify methods which are based on the signal's waveform:
 
 \begin{enumerate}
@@ -307,17 +310,18 @@ The following criteria is proposed to identify methods which are based on the si
 \item A single-channel processing scheme.
 \end{enumerate}
 
-As described in (Mixed Domain Signal Analysis) the Pattern Matching problem in Signal processing is finding a signal given the region that best describes the structure of the pattern.   All these algorithm were implemented on MATLAB 2014a (Mathworks Inc., Natick, MA, USA). 
+As described in \citep{allen2004signal} the Pattern Matching problem in Signal processing is finding a signal given the region that best describes the structure of the prototype signal.   All these algorithm were implemented on MATLAB 2014a (Mathworks Inc., Natick, MA, USA). 
 
 \subsection{EEG Waveform Analysis Algorithms}
+\label{Algorithms}
 
 Shape or waveform analysis methods are considered as nonparametric (in opposition to statistical or dynamical models).  They explore signal's time-domain metrics or even derive more complex indexes from it \citep{Thakor2009}. 
 
-One of the earliest approach to automatically process EEG data is the Peak Picking method.  Although of limited usability, peak picking has been used to determine latency of transient events in EEG \citep{Jaskowski2000,Zhang2011}.  Straightforward in its implementation, it consists in selecting a component, a simple component based on the expected location of its more prominent deflection \citep{Ouyang2017}.  Of regular use in ERP Research, the name of many of the EEG features reference directly a peak within the component, e.g. P300 or P3a P3b or N100.  This leads to a natural way to classify them visually by selecting appropriate peaks and matching their positions and amplitudes in an orderly manner.  The letter provides the polarity (Positive or Negative) and the numbering shows the time referencing the stimulus onset, or the ordinal position of each peak (first, second, etc).   
+One of the earliest approach to automatically process EEG data is the Peak Picking method.  Although of limited usability, peak picking has been used to determine latency of transient events in EEG \citep{Jaskowski2000,Zhang2011}.  Straightforward in its implementation, it consists in selecting a component, a simple component based on the expected location of its more prominent deflection \citep{Ouyang2017}.  Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient component that may arise as a brain response to an external visual, tactile or auditory stimulus.  Particularly, EPs are regularly used to assess auditory response in infants. They are precisely characterized in this manner, where the name of many of the EEG features evoke directly a peak within the component, e.g. P300 or P3a P3b or N100.  This leads to a natural procedure to classify them visually by selecting appropriate peaks and matching their positions and amplitudes in an orderly manner.  The letter provides the polarity (Positive or Negative) and the numbering shows the time referencing the stimulus onset, or the ordinal position of each peak (first, second, etc).   
 
 A related method is used in \citep{Alvarado-Gonzalez2016} where the area under the curve of the EEG is sumarized to derive a feature.  This was even used in the seminal work of Farwell and Donchin on P300 \citep{Farwell1988,WolpawJonathanR2012}. Additionally, a logarithmic graph of the peak-to-peak amplitude which is called amplitude integrated EEG (aEEG) \citep{Shah2015} is used nowadays in Neonatal Intensive Care Units.
 
-Other works on EEG explored the idea to extend human capacities analyzing EEG waveforms \citep{Klein1976} where a feature from the amplitude and frequency of its signal and its derivative in time-domain is used.  Moreover, other works explored the use of Mathematical Morphology \citep{Yamaguchi2009}, where the time-domain structure of contractions and dilations were studied, and finally the proposals of Fujimori, Uchida and the PAA algorithm as few of the earliest proposals where the idea of capturing the shape of the signal were established.
+Other works on EEG explored the idea to extend human capacities analyzing EEG waveforms \citep{Klein1976} where a feature from the amplitude and frequency of its signal and its derivative in time-domain is used.  Moreover, other works explored the use of Mathematical Morphology \citep{Yamaguchi2009}, where the time-domain structure of contractions and dilations were studied. Finally the proposals of Fujimori, Uchida and the PAA \citep{Uchida1996} algorithm are few of the earliest proposals where the idea of capturing the shape of the signal were established.
 
 %Althought CASENET REFERENCe explored "waveform" structure they were purely based on spike detection based on feeding artificial neural networks.  
 
@@ -353,11 +357,11 @@ According to the defined criteria, the algorithms that will be evaluated are as 
 \item Permutation Entropy
 \item Slope Horizontal Chain Code
 \item Histogram of Gradient Orientations
- \item Merging of Increasing and Decreasing Sequences
-\item Local Binary Patterns (1-D LNBP, 1D-LBP and LBP)
+%\item Merging of Increasing and Decreasing Sequences
+%\item Local Binary Patterns (1-D LNBP, 1D-LBP and LBP)
 \end{itemize}
 
-All these methods provide a feature that can be used as a template, whereas all of them are based on metrics that can be extracted from the shape of the signal.  These features can be used to create dictionaries or templates databases.  These templates provide the basis for the pattern matching algorithm and offline classification.
+All these methods provide a feature that can be used as a template, whereas all of them are based on metrics that can be extracted from the shape of the signal.  These features can be used to create dictionaries or template databases.  These templates provide the basis for the pattern matching algorithm and offline classification.
 
 \subsection{Matching Pursuit - MP 1 and MP 2}
 
@@ -385,12 +389,13 @@ This Histogram of Gradient Orientations is based on using Computer Vision techni
 %Stepwise downsampling 
 
 \subsection{Experimental Protocol}
+\label{Experimental}
 
 Farwell and Donchin P300 Speller \citep{Farwell1988} is one the most used BCI paradigms to implement a thought translation device and to send commands to a computer in the form of selected letters, similar to typing in a virtual keyboard.  This procedure exploits a cognitive phenomena called oddball paradigm: along the EEG trace of a person which is focusing on a sequence of two different visual flashing stimulus, a particular and distinctive transient component is found each time the expected stimulus flashes.  This is cleverly utilized in the P300 Speller, where rows and columns of a 6x6 matrix flashes randomly but only the flashing of a column or row where the letter that a user is focusing will trigger concurrently the P300 ERP along the EEG trace.
 
-Higher accuracy algorithms can detect it in a good-enough single-trial approach [P300 Summary], but in general these algorithms are not related to the shape of the P300 ERP. Hence it is difficult to establish a backward mapping back to a certain visual pattern within the waveform.
+%Algorithms based on qEEG can detect this component in a good-enough single-trial approach [P300 Summary], but at the same time, these algorithms do not establish a clear relationship with the P300 ERP. Hence it is difficult to establish a backward mapping back to a certain visual pattern within the waveform.
 
-In order to verify each algorithm in a controlled procedure, a real ERP template is superimposed into a real EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on anyone in particular. Everything is there, except the P300 ERP component. By implementing this pseudo-real approach, it is possible to effectively control null-signals and the shape of this evoked potential following the same approach of other similar works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
+In order to verify each algorithm in a controlled procedure, a real ERP template is superimposed into a real EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on anyone in particular. Everything is there, except the P300 ERP component. By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to a similar procedure used in similar works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
 
 The experiments are as follows:
 
@@ -420,15 +425,15 @@ Fig. \ref{fig:gaincheck} shows the result of superimposing the template signal i
 \begin{figure}[H]
 \centering
 \includegraphics[width=12cm]{images/erptemplate1.eps}
-\caption{ERP Template obtained from the coherent point-to-point ensemble average of subject eight obtained from the BNCI Horizon public dataset. The P1, N1 and P300 peaks can be seen.}
+\caption{ERP Template obtained from the coherent point-to-point ensemble average of subject Eight obtained from the BNCI Horizon public dataset. The template is $1s$ long which is 256 sample points, and the eight channels are superimposed with different colors.  The P1, N1 and P300 peaks can be seen.}
 \label{fig:erptemplate1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=5cm]{images/doublegain.eps}
-\includegraphics[width=5cm]{images/triplegain.eps}
-\caption{8-Channel EEG signal superimposed with the ERP Template.  (Left) EEG trace of the original signal. (Right) The same signal segment with the superimposed template.}
+\includegraphics[width=10cm]{images/doublegain.eps}
+\includegraphics[width=10cm]{images/triplegain.eps}
+\caption{Eight-channel EEG signal superimposed with the ERP Template.  (Left) EEG trace of the original signal. (Right) The same signal segment with the added template.}
 \label{fig:doubleandtriplegain}
 \end{figure}
 
@@ -484,23 +489,23 @@ Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancet
 
 
 \begin{table}[H]
-\caption{Classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, HGO Histogram of Gradient Orientation, PE Permutation Entropy, SHCC Slope Horizontal Code Chain, RS Raw Signal, NN Neural Network, SVM Support Vector Machines.  All the methods that process the signal on a channel-by-channel basis, so the best performing channel is also shown. The mark $m-c$ is used on the control algorithms to identify that the feature was constructed using all the channels.  It can be understood as the channel that adds less noise to the ERP template. All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal that was used to obtain the feature that was finally classified.}
+\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, HGO Histogram of Gradient Orientation, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, three control algorithms were included: RS Raw Signal, NN Neural Network and SVM Support Vector Machines.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. The mark \textit{m-c} is used on the control algorithms to identify that the feature was constructed using all the channels.  In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template. All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
 \begin{tabular}{ccc}
 \toprule
 \textbf{Method}	& \textbf{Channel} & \textbf{Single Trial Performance}	\\
 \midrule
-MP 1 & PO8 & $25\%$ \\
-MP 2 & PO7 & $10\%$ \\
+SVM     & m-c  & $50\%$ \\
+NN       & m-c  & $45\%$ \\
 HGO  & PO8 & $25\%$ \\
+MP 1 & PO8 & $25\%$ \\
 PE     & Cz & $20\%$ \\
-SHCC & P4 & $10\%$ \\
 RS     & Fz & $15\%$ \\
-RS m-c &   & $15\%$ \\
+RS     & m-c  & $15\%$ \\
+MP 2 & PO7 & $10\%$ \\
+SHCC & P4 & $10\%$ \\
 NN s-c & Fz & $10\%$ \\
-NN m-c & Cz & $45\%$ \\
-SVM m-c & Cz & $50\%$ \\
 \bottomrule
 \end{tabular}
 \label{tab:results}
@@ -510,7 +515,7 @@ SVM m-c & Cz & $50\%$ \\
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/PerformanceTest.eps}
-\caption{Performance obtained from the different methods.}
+\caption{Speller performance obtained for each method.  Y-axis shows performance accuracy while X-axis shows the number of intensification sequences used to calculate the point-to-point signal average.}
 \label{fig:performancetest}
 \end{figure}
 
@@ -518,7 +523,7 @@ SVM m-c & Cz & $50\%$ \\
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/PerformanceTestLatency.eps}
-\caption{Performance obtained for all the methods.  Latencies were artificially added to each single-trial segment.  Performance is significantly reduced for all methods.}
+\caption{Speller performance obtained for each method while latencies were artificially added to each single-trial segment.  The achieved performance is significantly reduced for all methods.}
 \label{fig:performancetestlatency}
 \end{figure}
 
@@ -526,13 +531,14 @@ SVM m-c & Cz & $50\%$ \\
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/PerformanceTestAmplitude.eps}
-\caption{Performance obtained for all the methods.  The amplitudes of the N1 and P3 component of the superimposed ERP are randomly reduced.}
+\caption{Speller performance obtained while the amplitudes of the N1 and P3 component of the superimposed ERP are randomly reduced.}
 \label{fig:performancetestamplitude}
 \end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
+\label{section:discussion}
 
 The classification methods Support Vector Machine SVM and Artificial Neural Networks NN are added for comparison using the feature of Kasinksky (REF).  Additionally, the Kasinksky feature is used with the same classification algorithm as detailed in \ref{section:classification}.
 
@@ -548,8 +554,9 @@ It is important to remark that Segmentation or identification is not considered 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
+\label{section:conclusion}
 
-The conventional clinical method of observing the waveform is understood to be subjective and laborious because results depend on the technicians' experience and expertise.  The need for more objective measurements pushed the adoption of more automated means of decoding the signals and demanded a need for replication \citep{Thakor2004}.  This lead to the initial development of quantitative EEG, which however didn't replaced clinically the traditional approach which is still widespread.
+The conventional clinical method of observing the waveform is understood to be subjective and laborious because results depend on the technicians' experience and expertise.  The need for more objective measurements pushed the adoption of more automated means of decoding the signals and demanded a need for replication \citep{Thakor2004}.  This lead to the initial development of quantitative EEG, which however didn't replaced clinically the traditional approach which is still widespread: the Gold standard in clinical EEG is still \textit{Eye Ball}
 
 The purpose of this work was threefold, (1) raise awareness about the utility of using automatic waveform-based methods to study EEG signals, (2) to provide an overview of the state-of-the-art of those methods, and (3) to compare those methods and verify if it is possible to obtain classification accuracies based exclusively on the signal's waveform.
 
@@ -595,7 +602,9 @@ Additionally, the same problem can be found in Intelligent Character Recognition
 %\supplementary{The following are available online at www.mdpi.com/link, Figure S1: title, Table S1: title, Video S1: title.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\acknowledgments{This project was supported by the ITBACyT-15 funding program issued by ITBA University. We would like to thank to Dr. Jian Zhang for providing details of the MIDS algorithm, to Dr. Valentina Unakafova for providing the Permutation Entropy algorithm and to Dr. Montserrat-Alvarado González for providing the source code and a detailed description of the SHCC algorithm.}
+\acknowledgments{This project was supported by the ITBACyT-15 funding program issued by ITBA University. We would like to thank to Dr. Valentina Unakafova for providing the Permutation Entropy algorithm and to Dr. Montserrat-Alvarado González for providing the source code and a detailed description of the SHCC algorithm.}
+
+%We would like to thank to Dr. Jian Zhang for providing details of the MIDS algorithm, to Dr. Valentina Unakafova for providing the Permutation Entropy algorithm 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \authorcontributions{This projects is part of a the first author's PhD Thesis which is directed by Juan Miguel Santos and codirected by Ana Julia Villar.}
