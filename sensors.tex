@@ -295,6 +295,31 @@ Moreover, EEG data acquisition is a key procedure during the assessment of patie
 %The traditional approach do not consider waveform even though the brain oscilations are in general nonsinusoidal (reference)
 % Waveform characterization, on the other hand, has been extensively used in artifact detection and averaging.
 
+
+\begin{table}[H]
+\caption{Subjective EEG characterization methods found in the surveyed literature.}
+\centering
+%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
+\begin{tabular}{ccc}
+\toprule
+\textbf{Method}	& \textbf{Phenomena} & \textbf{Reference}	\\
+\midrule
+SVM     & m-c  & $50\%$ \\
+NN       & m-c  & $45\%$ \\
+HGO  & PO8 & $25\%$ \\
+MP 1 & PO8 & $25\%$ \\
+PE     & Cz & $20\%$ \\
+RS     & Fz & $15\%$ \\
+RS     & m-c  & $15\%$ \\
+MP 2 & PO7 & $10\%$ \\
+SHCC & P4 & $10\%$ \\
+NN s-c & Fz & $10\%$ \\
+\bottomrule
+\end{tabular}
+\label{tab:results}
+\end{table}
+
+
 \section{Materials and Methods}
 
 The search of methods based on waveforms is conducted by following the PRISMA~\citep{Moher2009} guidelines.  Search is performed on Google Scholar, Semantic Web and IEEE Xplore search engines by the terms "Waveforms" OR "Shape" OR "Morphology" OR "Visual inspection" + "EEG".
@@ -365,24 +390,140 @@ All these methods provide a feature that can be used as a template, whereas all 
 
 \subsection{Matching Pursuit - MP 1 and MP 2}
 
-Pursuit algorithms refer, in their many variants, as blind source separation(REF) techniques that assume that the EEG signal is a linear combination of different sources that comes from template's dictionaries.  The underlying idea is to find the best template out of a dictionary that matches against the signal.  The algorithm works iteratively, starting from the raw signal and then, the template is substracted from the signal in Graham-Schmidt approach and the process iterates. (ref Cohen book, Sanei book, Mallat and Zhang 1993).
+\textit{Pursuit} algorithms refer, in their many variants, as blind source separation \citep{Comon2010} techniques that assume that the EEG signal is a linear combination of different sparse sources extracted from a template's dictionaries.  \textit{MP}, the most representative of this algorithms, is a greedy variant that decomposes a signal into a linear combination of waveforms, called atoms, that are well localized in time and frequency \citep{ChandranKS2016}.  Given a signal, this optimization technique, tries to find the indexes of atoms and their weights (contributions) that minimize,
 
-Two variants of this algorithm are evaluated. In \textit{MP 1} the dictionary is directly constructed with the normalized templates from Fig \ref{fig:dictionaryfig}.  In \textit{MP 2} the coefficients of  Daubechies least-asymetric wavelet with 2 vanishing moments atoms are used to construct the dictionary.  To construct each feature a signal is decomposed in its coefficients and then they can be compared by any distance function.
+
+\begin{equation}
+\varepsilon =  \left\lVert   x(n,c) - \sum_{i=1}^{m} w_i g_{yi}   \right\rVert
+\label{eq:mperror}
+\end{equation}
+
+which is the error from the signal approximation constructed by the weighted atoms.  The algorithm goes by first setting the approximation signal by the original signal itself,  
+
+\begin{equation}
+\tilde{x_{0}}(n,c) = x(n,c), k \leftarrow 1
+\label{eq:multiclassificationrow}
+\end{equation}
+
+Hence, it finds the best template, out of the dictionary, that matches current approximation (original signal).  
+
+\begin{equation}
+g_{yk}(n) = \arg \max_{g_{yi}} \left\lVert < \tilde{x_{k}}(n,c), g_{yi} > \right\rVert 
+\label{eq:multiclassificationrow}
+\end{equation}
+
+where $g_{yi}$ are all the available scaled, translated and modulated atoms from the dictionary.  This determines the atom selection process, and their contribution is calculating based on 
+
+\begin{equation}
+w_{k} =  \frac{< \tilde{x_{k}}(n,c), g_{yk} >}{g_{yk}}
+\label{eq:multiclassificationrow}
+\end{equation}
+
+with $k$ representing the index of the selected atom $g_{yk}$.  Finally the contribution of each atom is subtracted from the next approximation, refining the approximation process \citep{Cohen2008,Sanei1997, Mallat1993}
+
+\begin{equation}
+\tilde{x_{k+1}}(n,c)=  \tilde{x_k}(n,c) - w_{k} g_{yk} (n), k \leftarrow k + 1
+\label{eq:multiclassificationrow}
+\end{equation}
+
+Two variants of this algorithm are evaluated. In \textit{MP 1} the dictionary is directly constructed with the normalized templates from Fig \ref{fig:dictionaryfig}.  In \textit{MP 2} the coefficients of  Daubechies least-asymetric wavelet with 2 vanishing moments atoms are used to construct the dictionary.  The first version, the matching against the template is evaluated according to Equation \ref{eq:mperror} directly, whereas for the latter to craft each feature is crafted by decomposing the signal in its coefficients and building a vector with them.
+
+\begin{equation}
+f =  {\bigg ( w_{i} \bigg )}_{1}^{m} 
+\label{eq:multiclassificationrow}
+\end{equation}
+
 
 %On the other hand, Morphological Component Analysis is a variant form of Blind Source Separation which can be considered the extension of Matching Pursuit algorithm. (cita a esa parte del paper).
 
+
 \subsection{Permutation Entropy - PE}
 
-Bond and Pompe Permutation Entropy has been extensively used in EEG processing, particularly for Epilepsy pre-ictal detection.  This method generates a code based on the orderly arrangement of sequential samples, and then derives a metric which is based on the amount of entropy of each code within the signal.   For instance, a pure random signal, will achieve the maximum entropy value due to the probability of each code being equal for all of them. This method is the best representative of Waveform Complexity: Lempel-Ziv method L-Z complexity are other variants which use a different definition (Permutation Entropy a new feature for brain computer interfaces).
+Bond and Pompe Permutation Entropy has been extensively used in EEG processing, particularly for Epilepsy pre-ictal detection \citep{Bandt2002}.  This method generates a code based on the orderly arrangement of sequential samples, and then derives a metric which is based on the amount of entropy of each code within the signal.   For instance, a pure random signal, will achieve the maximum entropy value due to the probability of each code being equal for all of them. This method is the best representative of Waveform Complexity: Lempel-Ziv method L-Z complexity are other variants which use a different definition (Permutation Entropy a new feature for brain computer interfaces).
 
+A signal represented by 
+
+\begin{equation}
+(x_1,x_2,...,x_{N})
+\label{eq:pesignal}
+\end{equation}
+
+is resampled by $\tau$ values doing
+
+\begin{equation}
+(x_n,x_{n+\tau},x_{n+2 \tau}...,x_{n+(N-1)\tau})
+\label{eq:pesignal}
+\end{equation}
 
 \subsection{Slope Horizontal Chain Code - SHCC}
 
 This method is an extension of Slope Chain Code (SCC) (ref a SCC paper y a SHCC paper), and a code of a sequence of sample points is generated based on the angle between the horizontal segment and any segment, one by one.  This method can be encompass as a syntactic analysis technique, where the EEG segment is represented as a series of elementary patterns, similar to tokens, due to the quantization of angles.
 
+A signal, can be represented by a list of ordered-pairs $e$,
+
+\begin{equation}
+e = \left[ (x,y)_{1}, (x,y)_{2}, ..., (x,y)_{N} \right]
+\label{eq:shccdelta}
+\end{equation}
+
+\noindent and it can be divided into $G$ different blocks.  These blocks are obtained by resampling the original signal from the index 
+
+\begin{equation}
+g = \lfloor n + ( m \Delta ) + 0.5 \rfloor
+\label{eq:shccdelta}
+\end{equation}
+
+\noindent with $n$ being the original sampling index, and $ 1 \leq t \leq N $.  On the other hand, $\Delta$ can be obtained by
+
+\begin{equation}
+\Delta = \bigg \lceil \frac{N}{G+1} \bigg \rceil
+\label{eq:shccdelta}
+\end{equation}
+
+\noindent with $ G < N $. The value $m$ can be derived from
+
+\begin{equation}
+m = sign \bigg (  \frac{N-1}{\Delta} \bigg )  \bigg \lfloor \left\lvert \frac{T-1}{\Delta} \right\lvert \bigg \rfloor
+\label{eq:shccdelta}
+\end{equation}
+
+This resampling produces a new sequence of values,
+
+\begin{equation}
+e = \left[ (x',y')_{1}, (x',y')_{s}, ..., (x',y')_{G} \right]
+\label{eq:shccdelta}
+\end{equation}
+
+Next step is the normalization of each paired-values according to
+
+\begin{equation}
+\textbf{x} = \frac{1}{\max(x') - min(x')} ( \textbf{x'} - \min(x') \textbf{1} )
+\label{eq:shccdelta}
+\end{equation}
+
+\begin{equation}
+\textbf{y} = \frac{1}{\max(y') - min(y')} ( \textbf{y'} - \min(y') \textbf{1} )
+\label{eq:shccdelta}
+\end{equation}
+
+\noindent effectively yielding $x,y \in [0,1]$.
+
+Finally, the feature is constructed by calculating the point-to-point slope against the horizontal plane,
+
+\begin{equation}
+f = \bigg (  \frac{y_{s}-y_{s-1}}{x_{s}-x_{s-1}}  \bigg )_{2}^{G} 
+\label{eq:shccdelta}
+\end{equation}
+
+
 \subsection{Histogram of Gradients Orientations - HGO}
 
 This Histogram of Gradient Orientations is based on using Computer Vision techniques to extract directly information from a signal based on the plot of a signal on a 2D image.  This mimicks exactly what a person is doing by visually inspecting the plot, and the waveform.  To do that, the region of the image where the signal is located is divided in a $4 x 4$ block and the signal bidimensional gradients is calculated.  For each block within the patch, a histogram of gradient orientations, 8 circular orientations, is calculated.  This histogram is concatenated for all the 16 blocks and a feature is thus formed.  The details of the method can be found here \citep{Ramele2016}.  This method was implemented using the VLFeat  \citep{Vedaldi2010} Computer Vision libraries.
+
+\begin{equation}
+f = {\bigg ( h(i,j,\theta) \bigg )}_{i,j,\theta}
+\label{eq:multiclassificationrow}
+\end{equation}
 
 %\subsection{Merger of Increasing and Decreasing Sequences}
 
