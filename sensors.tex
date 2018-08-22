@@ -220,22 +220,20 @@ The signal context is crucial for waveform characterization, both in a spatial a
 
 A waveform can have a characteristic shape, a rising or falling phase, a pronounced plateau or it may be composed of ripples and wiggles. In order to describe them, they are characterized by its amplitude, the arch, whether they have (non)sinusoidal shape, by the presence of an oscillation or imitating a sawtooth (e.g. Motor Cortical Beta Oscillations).  The characterization by their sharpness is also common, particularly in Epilepsy, and they can also be identified by their resemblance to spikes (e.g. Spike-wave discharge).
 
-Other depictions may include, subjective definitions of sharper, arch comb or wicket shape, rectangular, containing a decay phase or voltage rise, peaks and troughs, short term voltage change around each extrema in the raw trace.  Derived ratios and indexes can be used as well like peak and trough sharpness ratio, symmetry between rise and decay phase and slope ratio (steepness of the rise period to that of the adjacent decay period).  For instance,  wording like "Central trough is sharper and more negative that the adjacent troughs" are common in the literature.
+Depictions may include subjective definitions of sharper, arch comb or wicket shape, rectangular, containing a decay phase or voltage rise, peaks and troughs, short term voltage change around each extrema in the raw trace.  Derived ratios and indexes can be used as well like peak and trough sharpness ratio, symmetry between rise and decay phase and slope ratio (steepness of the rise period to that of the adjacent decay period).  For instance,  wording like "Central trough is sharper and more negative that the adjacent troughs"~\citep{Cole2017} are common in the literature.
 
-Other regular characterizations which are based on shape features may include:
+Other regular characterizations which are based on shape features may encompass:
 
 \begin{itemize}
 \item Attenuation: Also called suppression or depression. Reduction of amplitude of EEG activity resulting from decreased voltage. When activity is attenuated by stimulation, it is said to have been "blocked" or to show "blocking".
 \item Hypersynchrony: Seen as an increase in voltage and regularity of rhythmic activity, or within the alpha, beta, or theta range. The term suggest an increase in the number of neural elements contributing to the rhythm.
-\item Paroxysmal: Activity that emerges from background with a rapid onset, reaching (usually) quite high voltage and ending with an abrupt return to lower voltage activity. Though the term does not directly imply abnormality, much abnormal activity is paroxysmal.
+\item Paroxysmal: Activity that emerges from background with a rapid onset, reaching (usually) quite high voltage and ending with an abrupt return to lower voltage activity. This term does not directly imply abnormality per se, much abnormal activity is paroxysmal.
+\item Monomorphic: Activity appearing to be composed of one dominant waveform pattern.
+\item Polymorphic: Activity composed of multiple frequencies that combine to form a complex waveform.
+\item Transient: An isolated wave or pattern that is distinctly different from background activity. 
 \end{itemize}
 
-\begin{itemize}
-\item Monomorphic: Distinct EEG activity appearing to be composed of one dominant activity
-\item Polymorphic: distinct EEG activity composed of multiple frequencies that combine to form a complex waveform.
-\item Transient. An isolated wave or pattern that is distinctly different from background activity.  Define component, source and sensor space.
-\end{itemize}
-
+%  Define component, source and sensor space.
 
 %\subsection{EEG Patterns}
 %
@@ -295,32 +293,33 @@ Moreover, EEG data acquisition is a key procedure during the assessment of patie
 %The traditional approach do not consider waveform even though the brain oscilations are in general nonsinusoidal (reference)
 % Waveform characterization, on the other hand, has been extensively used in artifact detection and averaging.
 
+% Non-exhaustive list of EEG Waveforms, their phenomena and the literature reference where they are described.
 
 \begin{table}[H]
-\caption{Subjective EEG characterization methods found in the surveyed literature.}
+\caption{EEG characterization descriptions found in the surveyed literature.}
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
 \begin{tabular}{ccc}
 \toprule
 \textbf{Method}	& \textbf{Phenomena} & \textbf{Reference}	\\
 \midrule
-Rounded                                & $\alpha$-Waves & \citep{Schomer2010} \\
-Characteristic Shape           & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Rising and Falling Phase      & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Pronounced plateau      & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Ripples and Wiggles     & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Sinusoidal Shape        & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Sawtooth                     & Motor Imagery, Sleep &  \citep{Cacioppo2007, Mak2010} \\
-Sharpness or Spike-like     & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Rectangular     & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Wicket Shape     & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Peak and Trough Sharpness Ratio     & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Symmetry between rise and decay phase     & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Slope Ratio    & Epilepsy &  \citep{Cacioppo2007, Mak2010} \\
-Positive vs Negative Ratio    & Sleep K-Complex &  \citep{Cacioppo2007, Mak2010} \\
-Base-to-Peak Amplitude     & ERP  &  \citep{Cacioppo2007, Mak2010} \\
-Peak-to-Peak Amplitude     & ERP  &  \citep{Cacioppo2007, Mak2010} \\
-Latency                                 & ERP  & \citep{Cacioppo2007, Mak2010}  \\
+Positive Rounded Component                    & $\alpha$-Waves, Epilepsy & \citep{Schomer2010,Tatum2008} \\
+Rising and Falling Phase      & Epilepsy &  \citep{Thakor2004,Tatum2008} \\
+Terminal plateau      & Epilepsy &  \citep{Thakor2004} \\
+Ripples and Wiggles     & Epilepsy, ERP &  \citep{EEGIntro, Thakor2004,Cacioppo2007,Kappenman2012} \\
+Sinusoidal Shape        & Epilepsy &  \citep{Cacioppo2007,Tatum2008,Ouyang2017,Kappenman2012} \\
+Sawtooth                     & Motor Imagery, Sleep &  \citep{EEGIntro,Rodenbeck2006,Tatum2008} \\
+Sharpness or Spike-like     & Epilepsy &  \citep{Cacioppo2007} \\
+Rectangular     & Epilepsy &  \citep{Cacioppo2007} \\
+Wicket Shape     & Epilepsy &  \citep{Cacioppo2007} \\
+Peak and Trough Sharpness Ratio     & Epilepsy &  \citep{Cacioppo2007} \\
+Symmetry between rise and decay phase     & Epilepsy &  \citep{Cacioppo2007} \\
+Slope Ratio    & Epilepsy &  \citep{Cacioppo2007} \\
+Positive/Negative Peak Amplitude & ERP & \citep{Mak2012} \\
+Positive vs Negative Ratio    & Sleep K-Complex &  \citep{Cacioppo2007} \\
+Base-to-Peak Amplitude     & ERP  &  \citep{Cacioppo2007} \\
+Peak-to-Peak Amplitude     & ERP  &  \citep{Cacioppo2007, Mak2012} \\
+Positive/Negative Peak Latency                                 & ERP  & \citep{Cacioppo2007, Mak2012}  \\
 Integrated Activity               & ERP, Epilepsy & \citep{Cacioppo2007, Shah2015} \\
 Cross-Correlation                & ERP, Epilepsy, Sleep & \citep{Cacioppo2007, Shah2015} \\
 Coupling \\ Cross Frequency,  Phase-Amplitude, Phase-Phase     & Sleep & $20\%$ \\
