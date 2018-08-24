@@ -222,7 +222,7 @@ A waveform can have a characteristic shape, a rising or falling phase, a pronoun
 
 Depictions may include subjective definitions of sharper, arch comb or wicket shape, rectangular, containing a decay phase or voltage rise, peaks and troughs, short term voltage change around each extrema in the raw trace.  Derived ratios and indexes can be used as well like peak and trough sharpness ratio, symmetry between rise and decay phase and slope ratio (steepness of the rise period to that of the adjacent decay period).  For instance,  wording like "Central trough is sharper and more negative that the adjacent troughs"~\citep{Cole2017} are common in the literature.
 
-Other regular characterizations which are based on shape features may encompass:
+Other regular characterizations which are based on the waveform shape may encompass:
 
 \begin{itemize}
 \item Attenuation: Also called suppression or depression. Reduction of amplitude of EEG activity resulting from decreased voltage. When activity is attenuated by stimulation, it is said to have been "blocked" or to show "blocking".
@@ -296,7 +296,7 @@ Moreover, EEG data acquisition is a key procedure during the assessment of patie
 % Non-exhaustive list of EEG Waveforms, their phenomena and the literature reference where they are described.
 
 \begin{table}[H]
-\caption{EEG characterization descriptions found in the surveyed literature.}
+\caption{EEG waveforms descriptions found in the surveyed literature.}
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
 \begin{tabular}{ccc}
@@ -307,23 +307,23 @@ Positive Rounded Component                    & $\alpha$-Waves, Epilepsy & \cite
 Rising and Falling Phase      & Epilepsy &  \citep{Thakor2004,Tatum2008} \\
 Terminal plateau      & Epilepsy &  \citep{Thakor2004} \\
 Ripples and Wiggles     & Epilepsy, ERP &  \citep{EEGIntro, Thakor2004,Cacioppo2007,Kappenman2012} \\
-Sinusoidal Shape        & Epilepsy &  \citep{Cacioppo2007,Tatum2008,Ouyang2017,Kappenman2012} \\
+Sinusoidal Shape        & Epilepsy &  \citep{Cacioppo2007,Tatum2008,Ouyang2017,Kappenman2012,Cole2017} \\
 Sawtooth                     & Motor Imagery, Sleep &  \citep{EEGIntro,Rodenbeck2006,Tatum2008} \\
-Sharpness or Spike-like     & Epilepsy &  \citep{Cacioppo2007} \\
-Rectangular     & Epilepsy &  \citep{Cacioppo2007} \\
-Wicket Shape     & Epilepsy &  \citep{Cacioppo2007} \\
-Peak and Trough Sharpness Ratio     & Epilepsy &  \citep{Cacioppo2007} \\
-Symmetry between rise and decay phase     & Epilepsy &  \citep{Cacioppo2007} \\
-Slope Ratio    & Epilepsy &  \citep{Cacioppo2007} \\
-Positive/Negative Peak Amplitude & ERP & \citep{Mak2012} \\
-Positive vs Negative Ratio    & Sleep K-Complex &  \citep{Cacioppo2007} \\
-Base-to-Peak Amplitude     & ERP  &  \citep{Cacioppo2007} \\
-Peak-to-Peak Amplitude     & ERP  &  \citep{Cacioppo2007, Mak2012} \\
-Positive/Negative Peak Latency                                 & ERP  & \citep{Cacioppo2007, Mak2012}  \\
-Integrated Activity               & ERP, Epilepsy & \citep{Cacioppo2007, Shah2015} \\
+Sharpness or Spike-like     & Epilepsy &  \citep{Thakor2004,Hartman2005,Sanei2007,EEGIntro} \\
+Rectangular     & Epilepsy &  \citep{Thakor2004,Cole2017} \\
+Wicket Shape     & Epilepsy &  \citep{EEGIntro,Hartman2005,Sanei2007,Tatum2008,Schomer2010,Cole2017} \\
+Peak and Trough Sharpness Ratio     & Epilepsy &  \citep{Hartman2005,Sanei2007,Lawrence2010,Cole2017} \\
+Symmetry between rise and decay phase     & Epilepsy &  \citep{Hartman2005,Cole2017} \\
+Slope Ratio    & Sleep &  \citep{Subha2010} \\
+Positive/Negative Peak Amplitude & ERP & \citep{Thakor2004,Hartman2005,Tatum2008,Mak2012,MullerPutz2015,Cole2017} \\
+Positive vs Negative Ratio    & Sleep K-Complex &  \citep{EEGIntro} \\
+Base-to-Peak Amplitude     & ERP  &  \citep{Cole2017} \\
+Peak-to-Peak Amplitude     & ERP  &  \citep{Mak2012} \\
+Positive/Negative Peak Latency                                 & ERP  & \citep{Mak2012}  \\
+Integrated Activity               & ERP, Epilepsy,ICU & \citep{Uchida1999, Shah2015} \\
 Cross-Correlation                & ERP, Epilepsy, Sleep & \citep{Cacioppo2007, Shah2015} \\
-Coupling \\ Cross Frequency,  Phase-Amplitude, Phase-Phase     & Sleep & $20\%$ \\
-Period Amplitude Analysis  & ERP, Epilepsy & \citep{Cacioppo2007, Shah2015} \\
+Coupling \\ Cross Frequency,  Phase-Amplitude, Phase-Phase     & Sleep & \citep{Cole2017} \\
+Period Amplitude Analysis  & ERP, Epilepsy & \citep{Uchida1999,Cacioppo2007, Shah2015} \\
 \bottomrule
 \end{tabular}
 \label{tab:results}
@@ -345,18 +345,18 @@ The following criteria is proposed to identify methods which are based on the si
 \item A single-channel processing scheme.
 \end{enumerate}
 
-As described in \citep{allen2004signal} the Pattern Matching problem in Signal processing is finding a signal given the region that best describes the structure of the prototype signal.   All these algorithm were implemented on MATLAB 2014a (Mathworks Inc., Natick, MA, USA). 
+As described in \citep{allen2004signal} the Pattern Matching problem in Signal processing is finding a signal given the region that best describes the structure of the prototype signal template.   On the other hand, a \textit{feature} is a meaningful quantification, usually a multidimensional vector, that synthesize the information of a given signal or signal segment~\citep{WolpawJonathanR2012}.   All these algorithm were implemented on MATLAB 2014a (Mathworks Inc., Natick, MA, USA). 
 
 \subsection{EEG Waveform Analysis Algorithms}
 \label{Algorithms}
 
-Shape or waveform analysis methods are considered as nonparametric (in opposition to statistical or dynamical models).  They explore signal's time-domain metrics or even derive more complex indexes from it \citep{Thakor2009}. 
+Shape or waveform analysis methods are considered as nonparametric (in opposition to statistical or dynamical models).  They explore signal's time-domain metrics or even derive more complex indexes or features from it \citep{Thakor2009}. 
 
-One of the earliest approach to automatically process EEG data is the Peak Picking method.  Although of limited usability, peak picking has been used to determine latency of transient events in EEG \citep{Jaskowski2000,Zhang2011}.  Straightforward in its implementation, it consists in selecting a component, a simple component based on the expected location of its more prominent deflection \citep{Ouyang2017}.  Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient component that may arise as a brain response to an external visual, tactile or auditory stimulus.  Particularly, EPs are regularly used to assess auditory response in infants. They are precisely characterized in this manner, where the name of many of the EEG features evoke directly a peak within the component, e.g. P300 or P3a P3b or N100.  This leads to a natural procedure to classify them visually by selecting appropriate peaks and matching their positions and amplitudes in an orderly manner.  The letter provides the polarity (Positive or Negative) and the numbering shows the time referencing the stimulus onset, or the ordinal position of each peak (first, second, etc).   
+One of the earliest approach to automatically process EEG data is the Peak Picking method.  Although of limited usability, peak picking has been used to determine latency of transient events in EEG \citep{Jaskowski2000,Zhang2011}.  Straightforward in its implementation, it consists in assigning a component to a simple waveform element based on the expected location of its more prominent deflection \citep{Ouyang2017}.  Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient component that may arise as a brain response to an external visual, tactile or auditory stimulus.  Particularly, ERPs are regularly used to assess auditory response in infants. They are characterized in this manner, where the name of many of the EEG features evoke directly a peak within the waveform, e.g. P300 or P3a P3b or N100.  This leads to a natural procedure to classify them visually by selecting appropriate peaks and matching their positions and amplitudes in an orderly manner.  The letter provides the polarity (Positive or Negative) and the numbering shows the time referencing the stimulus onset, or the ordinal position of each peak (first, second, etc).   
 
 A related method is used in \citep{Alvarado-Gonzalez2016} where the area under the curve of the EEG is sumarized to derive a feature.  This was even used in the seminal work of Farwell and Donchin on P300 \citep{Farwell1988,WolpawJonathanR2012}. Additionally, a logarithmic graph of the peak-to-peak amplitude which is called amplitude integrated EEG (aEEG) \citep{Shah2015} is used nowadays in Neonatal Intensive Care Units.
 
-Other works on EEG explored the idea to extend human capacities analyzing EEG waveforms \citep{Klein1976} where a feature from the amplitude and frequency of its signal and its derivative in time-domain is used.  Moreover, other works explored the use of Mathematical Morphology \citep{Yamaguchi2009}, where the time-domain structure of contractions and dilations were studied. Finally the proposals of Burch, Fujimori, Uchida and the Period Amplitude Analysis (PAA) \citep{Uchida1996} algorithm are few of the earliest proposals where the idea of capturing the shape of the signal were established.
+Other works on EEG explored the idea to extend human capacities analyzing EEG waveforms \citep{Klein1976} where a feature from the amplitude and frequency of its signal and its derivative in time-domain is used.  Moreover, other approaches explored the use of Mathematical Morphology \citep{Yamaguchi2009}, where the time-domain structure of contractions and dilations were studied. Finally the proposals of Burch, Fujimori, Uchida and the Period Amplitude Analysis (PAA) \citep{Uchida1996} algorithm are few of the earliest depictions where the idea of capturing the shape of the signal were established.
 
 %Althought CASENET REFERENCe explored "waveform" structure they were purely based on spike detection based on feeding artificial neural networks.  
 
@@ -396,11 +396,11 @@ According to the defined criteria, the algorithms that will be evaluated are as 
 %\item Local Binary Patterns (1-D LNBP, 1D-LBP and LBP)
 \end{itemize}
 
-All these methods provide a feature that can be used as a template, whereas all of them are based on metrics that can be extracted from the shape of the signal.  These features can be used to create dictionaries or template databases.  These templates provide the basis for the pattern matching algorithm and offline classification.
+All these methods provide a feature that can be used as a template, whereas all of them are based on metrics that are extracted from the shape of the signal.  These features are used to create dictionaries or template databases.  Finally, these templates provide the basis for the pattern matching algorithm and offline classification.
 
 \subsection{Matching Pursuit - MP 1 and MP 2}
 
-\textit{Pursuit} algorithms refer, in their many variants, as blind source separation \citep{Vincent2010} techniques that assume that the EEG signal is a linear combination of different sparse sources extracted from a template's dictionaries.  Matching Pursuit \textit{MP}~\citep{Mallat1993}, the most representative of this algorithms, is a greedy variant that decomposes a signal into a linear combination of waveforms, called atoms, that are well localized in time and frequency \citep{ChandranKS2016}.  Given a signal, this optimization technique, tries to find the indexes of atoms and their weights (contributions) that minimize,
+\textit{Pursuit} algorithms refer, in their many variants, as blind source separation \citep{Vincent2010} techniques that assume the EEG signal as a linear combination of different sparse sources extracted from a template's dictionaries.  Matching Pursuit \textit{MP}~\citep{Mallat1993}, the most representative of this algorithms, is a greedy variant that decomposes a signal into a linear combination of waveforms, called atoms, that are well localized in time and frequency \citep{ChandranKS2016}.  Given a signal, this optimization technique, tries to find the indexes of atoms and their weights (contributions) that minimize,
 
 
 \begin{equation}
@@ -408,14 +408,14 @@ All these methods provide a feature that can be used as a template, whereas all 
 \label{eq:mperror}
 \end{equation}
 
-which is the error between the signal and their approximation constructed by the weighted $w_i$ atoms $g_{yi}$.  The algorithm goes by first setting the approximation signal by the original signal itself,  
+which is the error between the signal and their approximation constructed by the weighted $w_i$ atoms $g_{yi}$.  The algorithm goes by first setting the approximating signal $\tilde{x_{0}}$  as the original signal itself,  
 
 \begin{equation}
 \tilde{x_{0}}(n,c) = x(n,c), k \leftarrow 1
 \label{eq:multiclassificationrow}
 \end{equation}
 
-Hence, it finds the best template, out of the dictionary, that matches current approximation.  
+\noindent and setting the iterative counter $k$ as $1$. Hence, it searches recurrently the best template out of the dictionary  that matches current approximation.  
 
 \begin{equation}
 g_{yk}(n) = \arg \max_{g_{yi}} \left\lVert < \tilde{x_{k}}(n,c), g_{yi} > \right\rVert 
@@ -429,7 +429,7 @@ w_{k} =  \frac{< \tilde{x_{k}}(n,c), g_{yk} >}{g_{yk}}
 \label{eq:multiclassificationrow}
 \end{equation}
 
-with $k$ represents the index of the selected atom $g_{yk}$.  Finally the contribution of each atom is subtracted from the next approximation,  extracting the approximating weights and atoms for this iteration \citep{Cohen2014,Sanei2007, Mallat1993}
+with $k$ representing the index of the selected atom $g_{yk}$.  Finally the projection of each atom is subtracted from the next approximation~\citep{Cohen2014,Sanei2007, Mallat1993}
 
 \begin{equation}
 \tilde{x_{k+1}}(n,c)=  \tilde{x_k}(n,c) - w_{k} g_{yk} (n), k \leftarrow k + 1
@@ -451,9 +451,7 @@ f =  {\bigg ( w_{i} \bigg )}_{1}^{D}
 
 \subsection{Permutation Entropy - PE}
 
-Bond and Pompe Permutation Entropy has been extensively used in EEG processing, with applications on Anesthesia, Sleep Stage evaluation and particularly for Epilepsy pre-ictal detection \citep{Bandt2002}.  This method generates a code based on the orderly arrangement of sequential samples, and then derives a metric which is based on the amount of entropy of each code within the signal.   For instance, a pure random signal, will achieve the maximum entropy value due to the probability of each code being equal for all of them~\citep{Nicolaou2010}.
-
-A signal on a window of length $W$ is represented by 
+Bond and Pompe Permutation Entropy has been extensively used in EEG processing, with applications on Anesthesia, Sleep Stage evaluation and particularly for Epilepsy pre-ictal detection \citep{Bandt2002}.  This method generates a code based on the orderly arrangement of sequential samples, and then derives a metric which is based on the number of times each sequence is found on the signal synthesized as numeric value called entropy~\citep{Nicolaou2010}. A signal on a window of length $W$ is represented by 
 
 \begin{equation}
 (x_1,x_2,...,x_{W})
@@ -467,7 +465,7 @@ and it can be resampled by $\tau$ intervals doing
 \label{eq:pesignal}
 \end{equation}
 
-This sequence of order $m$ corresponds to one ordinal pattern $\pi_{n}$, for $n$ varying between $1$ and $W$.  Within the signal window there can be at most $k$ different ordinal (and overlapping) patterns,
+This sequence of order $m$ corresponds to one ordinal pattern $\pi_{n}$, for $n$ varying between $1$ and $W$.  Along the signal window there can be at most $k$ different ordinal (and overlapping) patterns,
 
 \begin{equation}
 (\pi_{1},\pi_{2},...,\pi_{k})
@@ -476,7 +474,7 @@ This sequence of order $m$ corresponds to one ordinal pattern $\pi_{n}$, for $n$
 
 \noindent with $k = W-(m-1) \tau$.  The probability density function for all the available permutations of order $m$ should be $ p = (p_1,p_2,...,p_{m!}) $ with $ \left\lVert p \right\lVert = 1 $.
 
-Hence, the set of time samples map to a new set of $k$ ordinal patterns, and the \textit{pdf} can be estimated by the empirical permutation entropy,
+Hence, the set of time samples map to a new set of $k$ ordinal patterns, and the \textit{pdf} can be calculated by the empirical permutation entropy,
 
 \begin{equation}
 P_i = \frac{1}{k} \sum_{s=1}^{k} \left[ \pi_{s} = \pi_{i} \right]
@@ -490,7 +488,7 @@ H(p) = \sum_{i=1}^{m!} p_{i} \; log \frac{1}{p_{i}}
 \label{eq:pesignal}
 \end{equation}
 
-The implemented code was derived from~\citep{Unakafova2013}, and the model description from \citep{Berger2017}.  This procedure will produce a scalar number for the given signal window of size $W$.  To derive a feature out of it, a sliding window procedure must be implemented.  Thus, the length of the feature is $N - (W + \tau (m - 1)) + 1$.
+The implemented code was derived from~\citep{Unakafova2013}, and the model description from \citep{Berger2017}.  This procedure will produce a scalar number for the given signal window of size $W$.  To derive a feature, a sliding window procedure must be implemented.  Thus, the length of the feature is $N - (W + \tau (m - 1)) + 1$.
 
 \begin{equation}
 f =  {\bigg ( H(p)_{u} \bigg )}_{1}^{N - (W + \tau (m - 1)) + 1}
@@ -501,7 +499,7 @@ f =  {\bigg ( H(p)_{u} \bigg )}_{1}^{N - (W + \tau (m - 1)) + 1}
 
 \subsection{Slope Horizontal Chain Code - SHCC}
 
-This method is an extension of Slope Chain Code (SCC)~\citep{Alvarado-Gonzalez2016}. A code is generated from a sequence of sample points based on the angle between the horizontal line on a 2D-plane and any segment produced by two consecutive sample points, regarding them as coordinates on that plane.  
+This method is an extension of Slope Chain Code (SCC)~\citep{Alvarado-Gonzalez2016}. A coding scheme is generated from a sequence of sample points based on the angle between the horizontal line on a 2D-plane and any segment produced by two consecutive sample points, regarding them as coordinates on that plane.  
 
 A signal, can be represented by a list of ordered-pairs $e$,
 
