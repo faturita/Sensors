@@ -6,6 +6,8 @@
 %=================================================================
 \documentclass[brainsci,article,submit,moreauthors,pdftex,10pt,a4paper]{mdpi} 
 
+\usepackage{subfigure} 
+
 %
 %--------------------
 % Class Options:
@@ -59,7 +61,7 @@
 
 %=================================================================
 % Full title of the paper (Capitalized)
-\Title{EEG Waveform Analysis with applications to Brain Computer Interfaces}
+\Title{EEG Waveform Analysis of P300 ERP with applications to Brain Computer Interfaces}
 
 % Authors, for the paper (add full first names)
 \Author{Rodrigo Ramele $^{1,\dagger}$, Ana Julia Villar $^{1}$ and Juan Miguel Santos  $^{1}$*}
@@ -396,7 +398,7 @@ According to the defined criteria, the algorithms that will be evaluated are as 
 %\item Local Binary Patterns (1-D LNBP, 1D-LBP and LBP)
 \end{itemize}
 
-All these methods provide a feature that can be used as a template, whereas all of them are based on metrics that are extracted from the shape of the signal.  These features are used to create dictionaries or template databases.  Finally, these templates provide the basis for the pattern matching algorithm and offline classification.
+All these methods provide a feature $ f $  that can be used as a template, whereas all of them are based on metrics that are extracted from the shape of the single channel digital EEG signal $x(n)$, with $n$ varying from $1$ to the length of the EEG segment in sample points.  These features are used to create dictionaries or template databases.  Finally, these templates provide the basis for the pattern matching algorithm and offline classification.
 
 \subsection{Matching Pursuit - MP 1 and MP 2}
 
@@ -404,43 +406,43 @@ All these methods provide a feature that can be used as a template, whereas all 
 
 
 \begin{equation}
-\varepsilon =  \left\lVert   x(n,c) - \sum_{i=1}^{m} w_i g_{yi}   \right\rVert
+\varepsilon =  \left\lVert   x(n) - \sum_{i=1}^{m} w_i g_{yi}(n)   \right\rVert
 \label{eq:mperror}
 \end{equation}
 
 which is the error between the signal and their approximation constructed by the weighted $w_i$ atoms $g_{yi}$.  The algorithm goes by first setting the approximating signal $\tilde{x_{0}}$  as the original signal itself,  
 
 \begin{equation}
-\tilde{x_{0}}(n,c) = x(n,c), k \leftarrow 1
-\label{eq:multiclassificationrow}
+\tilde{x_{0}}(n) = x(n), k \leftarrow 1
+\label{eq:mp2}
 \end{equation}
 
 \noindent and setting the iterative counter $k$ as $1$. Hence, it searches recurrently the best template out of the dictionary  that matches current approximation.  
 
 \begin{equation}
-g_{yk}(n) = \arg \max_{g_{yi}} \left\lVert < \tilde{x_{k}}(n,c), g_{yi} > \right\rVert 
-\label{eq:multiclassificationrow}
+g_{yk}(n) = \arg \max_{g_{yi}} \left\lVert < \tilde{x_{k}}(n), g_{yi}(n) > \right\rVert 
+\label{eq:mp3}
 \end{equation}
 
 where $g_{yi}$ are all the available scaled, translated and modulated atoms from the dictionary.  This determines the atom selection process, and their contribution is calculated based on 
 
 \begin{equation}
-w_{k} =  \frac{< \tilde{x_{k}}(n,c), g_{yk} >}{g_{yk}}
-\label{eq:multiclassificationrow}
+w_{k} =  \frac{< \tilde{x_{k}}(n), g_{yk}(n) >}{  | g_{yk} | }
+\label{eq:mp4}
 \end{equation}
 
 with $k$ representing the index of the selected atom $g_{yk}$.  Finally the projection of each atom is subtracted from the next approximation~\citep{Cohen2014,Sanei2007, Mallat1993}
 
 \begin{equation}
-\tilde{x_{k+1}}(n,c)=  \tilde{x_k}(n,c) - w_{k} g_{yk} (n), k \leftarrow k + 1
-\label{eq:multiclassificationrow}
+\tilde{x_{k+1}}(n)=  \tilde{x_k}(n) - w_{k} g_{yk} (n), k \leftarrow k + 1
+\label{eq:mp5}
 \end{equation}
 
-Two variants of this algorithm are evaluated. In \textit{MP 1} the dictionary is directly constructed with the normalized templates from Fig \ref{fig:dictionaryfig}.  In \textit{MP 2} the coefficients of  Daubechies least-asymetric wavelet with 2 vanishing moments atoms are used to construct the dictionary.  The first version, the matching against the template is evaluated according to Equation \ref{eq:mperror} directly, whereas for the latter each feature is crafted by decomposing the signal in its coefficients and building a vector with them.
+Two variants of this algorithm are evaluated. In \textit{MP 1} the dictionary is directly constructed with the normalized templates from Fig \ref{fig:dictionaryfig}.  In \textit{MP 2} the coefficients of  Daubechies least-asymetric wavelet with 2 vanishing moments atoms are used to construct the dictionary.  For the first version, the matching against the template is evaluated according to Equation \ref{eq:mperror} directly, whereas for the latter each feature is crafted by decomposing the signal in its coefficients and building, an eventually sparse, vector with them.
 
 \begin{equation}
 f =  {\bigg ( w_{i} \bigg )}_{1}^{D} 
-\label{eq:multiclassificationrow}
+\label{eq:mp6}
 \end{equation}
 
 \noindent where $D$ is the size of the dictionary.
@@ -451,7 +453,7 @@ f =  {\bigg ( w_{i} \bigg )}_{1}^{D}
 
 \subsection{Permutation Entropy - PE}
 
-Bond and Pompe Permutation Entropy has been extensively used in EEG processing, with applications on Anesthesia, Sleep Stage evaluation and particularly for Epilepsy pre-ictal detection \citep{Bandt2002}.  This method generates a code based on the orderly arrangement of sequential samples, and then derives a metric which is based on the number of times each sequence is found on the signal synthesized as numeric value called entropy~\citep{Nicolaou2010}. A signal on a window of length $W$ is represented by 
+Bond and Pompe Permutation Entropy has been extensively used in EEG processing, with applications on Anesthesia, Sleep Stage evaluation and significantly for Epilepsy pre-ictal detection \citep{Bandt2002}.  This method generates a code based on the orderly arrangement of sequential samples, and then derives a metric which is based on the number of times each sequence is found on the signal synthesized as a numeric value called entropy~\citep{Nicolaou2010}. A signal on a window of length $W$ is represented by 
 
 \begin{equation}
 (x_1,x_2,...,x_{W})
@@ -462,14 +464,14 @@ and it can be resampled by $\tau$ intervals doing
 
 \begin{equation}
 (x_n,x_{n+\tau},x_{n+2 \tau}...,x_{n+(m-1)\tau})
-\label{eq:pesignal}
+\label{eq:pe2}
 \end{equation}
 
 This sequence of order $m$ corresponds to one ordinal pattern $\pi_{n}$, for $n$ varying between $1$ and $W$.  Along the signal window there can be at most $k$ different ordinal (and overlapping) patterns,
 
 \begin{equation}
 (\pi_{1},\pi_{2},...,\pi_{k})
-\label{eq:pesignal}
+\label{eq:pe3}
 \end{equation}
 
 \noindent with $k = W-(m-1) \tau$.  The probability density function for all the available permutations of order $m$ should be $ p = (p_1,p_2,...,p_{m!}) $ with $ \left\lVert p \right\lVert = 1 $.
@@ -478,28 +480,28 @@ Hence, the set of time samples map to a new set of $k$ ordinal patterns, and the
 
 \begin{equation}
 P_i = \frac{1}{k} \sum_{s=1}^{k} \left[ \pi_{s} = \pi_{i} \right]
-\label{eq:pesignal}
+\label{eq:pe4}
 \end{equation}
 
 \noindent with $1 \leq i \leq m!$.  By using the Iverson Bracket, for each $i$ only those ordinal patterns that were effectively found are counted to estimate $p_i$.  The empirical permutation entropy can be estimated from this histogram as,
 
 \begin{equation}
 H(p) = \sum_{i=1}^{m!} p_{i} \; log \frac{1}{p_{i}}
-\label{eq:pesignal}
+\label{eq:pe5}
 \end{equation}
 
 The implemented code was derived from~\citep{Unakafova2013}, and the model description from \citep{Berger2017}.  This procedure will produce a scalar number for the given signal window of size $W$.  To derive a feature, a sliding window procedure must be implemented.  Thus, the length of the feature is $N - (W + \tau (m - 1)) + 1$.
 
 \begin{equation}
 f =  {\bigg ( H(p)_{u} \bigg )}_{1}^{N - (W + \tau (m - 1)) + 1}
-\label{eq:multiclassificationrow}
+\label{eq:pe6}
 \end{equation}
 
 \noindent with $u$ varying on a sample by sample basis along the signal but excluding the first window.
 
 \subsection{Slope Horizontal Chain Code - SHCC}
 
-This method is an extension of Slope Chain Code (SCC)~\citep{Alvarado-Gonzalez2016}. A coding scheme is generated from a sequence of sample points based on the angle between the horizontal line on a 2D-plane and any segment produced by two consecutive sample points, regarding them as coordinates on that plane.  
+This method is an extension of Slope Chain Code (SCC)~\citep{Alvarado-Gonzalez2016}. This algorithm proceeds by generating a coding scheme from a sequence of sample points. This encoding is based on the angle between the horizontal line on a 2D-plane and any segment produced by two consecutive sample points, regarding them as coordinates on that plane.  
 
 A signal, can be represented by a list of ordered-pairs $e$,
 
@@ -512,40 +514,40 @@ e = \left[ (x,y)_{1}, (x,y)_{2}, ..., (x,y)_{N} \right]
 
 \begin{equation}
 g = \lfloor n + ( m \Delta ) + 0.5 \rfloor
-\label{eq:shccdelta}
+\label{eq:shcc2}
 \end{equation}
 
 \noindent with $n$ being the original sampling index, and $ 1 \leq n \leq N $.  On the other hand, $\Delta$ can be obtained by
 
 \begin{equation}
 \Delta = \bigg \lceil \frac{N}{G+1} \bigg \rceil
-\label{eq:shccdelta}
+\label{eq:shcc3}
 \end{equation}
 
 \noindent with $ G < N $. Lastly, the value $m$ can be derived from
 
 \begin{equation}
 m = sign \bigg (  \frac{N-1}{\Delta} \bigg )  \bigg \lfloor \left\lvert \frac{T-1}{\Delta} \right\lvert \bigg \rfloor
-\label{eq:shccdelta}
+\label{eq:shcc4}
 \end{equation}
 
 This resampling produces a new sequence of values,
 
 \begin{equation}
 e = \left[ (x',y')_{1}, (x',y')_{s}, ..., (x',y')_{G} \right]
-\label{eq:shccdelta}
+\label{eq:shcc5}
 \end{equation}
 
 The next step is the normalization of each ordered-pair according to
 
 \begin{equation}
 \textbf{x} = \frac{1}{\max(x') - min(x')} ( \textbf{x'} - \min(x') \textbf{1} )
-\label{eq:shccdelta}
+\label{eq:shcc6}
 \end{equation}
 
 \begin{equation}
 \textbf{y} = \frac{1}{\max(y') - min(y')} ( \textbf{y'} - \min(y') \textbf{1} )
-\label{eq:shccdelta}
+\label{eq:shcc7}
 \end{equation}
 
 \noindent effectively yielding $x,y \in [0,1]$. \\
@@ -554,18 +556,60 @@ Finally, the feature is constructed by calculating the point-to-point slope agai
 
 \begin{equation}
 f = \bigg (  \frac{y_{s}-y_{s-1}}{x_{s}-x_{s-1}}  \bigg )_{2}^{G} 
-\label{eq:shccdelta}
+\label{eq:shcc8}
 \end{equation}
 
 
-\subsection{Histogram of Gradients Orientations - HGO}
+\subsection{Scale Invariant Feature Transform - SIFT}
 
-This Histogram of Gradient Orientations is based on using Computer Vision techniques to extract directly information from a signal based on the plot of a signal on a 2D image.  This mimicks exactly what a person is doing by visually inspecting the plot, and the waveform.  To do that, the region of the image where the signal is located is divided in a $4 x 4$ block and the signal's bidimensional gradients is calculated.  For each block within the patch, a histogram of gradient orientations, 8 circular orientations, is calculated.  This histogram is concatenated for all the 16 blocks and a feature is thus formed.  The details of the method can be found here \citep{Ramele2016}.  This method was implemented using the VLFeat  \citep{Vedaldi2010} Computer Vision libraries.
+SIFT~\citep{Lowe2004} is a very successful feature extraction technique from Computer Vision .  It has a biomimetic inspiration on how the visual cortex analyze images based on orientations.  This method has been used in \citep{Ramele2016} to analyze EEG signals based on their plots on 2D images.
+
+The first step of the algorithm is plot generation based on single-channel EEG segments $ x(n) $.
+
+\begin{equation}
+\tilde{x}(n) = \left\lfloor \frac{\delta ( x(n) - \bar{x})}{\sigma_{x}} \right\rceil 
+\label{eq:sift1}
+\end{equation}
+
+\noindent with $\delta$ being the signal magnification factor and $\bar{x}$ and $\sigma_{x}$ the mean and standard deviation of $x$ on the signal segment.  The width of the image is determined straightforward based on the $1$-second length in sample units. This corresponds to the sampling frequency $F_s$ of the EEG signal segment. The width is adjusted by multiplying by a magnification factor $\delta$, 
+
+\begin{equation}
+w = \delta \; F_s
+\label{eq:sift2}
+\end{equation}
+
+\noindent whereas the height is calculated based on the peak-to-peak amplitude of the signal within the segment,
+
+\begin{equation}
+h = ( \max_{n} \tilde{x}(n) - \min_{n} \tilde{x}(n))
+\label{eq:sift4}
+\end{equation}
+
+Equation \ref{eq:sift5} determines the height of the image where the signal's zero value will be located.
+
+\begin{equation}
+z = \left\lfloor \frac{h}{2} \right\rfloor - \left\lfloor \frac{\max_{n} \tilde{x}(n) + \min_{n} \tilde{x}(n)}{2} \right\rfloor
+\label{eq:sift5}
+\end{equation}
+
+Finally, a binary, black-and-white image plot is generated based on
+
+\begin{equation}
+I(z_1,z_2) = \left\{ \begin{array}{rl}
+255 & \text{if} \,  z_1 = \delta \  n; \! z_2 = \tilde{x}(n) + z \\
+0   & \mbox{otherwise}
+\end{array}\right.
+\label{eq:sift6}
+\end{equation}
+
+Once the plot is generated, the plot's center is used to localize the SIFT patch. This region of the image, where the signal's most important salient waveform should be located, is divided in a grid of $4 x 4$ block and the bidimensional gradient vectors are calculated on each one of them.  At the same time, for each block within the patch, a histogram of the gradient orientations, 8 circular orientations, are calculated.  This histogram is concatenated for all the 16 blocks and a feature is thus formed:
 
 \begin{equation}
 f = {\bigg ( h(i,j,\theta) \bigg )}_{i,j,\theta}
-\label{eq:multiclassificationrow}
+\label{eq:sift7}
 \end{equation}
+
+\noindent with $i$ and $j$ varying between $0$ and $3$, localizing the 16 blocks within the grid. The angles $\theta$ are the eight possible values between $0$ and $315$.  This vector is normalized, clapped to $0.2$, and re-normalized again.   Details of the method can be found on \citep{Ramele2016,Lowe2004}.  It was implemented using the VLFeat  \citep{Vedaldi2010} public Computer Vision libraries.
 
 %\subsection{Merger of Increasing and Decreasing Sequences}
 
@@ -574,27 +618,26 @@ f = {\bigg ( h(i,j,\theta) \bigg )}_{i,j,\theta}
 \subsection{Experimental Protocol}
 \label{Experimental}
 
-Farwell and Donchin P300 Speller \citep{Farwell1988} is one the most used BCI paradigms to implement a thought translation device and to send commands to a computer in the form of selected letters, similar to typing in a virtual keyboard.  This procedure exploits a cognitive phenomena called oddball paradigm: along the EEG trace of a person which is focusing on a sequence of two different visual flashing stimulus, a particular and distinctive transient component is found each time the expected stimulus flashes.  This is cleverly utilized in the P300 Speller, where rows and columns of a 6x6 matrix flashes randomly but only the flashing of a column or row where the letter that a user is focusing will trigger concurrently the P300 ERP along the EEG trace.
+Farwell and Donchin P300 Speller \citep{Farwell1988} is one the most used BCI paradigms to implement a thought translation device and to send commands to a computer in the form of selected letters, similar to typing in a virtual keyboard.  This procedure exploits a cognitive phenomena raised by the oddball paradigm: along the EEG trace of a person which is focusing on a sequence of two different visual flashing stimulus, a particular and distinctive transient component is found each time the expected stimulus flashes.  This is cleverly utilized in the P300 Speller, where rows and columns of a 6x6 matrix flashes randomly but only the flashing of a column or row where the letter that a user is focusing will trigger concurrently the P300 ERP along the EEG trace.
 
-%Algorithms based on qEEG can detect this component in a good-enough single-trial approach [P300 Summary], but at the same time, these algorithms do not establish a clear relationship with the P300 ERP. Hence it is difficult to establish a backward mapping back to a certain visual pattern within the waveform.
-
-In order to verify each algorithm in a controlled procedure, a real ERP template is superimposed into a real EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on anyone in particular. Everything is there, except the P300 ERP component. By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to a similar procedure used in similar works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
+How much is it possible to classify and implement a valid P300 ERP Speller using only the waveform structure of the signal and which algorithm perform better at this even when single trial latency variations and component amplitudes issues are present ?
+In order to verify this in a controlled procedure, a real P300 ERP template, obtained from a public dataset, is superimposed into a different EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on anyone in particular. Everything is there, except the P300 ERP component. By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to a similar procedure used in similar works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
 
 The experiments are as follows:
 
 \begin{itemize}
 \item Pseudo-real dataset Classification Performance: the letter classification performance of each one of these methods.
-\item Latency Noise: Gaussian noise is added to the latency where the ERP template is injected into the EEG stream.
+\item Latency Noise: Gaussian noise is added to the ERP template latency, i.e. the temporal location where it is injected into the EEG stream.
 \item Component Amplitude Noise: the different components of the ERP template are altered to make them less distinguishable.
 \end{itemize}
 
-Finally results for the same methods while offline processing a public dataset of real P300 patterns are also shown.
+\textbf{Borrar o hacer: Finally results for the same methods while offline processing a public dataset of real P300 patterns are also shown.}
 
 \subsubsection{Pseudo-Real Dataset Generation}
 
-The template ERP is extracted from the Subject $8$ of the public dataset 008-2014  \citep{Riccio2013} published on the BNCI-Horizon website \citep{Brunner2014} by IRCCS Fondazione Santa Lucia. Segments from the EEG signal are labeled as hit and are extracted for the trial number $2$, and they are point-to-point coherently averaged.  This P300 ERP can be seen in Fig.  \ref{fig:erptemplate1}. 
+The template ERP is extracted from the Subject Number $8$ of the public dataset 008-2014  \citep{Riccio2013} published on the BNCI-Horizon website \citep{Brunner2014} by IRCCS Fondazione Santa Lucia. Segments from the EEG signal are labeled as hit and are extracted for the trial number $2$, and they are point-to-point coherently averaged.  This P300 ERP can be seen in Fig.  \ref{fig:erptemplate1}. 
 
-An EEG stream with null-P300 signal everywhere is obtained by the following procedure: 
+An EEG stream with null-P300 signal is obtained by the following procedure: 
 The participant is recruited voluntarily and the experiment is conducted anonymously in accordance with the Declaration of Helsinki published by the World Health Organization.  No monetary compensation is handed out and he/she agree and sign a written informed consent.  This study is approved by the \textit{Departamento de Investigación y Doctorado, Instituto Tecnológico de Buenos Aires (ITBA)}.  The participant is healthy and have normal or corrected-to-normal vision and no history of neurological disorders. This voluntary is of unspecified gender, aged between 20-30 years old.  EEG data is collected in a single recording session. She/He is seated in a comfortable chair, with her/his vision aligned to a computer screen located one meter in front of him.  The handling and processing of the data and stimuli is conducted by the OpenVibe platform~\citep{Renard2010}.  Gel-based active electrodes (g.LADYbird, g.Tec, Austria) are used on locations Fz, Cz, Pz, Oz, P3,P4, PO7 and PO8 according to the 10-20 international system.  Reference is set to the right ear lobe and ground is preset as the AFz position.   Sampling frequency is set to 250 Hz, which is the closest possible to the one used with the other dataset. 
 
 The participant is instructed to passively watch the flashing screen while not focusing on any particular letter.  A questionnaire is handed out at the end of the experiment with questions about how the participant felt during it, without giving more details.  
@@ -612,13 +655,24 @@ Fig. \ref{fig:gaincheck} shows the result of superimposing the template signal i
 \label{fig:erptemplate1}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htb]
 \centering
-\includegraphics[width=10cm]{images/doublegain.eps}
-\includegraphics[width=10cm]{images/triplegain.eps}
-\caption{Eight-channel EEG signal superimposed with the ERP Template.  (Left) EEG trace of the original signal. (Right) The same signal segment with the added template.}
+\subfigure[EEG trace of the original signal.]{\includegraphics[width=.45\linewidth]{images/nogain.eps}}
+\subfigure[The same signal segment with the added template.]{\includegraphics[width=.45\linewidth]{images/singlegain.eps}}
+\subfigure[EEG sample of Cz channel of the original EEG trace.]{\includegraphics[width=.45\linewidth]{images/nogainzoomhit.eps}}
+\subfigure[The same segment with the added template.]{\includegraphics[width=.45\linewidth]{images/singlegainzoomhit.eps}}
+\caption{Eight-channel EEG signal superimposed with the ERP Template.}
 \label{fig:doubleandtriplegain}
 \end{figure}
+
+
+%\begin{figure}[H]
+%\centering
+%\includegraphics[width=12cm]{images/nogain.eps}
+%\includegraphics[width=12cm]{images/singlegain.eps}
+%\caption{Eight-channel EEG signal superimposed with the ERP Template.  (Left) EEG trace of the original signal. (Right) The same signal segment with the added template.}
+%\label{fig:doubleandtriplegain}
+%\end{figure}
 
 \begin{figure}[H]
 \centering
