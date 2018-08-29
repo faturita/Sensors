@@ -562,16 +562,16 @@ f = \bigg (  \frac{y_{s}-y_{s-1}}{x_{s}-x_{s-1}}  \bigg )_{2}^{G}
 
 \subsection{Scale Invariant Feature Transform - SIFT}
 
-SIFT~\citep{Lowe2004} is a very successful feature extraction technique from Computer Vision .  It has a biomimetic inspiration on how the visual cortex analyze images based on orientations.  This method has been used in \citep{Ramele2016} to analyze EEG signals based on their plots on 2D images.
+SIFT~\citep{Lowe2004} is a very successful feature extraction technique from Computer Vision .  It has a biomimetic inspiration on how the visual cortex analyze images based on orientations~\citep{cogprints561}.  This method has been used in \citep{Ramele2016} to analyze EEG signals based on their plots on 2D images.
 
-The first step of the algorithm is plot generation based on single-channel EEG segments $ x(n) $.
+The first step of the algorithm is the plot generation based on single-channel EEG segments $ x(n) $.
 
 \begin{equation}
 \tilde{x}(n) = \left\lfloor \frac{\delta ( x(n) - \bar{x})}{\sigma_{x}} \right\rceil 
 \label{eq:sift1}
 \end{equation}
 
-\noindent with $\delta$ being the signal magnification factor and $\bar{x}$ and $\sigma_{x}$ the mean and standard deviation of $x$ on the signal segment.  The width of the image is determined straightforward based on the $1$-second length in sample units. This corresponds to the sampling frequency $F_s$ of the EEG signal segment. The width is adjusted by multiplying by a magnification factor $\delta$, 
+\noindent with $\delta$ being the signal magnification factor and $\bar{x}$ and $\sigma_{x}$, the mean and standard deviation of $x$ on the signal segment.  The width of the image is determined based on the $1$-second length size of the segment window in sample units. This corresponds to the sampling frequency $F_s$ of the EEG signal segment. The width is adjusted by multiplying by the magnification factor $\delta$, 
 
 \begin{equation}
 w = \delta \; F_s
@@ -585,7 +585,7 @@ h = ( \max_{n} \tilde{x}(n) - \min_{n} \tilde{x}(n))
 \label{eq:sift4}
 \end{equation}
 
-Equation \ref{eq:sift5} determines the height of the image where the signal's zero value will be located.
+Equation \ref{eq:sift5} determines the vertical position of the image where the signal's zero value will be located.
 
 \begin{equation}
 z = \left\lfloor \frac{h}{2} \right\rfloor - \left\lfloor \frac{\max_{n} \tilde{x}(n) + \min_{n} \tilde{x}(n)}{2} \right\rfloor
