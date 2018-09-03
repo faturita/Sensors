@@ -328,7 +328,7 @@ Coupling \\ Cross Frequency,  Phase-Amplitude, Phase-Phase     & Sleep & \citep{
 Period Amplitude Analysis  & ERP, Epilepsy & \citep{Uchida1999,Cacioppo2007, Shah2015} \\
 \bottomrule
 \end{tabular}
-\label{tab:results}
+\label{tab:methods}
 \end{table}
 
 
@@ -393,7 +393,7 @@ According to the defined criteria, the algorithms that will be evaluated are as 
 \item Matching Pursuit
 \item Permutation Entropy
 \item Slope Horizontal Chain Code
-\item Histogram of Gradient Orientations
+\item Scale Invariant Feature Transform
 %\item Merging of Increasing and Decreasing Sequences
 %\item Local Binary Patterns (1-D LNBP, 1D-LBP and LBP)
 \end{itemize}
@@ -622,7 +622,7 @@ f = {\bigg ( h(i,j,\theta) \bigg )}_{i,j,\theta}
 
 Farwell and Donchin P300 Speller \citep{Farwell1988} is one the most used BCI paradigms to implement a thought translation device and to send commands to a computer in the form of selected letters, similar to typing in a virtual keyboard.  This procedure exploits a cognitive phenomena raised by the oddball paradigm: along the EEG trace of a person which is focusing on a sequence of two different visual flashing stimulus, a particular and distinctive transient component is found each time the expected stimulus flashes.  This is cleverly utilized in the P300 Speller, where rows and columns of a 6x6 matrix flashes randomly but only the flashing of a column or row where the letter that a user is focusing will trigger concurrently the P300 ERP along the EEG trace.
 
-How much is it possible to classify and implement a P300 ERP Speller using only the waveform structure of the signal ? Which algorithm perform better at this even when single trial latency variations and component amplitudes issues are present ?
+How much is it possible to classify and implement a P300 ERP Speller using only the waveform structure of the signal ? Which algorithm perform better at this even when segment latency variations and component amplitudes issues are present ?
 
 In order to verify this in a controlled procedure, a real P300 ERP template, obtained from a public dataset, is superimposed into a different EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to similar procedures used in other works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
 
@@ -728,29 +728,43 @@ Thus, the letter identification performance can be obtained by measuring the acc
 Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{tab:results} shows the single-intensification performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance was attained.   Figure \ref{fig:performancetest} shows the performance curves for eight algorithms.  Each one represents the percentage of letters that were actually predicted by the combination of feature plus a classification method.  As previously described the data were divided in two, and the first 15 letters were used to derive the dictionary of templates while the remaining 20 letters were used to measure the classification performance.   Figure \ref{fig:performancetestlatency} shows the same results obtained when a Gaussian latency shift was included when the ERP was superimposed.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained when the amplitude of the N1 and P3 component of the template are randomly reduced (uniform distribution).
 
 
+%\begin{table}[H]
+%\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, the control algorithms SVM Support Vector Machines was included.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
+%\centering
+%%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
+%\begin{tabular}{cccc}
+%\toprule
+%\textbf{Method}	& \textbf{Channel} & \textbf{Single Intensification Performance} &  \textbf{Performance} 	\\
+%\midrule
+%SVM     & PO8  & $50\%$ & $70\%$ \\
+%SIFT  & PO8 & $25\%$ & $95\%$ \\
+%MP 1 & PO8 & $25\%$ & $70\%$ \\
+%PE     & Cz & $20\%$ & $55\%$ \\
+%MP 2 & PO7 & $10\%$ & $30\%$\\
+%SHCC & P4 & $10\%$ & $100\%$\\
+%\bottomrule
+%\end{tabular}
+%\label{tab:results}
+%\end{table}
+
 \begin{table}[H]
-\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, three control algorithms were included: RS Raw Signal, NN Neural Network and SVM Support Vector Machines.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template. The mark \textit{m-c} is used on the control algorithms to identify that the feature was crafted concatenating all the channels.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
+\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, the control algorithms SVM Support Vector Machines was included.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
-\begin{tabular}{ccc}
+\begin{tabular}{ccccc}
 \toprule
-\textbf{Method}	& \textbf{Channel} & \textbf{Single Trial Performance}	\\
+\textbf{Method}	& \textbf{Channel} &  \textbf{Performance} & \textbf{Perf w/Latency noise}	& \textbf{Perf w/Amplitude Noise}\\
 \midrule
-SVM     & m-c  & $50\%$ \\
-NN       & m-c  & $45\%$ \\
-SIFT  & PO8 & $25\%$ \\
-MP 1 & PO8 & $25\%$ \\
-PE     & Cz & $20\%$ \\
-RS     & Fz & $15\%$ \\
-RS     & m-c  & $15\%$ \\
-MP 2 & PO7 & $10\%$ \\
-SHCC & P4 & $10\%$ \\
-NN s-c & Fz & $10\%$ \\
+MP 1 & PO8  & $70\%$ & $25\%$ & $50\%$\\
+MP 2 & PO7 & $30\%$ & $15\%$ & $10\%$\\
+SIFT  & PO8 & $95\%$ & $30\%$ & $65\%$\\
+PE     & Cz & $55\%$ & $10\%$ & $40\%$\\
+SHCC & P4 & $100\%$ & $20\%$ & $75\%$\\
+SVM     & PO8  & $85\%$ & $10\%$ & $60\%$\\
 \bottomrule
 \end{tabular}
 \label{tab:results}
 \end{table}
-
 
 \begin{figure}[H]
 \centering
@@ -780,36 +794,32 @@ NN s-c & Fz & $10\%$ \\
 \section{Discussion}
 \label{section:discussion}
 
-The classification methods Support Vector Machine SVM and Artificial Neural Networks NN are added for comparison using the feature of Kasinksky (REF).  Additionally, the Kasinksky feature is used with the same classification algorithm as detailed in \ref{section:classification}.
+The classification method Support Vector Machine SVM is added for comparison using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  
 
-All the methods show a significant reduction of performance when the latency noise is added, and at the same time all the methods show resistance to noise in peak amplitudes.
+All the methods show a significant reduction of performance when latency noise is added, and at the same time all the methods show some resistance to noise in peak amplitudes of the main components.
 
-Except for the raw signal, using a multichannel feature provides a better synthesis of the differentiation information that provides a better accuracy.  This can be seen in Fig \ref{fig:performancetest} where the performance of the control algorithm NN is improved by using a multichannel feature.  The poor raw signal performance while using a multichannel feasture is likely to the curse of dimensionality due to the fact that the feature is simple too large.
+Using a straightforward dictionary of templates for \textit{MP-1} proved more beneficial in terms of performance than the standard approach of using a Hilbert base of Wavelets atoms on \textit{MP-2}.  Either applying latency noise or amplitude noise, the method based on the signal's templates instead of using their coefficient proved to achieve much better performance values.
 
-Using a straightforward dictionary of templates for MP-1 proved more beneficial in terms of performance than the standard approach of using a Hilbert base of Wavelets atoms.
-
-The methods \textit{SIFT} and \textit{SHCC} performed much better than the other algorithms including when the latency and the amplitudes are noisy.
-
-It is important to remark that Segmentation or identification is not considered in these experiments. The  problem of segmentation is related to the detection of a feature within an EEG trace and not to the feature extraction problem.
+Results obtained for algorithms MP-1, SIFT, SHCC show them to be comparable with the results obtained for SVM.  Particularly, the methods \textit{SIFT} and \textit{SHCC} performed much better than the other algorithms even when the latency and the amplitudes are noisy.  Latency noise on the other hand, reduces the information contained in the signal, mainly due to the invalidation of the SNR enhancement performed by the averaging procedure.  This reduction impacts on the obtained performance for all the methods, almost equally.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 \label{section:conclusion}
 
-intelligible property
+The purpose of this work was threefold, (1) raise awareness about the utility of using automatic waveform-based methods to study EEG signals, (2) to provide an overview of the state-of-the-art of those methods, and (3) to compare those methods and verify if it is possible to obtain acceptable classification accuracies based exclusively on the signal's waveform.
 
-The conventional clinical method of observing the waveform is understood to be subjective and laborious because results depend on the technicians' experience and expertise.  The need for more objective measurements pushed the adoption of more automated means of decoding the signals and demanded a need for replication \citep{Thakor2004}.  This lead to the initial development of quantitative EEG, which however didn't replaced clinically the traditional approach which is still widespread: the Gold standard in clinical EEG is still \textit{Eye Ball}
+We verified that similar performance results are obtained for the methods \textit{MP-1}, \textit{SIFT} and \textit{SHCC} and that it is possible to obtain discriminating information from the underlying signal based exclusively on an automated method of processing the waveforms.  This open the possibility to use these techniques to implement automatic detection procedures with a strong intelligible property, due to the fact that they are based on metrics which can be visually verified.
 
-The purpose of this work was threefold, (1) raise awareness about the utility of using automatic waveform-based methods to study EEG signals, (2) to provide an overview of the state-of-the-art of those methods, and (3) to compare those methods and verify if it is possible to obtain classification accuracies based exclusively on the signal's waveform.
+%How much is it possible to classify and implement a P300 ERP Speller using only the waveform structure of the signal ? Which algorithm perform better at this even when segment latency variations and component amplitudes issues are present ?
 
-One of the main goals of the BCI discipline is to provide assistance to patients and to provide alternative tools to be used in diagnostics and rehabilitation procedure.  This requires a clinical focus which is often neglected in BCI research (ref).  At the same time, BCI reliability and the avoidance of the black box phenomena are goals that are still unfulfilled in this discipline(WOkpaw and wolpaw). The benefits of analysing or including metrics about the shape of the EEG, are that clinical EEG diagnosis may support a vast set of already understood knowledge which is based on identifying EEG patterns by their shape and that can lead to more robust implementation of BCI devices.
+One of the main goals of the BCI discipline is to provide assistance to patients and to provide alternative tools to be used in diagnostics and rehabilitation procedure.  This requires a clinical focus which is often neglected in BCI research~\citep{Chavarriaga2017}.  At the same time, BCI reliability is yet an unfulfilled goal in this discipline~\citep{WolpawJonathanR2012}. The benefits of analyzing or including metrics about the shape of the EEG, are that clinical EEG diagnosis may support a vast set of already understood knowledge which is based on identifying EEG patterns by their shape and that can lead to more robust implementation of BCI devices.
 
-Successful approaches in Computer Vision or pattern recognition in other areas use a set of different features to compound ensemble classifiers.  All these methods had the advantage that they can truly map a visual component with a clinical meaning, assessed by a physician, and provide an automatic identification which can be constructed by the set of methods.  
+The conventional clinical method of observing the waveform is understood to be subjective and laborious because results depend on the technicians' experience and expertise.  The need for more objective measurements pushed the adoption of more automated means of decoding the signals and demanded a need for replication \citep{Thakor2004}.  This lead to the initial development of quantitative EEG, which however didn't replaced clinically the traditional approach which is still widespread: the Gold standard in clinical EEG is still \textit{Eye Ball}.  We believe that the adoption of \textit{hybrid} methodology which can process the signal automatically, but at the same time, mantains an intelligible property that can be mapped to existing procedures, and above all, can mantain the clinician control of the procedure will be benefical to clinical practice, Neuroscience and BCI research. 
 
-More work has to be conducted in order to extend this methods to other patterns of waves.
+Successful approaches in Computer Vision or pattern recognition in other areas use a set of different features to compound ensemble classifiers.  All these methods had the advantage that they can truly map a visual component with a clinical meaning, assessed by a physician, and provide an automatic identification which can be constructed by the set of methods.   More work has to be conducted in order to extend this methods to other wave patterns.
 
-The procedure of analysing signals by their waveforms is relative common in chemical analysis (i.e. chemometrics Skoog, D.; West, D.; Holler, F. Analtyical Chemistry, An Introduction; Saunders: Philadelphia, 1994.), geology (sismic analysis), and quantitive financial analysis.  EKG, or Electrocardiogram, on the other hand, has been extensively processed and analysed by waveform methods.
-Additionally, the same problem can be found in Intelligent Character Recognition.
+Another benefit of these approaches is that they have a potential universal applicability.  As they are only analyzing waveform, they can be explored in other disciplines where the structure or shape of the waveform is of relevance.  Analyzing signals by their waveforms is relative common in chemical analysis~\citep{Skoog2000}, seismic analysis in Geology~\citep{Owens1984}, and quantitative financial analysis.  Electrocardiogram EKG, on the other hand, has been extensively processed and studying the waveform structure~\citep{Stockman1976}.
+%Additionally, the same problem can be found in Intelligent Character Recognition.
 
 %Berger H: tiber das Elektrenkephalogramm des Menschen, Archiv Psychiatr, 87 (1929) pp. 527-570.
 
@@ -860,15 +870,23 @@ Additionally, the same problem can be found in Intelligent Character Recognition
 
 \noindent EEG: electroencephalography\\
 BCI: Brain Computer Interfaces\\
+BMI: Brain Machine Interfaces\\
+BNCI: Brain-Neural Computer Interfaces\\
 SNR: Signal to Noise Ratio\\
 CNS: Central Nervous System\\
-ALS: Amyotrophic Lateral Sclerosis\\
+DC: Direct Current\\
 ERP: Event-Related Potential\\
 P300: Positive deflection of an Event-Related Potential which occurs 300 ms after onset of stimulus\\
 ITR: Information Transfer Rate\\
 BTR: Bit Transfer Rate\\
 SIFT: Scale Invariant Feature Transform\\
-HOG: Histogram Of Gradients}
+SHCC: Slope Horizontal Chain Code\\
+PE: Permutation Entropy\\
+MP: Matching Pursuit\\
+ICU: Intensive Care Unit\\
+EKG: Electrocardiogram\\
+PAA:Period Amplitude Analysis
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% optional
