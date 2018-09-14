@@ -284,7 +284,7 @@ Sleep Research has been studied in this way by performing Polysomnographic recor
 
 Moreover, EEG data acquisition is a key procedure during the assessment of patients with focal Epilepsy for potential seizure surgery, where the source of the seizure activity must be reliably identified. The onset of the Epileptic Seizure is defined as the first electrical change seen in the EEG rhythm which can be visually identified from the context and it is verified against any clinical sign indicating seizure onset.  The interictal epileptiform discharges (IEDs) are visually identified from the paper strip, and they are also named according to their shape: spike, spike and wave or sharp-wave discharges\citep{EEGIntro}.  
 
-\textbf{Waveform characterization is of quite importance in terms of Event Related Potentials.  Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient signal elements that may arise as a brain response to an external visual, tactile or auditory stimulus.  Particularly, ERPs are regularly used to assess auditory response in infants.  They are extensively used and studied in Cognitive Neuroscience ~\citep{Luck2005}.  ERPs are identified by their components which are recognizable signal shapes assigned to the observed waveform, that can be linked to some cognitive or measurable psychological process.   The P300 is one of the most studied ERP component in BCI because it can be used to implement a Speller application.  We will start with this process now.}
+Waveform characterization is the method in which analysis has been performed for Event Related Potentials.  Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient signal elements that may arise as a brain response to an external visual, tactile or auditory stimulus.  Particularly, ERPs are regularly used to assess auditory response in infants.  They are extensively used and studied in Cognitive Neuroscience~\citep{Luck2005}.  ERPs are identified by their components which are recognizable signal shapes assigned to the observed waveform, that can be linked to some cognitive or measurable psychological process.   The P300 is one of the most studied ERP component in BCI because it can be used to implement a Speller application.  Hence, P300 ERPs are a target phenomena to study by automatic waveform recognition methods.
 
 %The clinical EEG patterns are identified by the shape of waveform amplitude plotted against time.
 
@@ -642,9 +642,9 @@ In order to verify this in a controlled procedure, a real P300 ERP template, obt
 The experiments are as follows:
 
 \begin{itemize}
-\item Pseudo-Real Dataset Classification Performance: the letter classification performance of each one of these methods applied on the artificially generated pseudo-real dataset.
-\item Latency Noise: Uniform noise is added to the ERP template latency, i.e. the temporal location where it is injected into the EEG stream.  The latency range from $0$ to $40\%$ of the $1s$ of the window size. 
-\item Component Amplitude Noise: the amplitude of the main P3b components of the ERP template is altered based on uniform distribution.  This component is completely substracted from the original template or not substracted at all.  The substraction percentage is obtained from a uniform distribution.  Additionally the substraction curve is warped in a gaussian window of 800 ms.
+\item Experiment 1 - Pseudo-Real Dataset Classification Performance: the letter classification performance of each one of these methods applied on the artificially generated pseudo-real dataset.
+\item Experiment 2 - Latency Noise: Uniform noise is added to the ERP template latency, i.e. the temporal location where it is injected into the EEG stream.  The latency range from $0$ to $40\%$ of the $1s$ of the window size. 
+\item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b components of the ERP template is altered based on uniform distribution.  This component is completely substracted from the original template or not substracted at all.  The substraction percentage is obtained from a uniform distribution.  Additionally the substraction curve is warped in a gaussian window of 800 ms.
 \end{itemize}
 
 %\textbf{Borrar o hacer: Finally results for the same methods while offline processing a public dataset of real P300 patterns are also shown.}
