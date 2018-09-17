@@ -46,8 +46,8 @@
 \articlenumber{x}
 \doinum{10.3390/------}
 \pubvolume{xx}
-\pubyear{2017}
-\copyrightyear{2017}
+\pubyear{2018}
+\copyrightyear{2018}
 \externaleditor{Academic Editor: name}
 \history{Received: date; Accepted: date; Published: date}
 
@@ -284,7 +284,7 @@ Sleep Research has been studied in this way by performing Polysomnographic recor
 
 Moreover, EEG data acquisition is a key procedure during the assessment of patients with focal Epilepsy for potential seizure surgery, where the source of the seizure activity must be reliably identified. The onset of the Epileptic Seizure is defined as the first electrical change seen in the EEG rhythm which can be visually identified from the context and it is verified against any clinical sign indicating seizure onset.  The interictal epileptiform discharges (IEDs) are visually identified from the paper strip, and they are also named according to their shape: spike, spike and wave or sharp-wave discharges\citep{EEGIntro}.  
 
-Waveform characterization is the method in which analysis has been performed for Event Related Potentials.  Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient signal elements that may arise as a brain response to an external visual, tactile or auditory stimulus.  Particularly, ERPs are regularly used to assess auditory response in infants.  They are extensively used and studied in Cognitive Neuroscience~\citep{Luck2005}.  ERPs are identified by their components which are recognizable signal shapes assigned to the observed waveform, that can be linked to some cognitive or measurable psychological process.   The P300 is one of the most studied ERP component in BCI because it can be used to implement a Speller application.  Hence, P300 ERPs are a target phenomena to study by automatic waveform recognition methods.
+Waveform characterization is the method in which analysis has been performed for Event Related Potentials.  Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient signal elements that may arise as a brain response to an external visual, tactile or auditory stimulus.  ERPs are regularly used to assess auditory response in infants.  They are extensively used and studied in Cognitive Neuroscience~\citep{Luck2005}.  ERPs are identified by their components which are recognizable signal shapes assigned to the observed waveform, that can be linked to some cognitive or measurable psychological process.   The P300 is one of the most studied ERP component in BCI because it can be used to implement a Speller application.  Hence, P300 ERPs are a target phenomena to study by automatic waveform recognition methods.
 
 %The clinical EEG patterns are identified by the shape of waveform amplitude plotted against time.
 
@@ -365,7 +365,10 @@ As described in \citep{allen2004signal} the Pattern Matching problem in Signal p
 
 Shape or waveform analysis methods are considered as nonparametric methods.  They explore signal's time-domain metrics or even derive more complex indexes or features from it \citep{Thakor2009}. 
 
-One of the earliest approach to automatically process EEG data is the Peak Picking method.  Although of limited usability, peak picking has been used to determine latency of transient events in EEG \citep{Jaskowski2000,Zhang2011}.  Straightforward in its implementation, it consists in assigning a component to a simple waveform element based on the expected location of its more prominent deflection \citep{Ouyang2017}.  Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient component that may arise as a brain response to an external visual, tactile or auditory stimulus.  Particularly, ERPs are regularly used to assess auditory response in infants. They are characterized in this manner, where the name of many of the EEG features evoke directly a peak within the waveform, e.g. P300 or P3a P3b or N100.  This leads to a natural procedure to classify them visually by selecting appropriate peaks and matching their positions and amplitudes in an orderly manner.  The letter provides the polarity (Positive or Negative) and the numbering shows the time referencing the stimulus onset, or the ordinal position of each peak (first, second, etc).   
+One of the earliest approach to automatically process EEG data is the Peak Picking method.  Although of limited usability, peak picking has been used to determine latency of transient events in EEG \citep{Jaskowski2000,Zhang2011}.  Straightforward in its implementation, it consists in assigning a component to a simple waveform element based on the expected location of its more prominent deflection \citep{Ouyang2017}.  
+Of regular use in ERP Research, the name of many of the EEG features reference directly a peak within the component, e.g. P300 or P3a P3b or N100.  This leads to a natural way to classify them visually by selecting appropriate peaks and matching their positions and amplitudes in an orderly manner.  The letter provides the polarity (Positive or Negative) and the numbering shows the time referencing the stimulus onset, or the ordinal position of each peak (first, second, etc). 
+
+%Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient component that may arise as a brain response to an external visual, tactile or auditory stimulus.  Particularly, ERPs are regularly used to assess auditory response in infants. They are characterized in this manner, where the name of many of the EEG features evoke directly a peak within the waveform, e.g. P300 or P3a P3b or N100.  This leads to a natural procedure to classify them visually by selecting appropriate peaks and matching their positions and amplitudes in an orderly manner.  The letter provides the polarity (Positive or Negative) and the numbering shows the time referencing the stimulus onset, or the ordinal position of each peak (first, second, etc).   
 
 A related method is used in \citep{Alvarado-Gonzalez2016} where the area under the curve of the EEG is sumarized to derive a feature.  This was even used in the seminal work of Farwell and Donchin on P300 \citep{Farwell1988,WolpawJonathanR2012}. Additionally, a logarithmic graph of the peak-to-peak amplitude which is called amplitude integrated EEG (aEEG) \citep{Shah2015} is used nowadays in Neonatal Intensive Care Units.
 
@@ -409,11 +412,11 @@ According to the defined criteria, the algorithms that will be evaluated are as 
 %\item Local Binary Patterns (1-D LNBP, 1D-LBP and LBP)
 \end{itemize}
 
-All these methods provide a feature $ f $  that can be used as a template.  The notation $()_{1}^{n} $ will be used to describe the concatenation of scalar values to form a multidimensional feature vector $f$. Additionally, thy are based on metrics that are extracted from the shape of the single channel digital EEG signal $x(n)$, with $n$ varying from $1$ to the length $N$ of the EEG segment in sample points.  These features are used to create dictionaries or template databases.  Finally, these templates provide the basis for the pattern matching algorithm and offline classification. These algorithm were implemented on MATLAB 2014a (Mathworks Inc., Natick, MA, USA). 
+All these methods provide a feature $ f $  that can be used as a template.  The notation $\{\}_{1}^{n} $ will be used to describe the concatenation of scalar values to form a multidimensional feature vector $f$. These algorithms are based on metrics that are extracted from the shape of the single channel digital EEG signal $x(n)$, with $n$ varying from $1$ to the length $N$ of the EEG segment in sample points.  These features are used to create dictionaries or template databases.  Finally, these templates provide the basis for the pattern matching algorithm and offline classification. These algorithm were implemented on MATLAB 2014a (Mathworks Inc., Natick, MA, USA). 
 
 \subsection{Matching Pursuit - MP 1 and MP 2}
 
-\textit{Pursuit} algorithms refer, in their many variants, as blind source separation \citep{Vincent2010} techniques that assume the EEG signal as a linear combination of different sparse sources extracted from a template's dictionaries.  Matching Pursuit \textit{MP}~\citep{Mallat1993}, the most representative of this algorithms, is a greedy variant that decomposes a signal into a linear combination of waveforms, called atoms, that are well localized in time and frequency \citep{ChandranKS2016}.  Given a signal, this optimization technique, tries to find the indexes of atoms and their weights (contributions) that minimize,
+\textit{Pursuit} algorithms refer, in their many variants, as blind source separation \citep{Vincent2010} techniques that assume the EEG signal as a linear combination of different sparse sources extracted from a template's dictionaries.  Matching Pursuit \textit{MP}~\citep{Mallat1993}, the most representative of this algorithms, is a greedy variant that decomposes a signal into a linear combination of waveforms, called atoms, that are well localized in time and frequency \citep{ChandranKS2016}.  Given a signal, this optimization technique, tries to find the indexes of $m$ atoms and their weights (contributions) that minimize,
 
 
 \begin{equation}
@@ -421,7 +424,7 @@ All these methods provide a feature $ f $  that can be used as a template.  The 
 \label{eq:mperror}
 \end{equation}
 
-which is the error between the signal and their approximation constructed by the weighted $w_i$ atoms $g_{i}$, and calculating the euclidean norm ${\left\lVert \cdot \right\rVert}_{2}$.  The algorithm goes by first setting the approximating signal $\tilde{x}_{0}$  as the original signal itself,  
+\noindent which is the error between the signal and their approximation constructed by the weighted $w_i$ atoms $g_{i}$, and calculating the euclidean norm ${\left\lVert \cdot \right\rVert}_{2}$.  The algorithm goes by first setting the approximating signal $\tilde{x}_{0}$  as the original signal itself,  
 
 \begin{equation}
 \tilde{x}_{0}(n) = x(n)
@@ -435,7 +438,7 @@ g_{k} = \arg \max_{g_{i}} \left\lvert  \sum_{n=1}^{N} \tilde{x}_{k-1}(n) \; g_{i
 \label{eq:mp3}
 \end{equation}
 
-where $g_{i}$ are all the available scaled, translated and modulated atoms from the dictionary.  The operation $\left\lvert \cdot \right\rvert$ corresponds to the absolute value of the inner product.  This step determines the atom selection process, and their contribution is calculated based on 
+\noindent where $g_{i}$ are all the available scaled, translated and modulated atoms from the dictionary.  The operation $\left\lvert \cdot \right\rvert$ corresponds to the absolute value of the inner product.  This step determines the atom selection process, and their contribution is calculated based on 
 
 %The operation $\left\lvert < \cdot,\cdot > \right\rvert$ corresponds to the absolute value of the inner product. 
 
@@ -445,17 +448,17 @@ w_{k} =  \frac{\sum_{n=1}^{N} \tilde{x}_{k-1}(n) \; g_{k}(n)}{  {\left\lVert  g_
 \label{eq:mp4}
 \end{equation}
 
-with $k$ representing the index of the selected atom $g_{k}$.  Finally the contribution of each atom is subtracted from the next approximation~\citep{Cohen2014,Sanei2007, Mallat1993}
+\noindent with $k$ representing the index of the selected atom $g_{k}$ and $\left\lVert \cdot \right\rVert$ its norm.  Finally the contribution of each atom is subtracted from the next approximation~\citep{Cohen2014,Sanei2007, Mallat1993}
 
 \begin{equation}
-\tilde{x}_{k+1}(n)=  \tilde{x}_{k}(n) - w_{k} g_{k} (n)
+\tilde{x}_{k}(n)=  \tilde{x}_{k-1}(n) - w_{k} g_{k} (n)
 \label{eq:mp5}
 \end{equation}
 
 The stopping criteria can be established based on a limiting threshold on Equation \ref{eq:mperror} or based on a predetermined number of steps and selected atoms.  Two variants of this algorithm are evaluated. In \textit{MP 1} the dictionary is directly constructed with the normalized templates directly extracted from the real signal segments which is a straightforward implementation of the pattern matching technique.  In \textit{MP 2} the coefficients of Daubechies least-asymetric wavelet with 2 vanishing moments atoms are used to construct the dictionary~\citep{Vareka2012}.  For the first version, the matching against the template is evaluated according to Equation \ref{eq:mperror} directly, whereas for the latter each feature is crafted by decomposing the signal in its coefficients and building, an eventually sparse, vector with them:
 
 \begin{equation}
-f =  {\bigg ( w_{i} \bigg )}_{1}^{D} 
+f =  {\bigg \{ w_{i} \bigg \}}_{1}^{D} 
 \label{eq:mp6}
 \end{equation}
 
@@ -506,7 +509,7 @@ H(\textbf{p}) = \sum_{i=1}^{m!} p_{i} \; log \frac{1}{p_{i}}.
 The implemented code was derived from~\citep{Unakafova2013}, and the model description from \citep{Berger2017}.  This procedure will produce a scalar number for the given signal window of size $W$.  To derive a feature, a sliding window procedure must be implemented.  Thus, the length of the feature is $N - (W + \tau (m - 1)) + 1$.
 
 \begin{equation}
-f =  {\bigg ( H(\textbf{p})_{u} \bigg )}_{1}^{N - (W + \tau (m - 1)) + 1}
+f =  {\bigg \{ H(\textbf{p})_{u} \bigg \}}_{1}^{N - (W + \tau (m - 1)) + 1}
 \label{eq:pe6}
 \end{equation}
 
@@ -568,7 +571,7 @@ The next step is the normalization of each ordered-pair as vectors $\textbf{x'} 
 Finally, the feature is constructed by calculating the point-to-point slope against the horizontal plane,
 
 \begin{equation}
-f = \bigg (  \frac{\hat{y}_{s}-\hat{y}_{s-1}}{\hat{x}_{s}-\hat{x}_{s-1}}  \bigg )_{2}^{G} 
+f = \bigg \{  \frac{\hat{y}_{s}-\hat{y}_{s-1}}{\hat{x}_{s}-\hat{x}_{s-1}}  \bigg \}_{2}^{G} 
 \label{eq:shcc8}
 \end{equation}
 
@@ -620,7 +623,7 @@ I(z_1,z_2) = \left\{ \begin{array}{rl}
 Once the plot is generated, the plot's center is used to localize the center of the SIFT patch. This region of the image, where the signal's most important salient waveform should be located, is divided in a grid of $4 x 4$ block and the bidimensional gradient vectors are calculated on each one of them.  Therefore, for each block within the patch, a histogram of the gradient orientations, 8 circular orientations, are calculated.  This histogram is concatenated for all the 16 blocks and a feature is thus formed:
 
 \begin{equation}
-f = {\bigg ( h(i,j,\theta) \bigg )}_{(0,0,0)}^{(3,3,315)}
+f = {\bigg \{ h(i,j,\theta) \bigg \}}_{(0,0,0)}^{(3,3,315)}
 \label{eq:sift7}
 \end{equation}
 
