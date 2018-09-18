@@ -646,9 +646,12 @@ The experiments are as follows:
 
 \begin{itemize}
 \item Experiment 1 - Pseudo-Real Dataset Classification Performance: the letter classification performance of each one of these methods applied on the artificially generated pseudo-real dataset.
-\item Experiment 2 - Latency Noise: Uniform noise is added to the ERP template latency, i.e. the temporal location where it is injected into the EEG stream.  The latency range from $0$ to $40\%$ of the $1s$ of the window size. 
-\item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b components of the ERP template is altered based on uniform distribution.  This component is completely substracted from the original template or not substracted at all.  The substraction percentage is obtained from a uniform distribution.  Additionally the substraction curve is warped in a gaussian window of 800 ms.
+\item Experiment 2 - Latency Noise: Uniform noise is added to the ERP template latency, i.e. to the temporal location where it is injected into the EEG stream.  The latency lag ranges from $0$ to $40\%$ of the $1s$ of the window size. 
+\item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b components of the ERP template is randomly altered.  This component is subtracted from the original template.  The subtraction percentage is obtained from a uniform distribution.  Additionally the subtracted curve is warped in a Gaussian window of 800 ms.
 \end{itemize}
+
+These are executed using 3-fold cross validation procedure.
+
 
 %\textbf{Borrar o hacer: Finally results for the same methods while offline processing a public dataset of real P300 patterns are also shown.}
 
