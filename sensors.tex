@@ -85,7 +85,7 @@ $^{1}$ \quad Computer Engineering Department, Instituto Tecnológico de Buenos A
 %\simplesumm{}
 
 % Abstract (Do not use inserted blank lines, i.e. \\) 
-\abstract{The Electroencephalography (EEG) is not just a mere clinical tool anymore.  It has become the de-facto mobile, portable, non-invasive brain imaging sensor to harness brain information in real time and translating or decoding brain signals that can be used to diagnose disease or implement Human Computer Interaction devices.  The automatic processing approach which is based on using quantitative algorithms to detect the cloaked information buried in the signal, outshines the research done by the clinical EEG community which was based intensively on EEG waveforms and the structure of signal plots.  Hence, the purpose of this work is to establish a bridge to fill this gap by doing a review and description of the procedures that have been used to detect patterns in the electroencephalographic waveforms, and to perform a benchmarking analysis of them.  }
+\abstract{The Electroencephalography (EEG) is not just a mere clinical tool anymore.  It has become the de-facto mobile, portable, non-invasive brain imaging sensor to harness brain information in real time and translating or decoding brain signals that can be used to diagnose disease or implement Human Computer Interaction devices.  The automatic processing approach which is based on using quantitative algorithms to detect the cloaked information buried in the signal, outshines the research done by the clinical EEG community which was based intensively on EEG waveforms and the structure of signal plots.  Hence, the purpose of this work is to establish a bridge to fill this gap by reviewing and describing the procedures that have been used to detect patterns in the electroencephalographic waveforms, benchmarking them on a controlled pseudo-real dataset of an ERP waveform and verifying their performance on a public dataset of a BCI Competition.}
 
 % We aim to detect specific waveforms mimicking what physicians has been doing since the inception of this fruitful technology.
 
@@ -148,7 +148,7 @@ In contrast, automatic processing, or quantitative EEG (qEEG), was based first o
 
 Hence, the traditional and knowledgeable approach was mainly overshadow particularly in BCI Research, and the waveform of the EEG was replaced by pragmatic procedures that were difficult to link to existing clinical EEG knowledge.  We aim to help fix this gap by providing a review of the methods which emphasize the waveform, the shape of the EEG signal and which can decode them in a supervised and semi-automated procedure.
 
-The aim of this study is twofold: first to review current literature of EEG processing techniques which are based on analysis of the waveform.  The second is to evaluate and study these methods by analyzing its classification performance against a pseudo-real dataset. We believe that the importance of waveform analysis methods, as described here, is that by using this methodology, collaboration could be fostered because there is a clear description and characterization of the signal waveform, where the extensive literature which explores clinical EEG can be reviewed from the same shared perspective~\citep{Nijboer2009,Wei2017}. 
+The aim of this study is threefold: first to review current literature of EEG processing techniques which are based on analysis of the waveform.  The second is to evaluate and study these methods by analyzing its classification performance against a pseudo-real dataset. And third, to verify their applicability to a real and public dataset.  We believe that the importance of waveform analysis methods, as described here, is that by using this methodology, collaboration could be fostered because there is a clear description and characterization of the signal waveform, where the extensive literature which explores clinical EEG can be reviewed from the same shared perspective~\citep{Nijboer2009,Wei2017}. 
 
 This article unfolds as follows: Section \ref{EEG} will provide a brief introduction to EEG and the particularities of the EEG waveform characterization.  Section \ref{Algorithms} will explain the algorithms based on the waveform that will be analyzed.  In Section \ref{Experimental} the experimentation procedure will be explained.  Results will be presented in Section \ref{section:results} and finally Discussion and Conclusions will be established in the final sections.
 
@@ -282,7 +282,7 @@ The traditional clinical approach consists in analyzing the paper strip that is 
 
 Sleep Research has been studied in this way by performing Polysomnographic recordings (PSG)  \citep{Rodenbeck2006}, where the different sleep stages are evaluated by visually marking waveforms or graphoelements in long-running electroencephalographic recordings, looking for patterns based on standardized guidelines.   Visual characterization includes the identification or classification of certain waveform components, or transient events, based on a subjective characterization (e.g. positive or negative peak polarity) or the location within the strip.  It is regular to establish an amplitude difference between different waveforms from which a relation between them is reckoned and a structured index is created (e.g. sleep K-Complex is well characterized based on rates between positive vs negative amplitude) \citep{Uchida1999}.  Other relevant EEG patterns for sleep stage scoring are alpha, theta, and delta waves,  sleep spindles, polysplindles, vertex sharp waves (VSW), and sawtooth waves (REM Sleep).
 
-Moreover, EEG data acquisition is a key procedure during the assessment of patients with focal Epilepsy for potential seizure surgery, where the source of the seizure activity must be reliably identified. The onset of the Epileptic Seizure is defined as the first electrical change seen in the EEG rhythm which can be visually identified from the context and it is verified against any clinical sign indicating seizure onset.  The interictal epileptiform discharges (IEDs) are visually identified from the paper strip, and they are also named according to their shape: spike, spike and wave or sharp-wave discharges\citep{EEGIntro}.  
+Moreover, EEG data acquisition is a key procedure during the assessment of patients with focal Epilepsy for potential seizure surgery, where the source of the seizure activity must be reliably identified. The onset of the Epileptic Seizure is defined as the first electrical change seen in the EEG rhythm which can be visually identified from the context and it is verified against any clinical sign indicating seizure onset.  The Interictal Epileptiform Discharges (IEDs) are visually identified from the paper strip, and they are also named according to their shape: spike, spike and wave or sharp-wave discharges\citep{EEGIntro}.  
 
 Waveform characterization is the method in which analysis has been performed for Event Related Potentials.  Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient signal elements that may arise as a brain response to an external visual, tactile or auditory stimulus.  ERPs are regularly used to assess auditory response in infants.  They are extensively used and studied in Cognitive Neuroscience~\citep{Luck2005}.  ERPs are identified by their components which are recognizable signal shapes assigned to the observed waveform, that can be linked to some cognitive or measurable psychological process.   The P300 is one of the most studied ERP component in BCI because it can be used to implement a Speller application.  Hence, P300 ERPs are a target phenomena to study by automatic waveform recognition methods.
 
@@ -414,7 +414,7 @@ According to the defined criteria, the algorithms that will be evaluated are as 
 %\item Local Binary Patterns (1-D LNBP, 1D-LBP and LBP)
 \end{itemize}
 
-All these methods provide a feature $ f $  that can be used as a template.  The notation $\{\}_{1}^{n} $ will be used to describe the concatenation of scalar values to form a multidimensional feature vector $f$. These algorithms are based on metrics that are extracted from the shape of the single channel digital EEG signal $x(n)$, with $n$ varying from $1$ to the length $N$ of the EEG segment in sample points.  These features are used to create dictionaries or template databases.  Finally, these templates provide the basis for the pattern matching algorithm and offline classification. These algorithm were implemented on MATLAB 2014a (Mathworks Inc., Natick, MA, USA). 
+All these methods provide a feature $ f $~\footnote{The notation $\{\}_{1}^{n} $ will be used to describe the concatenation of scalar values to form a multidimensional feature vector $f$}  that can be used as a template. These algorithms are based on metrics that are extracted from the shape of the single channel digital EEG signal $x(n)$, with $n$ varying from $1$ to the length $N$ of the EEG segment in sample points.  These features are used to create dictionaries or template databases.  Finally, these templates provide the basis for the pattern matching algorithm and offline classification. These algorithm were implemented on MATLAB 2014a (Mathworks Inc., Natick, MA, USA). 
 
 \subsection{Matching Pursuit - MP 1 and MP 2}
 
@@ -457,7 +457,7 @@ w_{k} =  \frac{\sum_{n=1}^{N} \tilde{x}_{k-1}(n) \; g_{k}(n)}{  {\left\lVert  g_
 \label{eq:mp5}
 \end{equation}
 
-The stopping criteria can be established based on a limiting threshold on Equation \ref{eq:mperror} or based on a predetermined number of steps and selected atoms.  Two variants of this algorithm are evaluated. In \textit{MP 1} the dictionary is directly constructed with the normalized templates directly extracted from the real signal segments which is a straightforward implementation of the pattern matching technique.  In \textit{MP 2} the coefficients of Daubechies least-asymetric wavelet with 2 vanishing moments atoms are used to construct the dictionary~\citep{Vareka2012}.  For the first version, the matching against the template is evaluated according to Equation \ref{eq:mperror} directly, whereas for the latter each feature is crafted by decomposing the signal in its coefficients and building, an eventually sparse, vector with them:
+The stopping criteria can be established based on a limiting threshold on Equation \ref{eq:mperror} or based on a predetermined number of steps and selected atoms.  Two variants of this algorithm are evaluated. In \textit{MP 1} the dictionary is constructed with the normalized templates directly extracted from the real signal segments which is a straightforward implementation of the pattern matching technique.  In \textit{MP 2} the coefficients of Daubechies least-asymetric wavelet with 2 vanishing moments atoms are used to construct the dictionary~\citep{Vareka2012}.  For the first version, the matching against the template is evaluated according to Equation \ref{eq:mperror} directly, whereas for the latter each feature is crafted by decomposing the signal in its coefficients and building, an eventually sparse, vector with them:
 
 \begin{equation}
 f =  {\bigg \{ w_{i} \bigg \}}_{1}^{D} 
@@ -471,17 +471,17 @@ f =  {\bigg \{ w_{i} \bigg \}}_{1}^{D}
 
 \subsection{Permutation Entropy - PE}
 
-Bond and Pompe Permutation Entropy has been extensively used in EEG processing, with applications on Anesthesia, Sleep Stage evaluation and increasingly for Epilepsy pre-ictal detection \citep{Bandt2002}.  This method generates a code based on the orderly arrangement of sequential samples, and then derives a metric which is based on the number of times each sequence is found along the signal.  This numeric value can be calculated as information entropy~\citep{Nicolaou2010}. Let's consider a signal on a window of length $W$ represented by 
+Bond and Pompe Permutation Entropy has been extensively used in EEG processing, with applications on Anesthesia, Sleep Stage evaluation and increasingly for Epilepsy pre-ictal detection \citep{Bandt2002}.  This method generates a code based on the orderly arrangement of sequential samples, and then derives a metric which is based on the number of times each sequence is found along the signal.  This numeric value can be calculated as information entropy~\citep{Nicolaou2010}. Let's consider a signal on a window of length $W$ represented by the sample points
 
 \begin{equation}
 (x_1,x_2,...,x_{W})
 \label{eq:pesignal}
 \end{equation}
 
-and resampled by $\tau$ intervals and starting from the sampling point $n$, doing
+and resampled by $\tau$ intervals, starting from the sampling point $n$, doing
 
 \begin{equation}
-(x_n,x_{n+\tau},x_{n+2 \tau}...,x_{n+(m-1)\tau})
+(x_n,x_{n+\tau},x_{n+2 \tau}...,x_{n+(m-1)\tau}).
 \label{eq:pe2}
 \end{equation}
 
@@ -501,14 +501,14 @@ p_i = \frac{1}{k} \sum_{s=1}^{k} \left[ \pi_{s} = \pi_{i} \right]
 \label{eq:pe4}
 \end{equation}
 
-\noindent with $1 \leq i \leq m!$. The Iverson Bracket $ \left[ \cdot \right] $ resolves to $1$ when their logical proposition argument is true, $0$ otherwise. Therefore, for each $i$ only those ordinal elements $\pi_{s}$ that were effectively found along the signal are counted to estimate $p_i$, and zero elsewhere.  The empirical permutation entropy can be calculated from this histogram as,
+\noindent with $1 \leq i \leq m!$. The Iverson Bracket $ \left[ \cdot \right] $ resolves to $1$ when their logical proposition argument is true, $0$ otherwise. Therefore, for each $i$ only those ordinal elements $\pi_{s}$ that were effectively found along the signal are counted to estimate $p_i$, and zero elsewhere.  The empirical permutation entropy can be calculated from the histogram as,
 
 \begin{equation}
 H(\textbf{p}) = \sum_{i=1}^{m!} p_{i} \; log \frac{1}{p_{i}}.
 \label{eq:pe5}
 \end{equation}
 
-The implemented code was derived from~\citep{Unakafova2013}, and the model description from \citep{Berger2017}.  This procedure produces a scalar number for the given signal window of size $W$.  To derive a feature, a sliding window procedure must be implemented.  Thus, the length of the feature is $N - (W + \tau (m - 1)) + 1$.
+The implemented code was derived from~\citep{Unakafova2013}, and the model description from \citep{Berger2017}.  This procedure produces a scalar number for the given signal window of size $W$.  To derive a feature, a sliding window procedure must be implemented to cover an entire segment of length $N$.  Thus, the length of the feature is $N - (W + \tau (m - 1)) + 1$.
 
 \begin{equation}
 f =  {\bigg \{ H(\textbf{p})_{u} \bigg \}}_{1}^{N - (W + \tau (m - 1)) + 1}
@@ -519,7 +519,7 @@ f =  {\bigg \{ H(\textbf{p})_{u} \bigg \}}_{1}^{N - (W + \tau (m - 1)) + 1}
 
 \subsection{Slope Horizontal Chain Code - SHCC}
 
-This method is an extension of Slope Chain Code (SCC)~\citep{Alvarado-Gonzalez2016}. This algorithm proceeds by generating a coding scheme from a sequence of sample points. This encoding is based on the angle between the horizontal line on a 2D-plane and any segment produced by two consecutive sample points, regarding them as coordinates on that plane.  
+This algorithm~\citep{Alvarado-Gonzalez2016} proceeds by generating a coding scheme from a sequence of sample points. This encoding is based on the angle between the horizontal line on a 2D-plane and any segment produced by two consecutive sample points, regarding them as coordinates on that plane.  
 
 A signal of length $N$, can be represented by a list of ordered-pairs $e$,
 
@@ -545,14 +545,14 @@ G = \lfloor n + ( m \Delta ) + 0.5 \rfloor
 \noindent with $ G < N $ and using instead $\lceil \cdot \rceil$ as the ceil operation, the rounding to the closest bigger integer number. Lastly, the value $m$ can be derived from
 
 \begin{equation}
-m = sign \bigg (  \frac{N-1}{\Delta} \bigg )  \bigg \lfloor \left\lvert \frac{N-1}{\Delta} \right\lvert \bigg \rfloor
+m = sign \bigg (  \frac{N-1}{\Delta} \bigg )  \bigg \lfloor \left\lvert \frac{N-1}{\Delta} \right\lvert \bigg \rfloor.
 \label{eq:shcc4}
 \end{equation}
 
 This resampling produces a new sequence of values,
 
 \begin{equation}
-e = \left[ (x',y')_{1}, ...,(x',y')_{s}, ..., (x',y')_{G} \right]
+e = \left[ (x',y')_{1}, ...,(x',y')_{s}, ..., (x',y')_{G} \right].
 \label{eq:shcc5}
 \end{equation}
 
@@ -606,7 +606,7 @@ h = ( \max_{n} \tilde{x}(n) - \min_{n} \tilde{x}(n)).
 Equation \ref{eq:sift5} determines the vertical position of the image where the signal's zero value will be located.
 
 \begin{equation}
-z = \left\lfloor \frac{h}{2} \right\rfloor - \left\lfloor \frac{\max_{n} \tilde{x}(n) + \min_{n} \tilde{x}(n)}{2} \right\rfloor
+z = \left\lfloor \frac{h}{2} \right\rfloor - \left\lfloor \frac{\max_{n} \tilde{x}(n) + \min_{n} \tilde{x}(n)}{2} \right\rfloor.
 \label{eq:sift5}
 \end{equation}
 
@@ -638,21 +638,21 @@ f = {\bigg \{ h(i,j,\theta) \bigg \}}_{(0,0,0)}^{(3,3,315)}
 \subsection{Experimental Protocol}
 \label{Experimental}
 
-Farwell and Donchin P300 Speller \citep{Farwell1988} is one the most used BCI paradigms to implement a thought translation device and to send commands to a computer in the form of selected letters, similar to typing in a virtual keyboard.  This procedure exploits a cognitive phenomena raised by the oddball paradigm: along the EEG trace of a person which is focusing on a sequence of two different visual flashing stimulus, a particular and distinctive transient component is found each time the expected stimulus flashes.  This is cleverly utilized in the P300 Speller, where rows and columns of a 6x6 matrix flashes randomly but only the flashing of a column or row where the letter that a user is focusing will trigger concurrently the P300 ERP along the EEG trace.
+Farwell and Donchin P300 Speller \citep{Farwell1988} is one the most used BCI paradigms to implement a thought translation device and to send commands to a computer in the form of selected letters, similar to typing on a virtual keyboard.  This procedure exploits a cognitive phenomena raised by the oddball paradigm: along the EEG trace of a person which is focusing on a sequence of two different visual flashing stimulus, a particular and distinctive transient component is found each time the expected stimulus flashes.  This is cleverly utilized in the P300 Speller, where rows and columns of a 6x6 matrix flashes randomly but only the flashing of a column or row where the letter that a user is focusing will trigger concurrently the P300 ERP along the EEG trace.
 
 Is it possible to classify and implement a P300 ERP Speller using only the waveform structure of the signal ? Which algorithm perform better at this even when segment latency variations and component amplitudes issues are present ?
 
-In order to verify this in a controlled procedure, a real P300 ERP template, obtained from a public dataset, is superimposed into a distinct EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to similar procedures used in other works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
+In order to verify this in a controlled procedure, a real P300 ERP template, obtained from a public dataset, is superimposed into a distinct EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. Along the EEG stream, the markers information was used to localize the \textit{True} segments where the P300 should have been found, and those timing locations are used to superimpose the extracted ERP waveform.  By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to similar procedures used in other works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
 
 The experiments are as follows:
 
 \begin{itemize}
-\item Experiment 1 - Pseudo-Real Dataset Classification Performance: the letter classification performance of each one of these methods on the artificially generated pseudo-real dataset.
+\item Experiment 1 - Letter Identification Performance: the letter identification performance of each one of these methods on the artificially generated pseudo-real dataset.
 \item Experiment 2 - Latency Noise:  Instead of superimposing the P300 ERP over the EEG trace at the exact locations where stimulus onsets are situated, an artificial latency lag is added.  The lagging value is picked from a uniform distribution ranging from $0$ to $40\%$ of the $1s$ segment size~\citep{DaPelo2018}.
 \item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b component of the ERP template is randomly altered.  This component is subtracted from the original template.  The subtraction percentage is drawn from a uniform distribution.  Additionally the subtracted curve is multiplied by a Gaussian window of $800$ ms.  This avoids adding any discontinuity into the artificial generated signal.
 \end{itemize}
 
-The classification method Support Vector Machine SVM~\citep{Kaper2004} is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions.  
+The classification method Support Vector Machine SVM~\citep{Kaper2004} with a linear kernel, is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions.  
 
 All these experiments are executed using two fold cross validation procedure that preserves the structure of the letter identification trials. Spelling letters are scrambled while the order and group of each intensification sequence is preserved.
 
@@ -660,7 +660,7 @@ Finally the performance at letter identifications for these same methods is eval
 
 \subsubsection{Pseudo-Real Dataset Generation}
 
-The template ERP is extracted from the Subject Number $8$ of the public dataset 008-2014  \citep{Riccio2013} published on the BNCI-Horizon website \citep{Brunner2014} by IRCCS Fondazione Santa Lucia. Segments from the EEG signal containing the ERP are extracted for the trial number $2$, and they are point-to-point coherently averaged.  This P300 ERP can be seen in Figure  \ref{fig:erptemplate1}. 
+The template ERP is acquired from the Subject Number $8$ of the public dataset 008-2014  \citep{Riccio2013} published on the BNCI-Horizon website \citep{Brunner2014} by IRCCS Fondazione Santa Lucia. Segments from the EEG signal containing the ERP are extracted for the trial number $2$, and they are point-to-point coherently averaged.  This P300 ERP can be seen in Figure  \ref{fig:erptemplate1}. 
 
 An EEG stream with null-P300 signal is obtained by the following procedure: 
 A subject participant is recruited voluntarily and the experiment is conducted anonymously in accordance with the Declaration of Helsinki published by the World Health Organization.  No monetary compensation is handed out and she/he agrees and signs a written informed consent.  This study is approved by the \textit{Departamento de Investigación y Doctorado, Instituto Tecnológico de Buenos Aires (ITBA)}.  The participant is healthy and have normal or corrected-to-normal vision and no history of neurological disorders. This voluntary subject is aged between 20-30 years old.  EEG data is collected in a single recording session. She/He is seated in a comfortable chair, with her/his vision aligned to a computer screen located one meter in front of her/him.  The handling and processing of the data and stimuli is conducted by the OpenVibe platform~\citep{Renard2010}.  Gel-based active electrodes (g.LADYbird, g.Tec, Austria) are used on locations Fz, Cz, Pz, Oz, P3,P4, PO7 and PO8 according to the 10-20 international system.  Reference is set to the right ear lobe and ground is preset as the AFz position.   Sampling frequency is set to 250 Hz.
@@ -669,16 +669,14 @@ The participant is instructed to passively watch the flashing screen while not f
 
 %This P300 Speller protocol consist in the flashing of 35 trails of 35 letters (7 words of 5 letter) where the intensification sequence of 6 rows and 6 columns is repeated 10 times for each letter.  More details can be found on the published work of \citep{Riccio2013}.
 
-Along the EEG stream, the markers information was used to localize the \textit{True} segments where the P300 should have been found, and those timing locations are used to superimpose the extracted ERP waveform.
-
-Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MNE library~\citep{Gramfort2013}.  Channel $S$ represents the twelve different stimulus markers (columns or rows) while channel $L$ represent the label (\textit{True} vs \textit{False}).  \textit{False} segments are marked as a square signal and \textit{True} segments are identified by the double-amplitude square signals.  Subfigure (a) shows the signals before the ERP template is superimposed while subfigure (b) shows the same signals with the superimposed ERP template.  At first-sight, differences are really hard to spot visually.  Subfigures (c) and (d) show only one second of the same segment only channel Cz and Label.  The superimposed ERP can be devised enclosed by the vertical bars, around $31.5$s, where in (d) the peak is slightly bigger.  Figure~\ref{fig:gaincheck} shows the obtained ensemble average ERPs as result of superimposing the template signal into EEG stream, time-locked to the stimulus onset.   These 12 point-to-point averaged segments correspond to the first trial of the EEG stream.
+Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MNE library~\citep{Gramfort2013}.  Channel $S$ represents the twelve different stimulus markers (columns or rows) while channel $L$ represent the label (\textit{True} vs \textit{False}).  \textit{False} segments are marked as a square signal and \textit{True} segments are identified by the double-amplitude square signals.  Subfigure (a) shows the signals before the ERP template is superimposed while subfigure (b) shows the same signals with the superimposed ERP template.  At first-sight, differences are really hard to spot visually.  Subfigures (c) and (d) show only one second of channels Cz and L from the same segment.  The superimposed ERP can be devised enclosed by the vertical bars, around $31.5$s, where in (d) the peak is slightly bigger.  Figure~\ref{fig:gaincheck} shows the obtained ensemble average ERPs as result of superimposing the template signal into the EEG stream, time-locked to the stimulus onset.   These 12 point-to-point averaged segments correspond to the first trial of the EEG stream.
 
 %The original signal-to-noise ratio was calculated as Hue 2010.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=12cm]{images/erptemplate1.eps}
-\caption{ERP Template obtained from the coherent point-to-point ensemble average of subject Eight obtained from the BNCI Horizon public dataset 008-2014. The template is $1s$ long which is 256 sample points, and the eight channels are superimposed with different colors.  The P3b component can be seen around the sample index $150$ and $200$.}
+\caption{ERP Template obtained from the coherent point-to-point ensemble average from the signals of Subject Number Eight of the BNCI Horizon public dataset 008-2014. The template is $1s$ long which is 256 sample points, and the eight channels are superimposed with different colors.  The P3b component can be seen around the sample index $150$ and $200$.}
 \label{fig:erptemplate1}
 \end{figure}
 
@@ -712,7 +710,7 @@ Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MN
 
 \subsubsection{Classification} \label{section:classification}
 
-The same classification algorithm based on k-nearest neighbors is used for all the methods~\citep{Boiman2008}.   The experiment is composed of $35$ trials to spell $7$ words of $5$ letters each.  Each trial is composed of $10$ intensification sequences of the $6$ columns and $6$ rows of the Speller Matrix.  The first $15$ trials are used to build the dictionary of templates, extracting the averaged EEG segments for the row and column that already contain the P300 ERP, hence shielding $30$ different templates per channel.  Figure~\ref{fig:dictionaryfig} shows the set of templates while using the first $15$ trials of the dataset.
+The same classification algorithm based on k-nearest neighbors is used for all the methods~\citep{Boiman2008}.   The experiment is composed of $35$ trials to spell $7$ words of $5$ letters each.  Each trial is composed of $10$ intensification sequences of the $6$ columns and $6$ rows of the Speller Matrix.  Fifteen trials are used to build the dictionary of templates, extracting the averaged EEG segments for the row and column that already contain the P300 ERP, hence shielding $30$ different templates per channel.  Figure~\ref{fig:dictionaryfig} shows the set of templates while using the first $15$ trials of the dataset.
 
 Described algorithms produce a feature $f$ for each EEG segment.  The aim of the classification procedure is to identify for the remaining $20$ trials which of the 6 features $f$ that were obtained for row intensification and which of the 6 features for column intensifications are the ones that elicited the P300 response on the averaged EEG segment. The row number of the matrix can be obtained by doing
 
@@ -721,7 +719,7 @@ Described algorithms produce a feature $f$ for each EEG segment.  The aim of the
 \label{eq:multiclassificationrow}
 \end{equation}
 
-\noindent with $q_i$ being the set of k-nearest neighbors of the feature $f_u$ with $u$ varying from $1$ to $6$.  The parameter $k$ represents the number of neighbors chosen from the dictionary of templates.  The column can be obtained by the same way,
+\noindent with $q_i$ being the set of k-nearest neighbors of the feature $f_u$ with $u$ varying from $1$ to $6$.  The parameter $k$ represents the number of neighbors chosen from the dictionary of templates.  The column can be obtained in the same way,
 
 \begin{equation}
 \hat{col} = \arg \min_{u \in \{7,\dots,12\}} \sum_{q_i=1}^{k} \left\lVert f_u - q_i \right\rVert ^2.
@@ -749,10 +747,10 @@ Thus, the letter identification performance can be obtained by measuring the acc
 \section{Results}
 \label{section:results}
 
-Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{tab:results} shows the  performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance was attained.   Figure \ref{fig:performancetest} shows the performance curves for six algorithms.  Each one represents the percentage of letters that were actually predicted by the algorithms using a cross-validation procedure.  As previously described the data were continuously divided in two folds, where the first 15 letters were used to derive the dictionary of templates while the remaining 20 letters were used to measure the classification performance. This is repeated one hundred times, and performances averaged.   Figure \ref{fig:performancetestlatency} shows the same results for the Experiment 2, where a noisy latency lag was included.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained for the Experiment 3, when the amplitude of the P3b component of the template are randomly attenuated.  Furthermore, results obtained for the dataset BCI Competition 2003 IIb are shown in Figures \ref{fig:performancebcicompetition} and in Table~\ref{tab:bcicompetitionresults}.
+Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{tab:results} shows the  performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance is attained.   Figure \ref{fig:performancetest} shows the performance curves for six algorithms.  Each one represents the percentage of letters that is actually predicted by the algorithms using a cross-validation procedure.  As previously described the data is continuously divided in two folds, where the first 15 letters are used to derive the dictionary of templates while the remaining 20 letters are used to measure the letter identification performance. This is repeated one hundred times, and performances averaged.   Figure \ref{fig:performancetestlatency} shows the same results for the Experiment 2, where a noisy latency lag was included.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained for the Experiment 3, when the amplitude of the P3b component of the template is randomly attenuated.  Furthermore, results obtained for the dataset BCI Competition 2003 IIb are shown in Figures \ref{fig:performancebcicompetition} and in Table~\ref{tab:bcicompetitionresults}.
 
 \begin{table}[H]
-\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, the control algorithms SVM Support Vector Machines was included, with a linear kernel.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
+\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, the control algorithms SVM Support Vector Machines is included for comparison.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
 \begin{tabular}{ccccc}
@@ -781,7 +779,7 @@ SVM     & PO8  & $78\%$ & $7\%$ & $53\%$\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/CrossPerformanceTestLatency.eps}
-\caption{Speller performance obtained for each method while latencies were artificially added to each single-intensification segment.  The achieved performance is significantly reduced for all methods. Y-axis shows performance accuracy while X-axis shows the number of intensification sequences used to calculate the point-to-point signal average.}
+\caption{Speller performance obtained for each method while latencies were artificially added to each single-intensification segment.  The achieved performance is significantly reduced for all methods. Y-axis shows letter identification performance while X-axis shows the number of intensification sequences used to calculate the ensemble average.}
 \label{fig:performancetestlatency}
 \end{figure}
 
@@ -789,20 +787,20 @@ SVM     & PO8  & $78\%$ & $7\%$ & $53\%$\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/CrossPerformanceTestAmplitude.eps}
-\caption{Speller performance obtained while the amplitudes of the N1 and P3 component of the superimposed ERP are randomly reduced. Y-axis shows performance accuracy while X-axis shows the number of intensification sequences used to calculate the point-to-point signal average.}
+\caption{Speller performance obtained while the amplitudes of the P3b component of the superimposed ERP is randomly reduced. Y-axis shows performance accuracy while X-axis shows the number of intensification sequences.}
 \label{fig:performancetestamplitude}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/PerformanceBCICompetition.eps}
-\caption{Speller performance obtained for the dataset IIb of the BCI Competition II (2003) for each one of the algorithms.  An offline BCI Simulation is performed using the first $42$ trials as training and the remaining $31$ as testing.}
+\caption{Speller performance obtained for the dataset IIb of the BCI Competition II (2003) for each one of the algorithms.  An offline BCI Simulation is performed using the first $42$ trials as training and the remaining $31$ as testing.  The horizontal axis show the number of intensification sequences, from $0$ to $15$ for this dataset, while the vertical axis show the performance rate.}
 \label{fig:performancebcicompetition}
 \end{figure}
 
 
 \begin{table}[H]
-\caption{Speller classification performance obtained for the dataset IIb of the BCI Competition II (2003) for each one of the algorithms using $15$ repetitions of intensification sequences. The first $42$ trials are used for training to build the template dictionary and the remaining $31$ for testing. }
+\caption{Speller classification performance obtained for the dataset IIb of the BCI Competition II (2003) for each one of the algorithms using $15$ repetitions of intensification sequences. The first $42$ trials are used for training to build the template dictionary and the remaining $31$ for testing. The channel where the best performance is attained, is also shown. }
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
 \begin{tabular}{ccc}
@@ -825,31 +823,31 @@ SVM     & C1  & $32\%$ \\
 \section{Discussion}
 \label{section:discussion}
 
-All the methods show a significant reduction of performance when latency noise is added, and at the same time all the methods show some resistance to noise in peak amplitudes of the main components.
+All the methods show a significant reduction of performance when latency noise is added, and at the same time all the methods show some resistance to noise in peak amplitudes of the main component.
 
 Using a straightforward dictionary of templates for \textit{MP-1} proved more beneficial in terms of performance than the standard approach of using a Hilbert base of Wavelets atoms on \textit{MP-2}.  Either applying latency noise or amplitude noise, the method based on the signal's templates instead of using their coefficients achieve much better performance values.
 
-Results obtained for algorithms MP-1, SIFT, SHCC show them to be comparable with the results obtained for SVM.  Particularly, the methods \textit{SIFT} and \textit{SHCC} performed much better than the other algorithms even when the latency and the amplitudes are noisy.  Latency noise on the other hand, reduces the information contained in the signal, mainly due to the invalidation of the SNR enhancement performed by the averaging procedure.  This reduction impacts on the obtained performance for all the methods, almost equally.
+The methods \textit{MP-1}, \textit{SIFT}, \textit{SHCC} performed much better than the other algorithms, including \textit{SVM}, even when the latency and the amplitudes are altered.  Latency noise on the other hand, reduces the information contained in the signal, mainly due to the invalidation of the SNR enhancement performed by the signal averaging procedure.  This reduction impacts on the obtained performance for all the methods, almost equally.
 
-Regarding results against a public and real dataset of P300 ERP from the Berlin BCI Competition 2003, the obtained performance is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$.  It is also similar to the performance obtained for the Experiment 3, which shows a more realistic scenario.
+Regarding results produced for the public and real dataset of P300 ERP from the Berlin BCI Competition II (2003), the obtained performance is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$.  It is also similar to the performance obtained for the Experiment 3, which represents coincidentally a more realistic scenario.
 
-However, it is bellow of those values obtained by the winners of that competition (perfect performance).  Despite of this, it is important to remark that the algorithms presented here analyze the single-channel waveform structure of the signal which cannot be easily done in a multichannel approach.  
+However, it is bellow of values obtained by the winners of that competition (perfect performance).  Despite of this, it is important to remark that the algorithms presented here analyze the single-channel waveform structure of the signal which cannot be easily done in a multichannel approach~\citep{Gribonval2008}.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
 \label{section:conclusion}
 
-The purpose of this work was threefold, (1) raise awareness about the utility of using automatic waveform-based methods to study EEG signals, (2) to provide an overview of the state-of-the-art of those methods, and (3) to compare those methods and verify if it is possible to obtain acceptable classification performances based exclusively on the signal's waveform.
+The purpose of this work is threefold, (1) raise awareness about the utility of using automatic waveform-based methods to study EEG signals, (2) to provide an overview of the state-of-the-art of those methods, and (3) to compare those methods and verify if it is possible to obtain acceptable classification performances based exclusively on the signal's waveform.
 
 We verified that similar performance results are obtained for the methods \textit{MP-1}, \textit{SIFT} and \textit{SHCC} and that it is possible to obtain discriminating information from the underlying signal based exclusively on an automated method of processing the waveforms.  This brings the possibility to use these techniques to implement intelligible automatic detection procedures due to the fact that they are based on metrics which can be visually verified.
 
 %How much is it possible to classify and implement a P300 ERP Speller using only the waveform structure of the signal ? Which algorithm perform better at this even when segment latency variations and component amplitudes issues are present ?
 
-One of the main goals of the BCI discipline is to provide assistance to patients and to provide alternative tools to be used in diagnostics and rehabilitation procedure.  This requires a clinical focus which is often neglected in BCI research~\citep{Chavarriaga2017}.  At the same time, BCI reliability is yet an unfulfilled goal in this discipline~\citep{WolpawJonathanR2012}. The convenience of analyzing or including metrics about the shape of the EEG, is that clinical EEG diagnosis may support a vast set of already understood knowledge which is based on identifying EEG patterns by their shape and that can lead to more robust implementation of BCI devices.
+One of the main goals of the BCI discipline is to provide assistance to patients and to provide alternative tools to be used in diagnostics and rehabilitation procedure.  This requires a clinical focus which is often neglected in BCI research~\citep{Chavarriaga2017}.  At the same time, BCI reliability is yet an unfulfilled goal in this discipline~\citep{WolpawJonathanR2012}. The convenience of analyzing or including metrics about the shape of the EEG, is that clinical EEG diagnosis may support a vast set of already understood knowledge which is based on identifying EEG patterns by their shape and that can steer towards a more robust implementation of BCI devices.
 
-The conventional clinical method of observing the waveform is understood to be subjective and laborious because results depend on the technicians' experience and expertise.   At the same time, it is a subjective time-consuming task, with long-learning curves, requires specialized personnel, and it has significant error rates~\citep{Tjepkema-Cloostermans2018}.  These problems has pushed for the adoption of more automated means of decoding the signals~\citep{Thakor2004}.   This trend lead to the initial development of quantitative EEG, which however didn't replaced clinically the traditional approach which is still widespread: the Gold standard in clinical EEG is still \textit{Eye Ball}~\citep{Wulsin2011,Tjepkema-Cloostermans2018}.  
+The conventional clinical method of observing the waveform is understood to be subjective and laborious because results depend on the technicians' experience and expertise.   At the same time, it is a subjective time-consuming task, with long-learning curves, requires specialized personnel, and it has significant error rates~\citep{Tjepkema-Cloostermans2018}.  These problems has pushed for the adoption of more automated means of decoding the signals~\citep{Thakor2004}.   This trend pointed to the initial development of quantitative EEG, which however didn't replaced clinically the traditional approach which is still widespread: the Gold standard in clinical EEG is still \textit{Eye Ball}~\citep{Wulsin2011,Tjepkema-Cloostermans2018}.  
 
-We believe that the adoption of a \textit{hybrid} methodology which can process the signal automatically, but at the same time, maintains an intelligible property~\citep{j2018challenge} that can be mapped to existing procedures, and above all, can maintain the clinician trust on the system behavior is beneficial to Clinical Practice, Neuroscience and BCI research. 
+We believe that the adoption of a \textit{hybrid} methodology which can process the signal automatically, but at the same time, maintains an inherent intelligible property~\citep{j2018challenge} that can be mapped to existing procedures, and above all, can maintain the clinician trust on the system behavior is beneficial to Clinical Practice, Neuroscience and BCI research. 
 
 These methods have the advantage that they can map a visual component with a clinical meaning to a feature with an objective representation. Compound classifiers or ensemble of features can be explored.  Successful approaches in Computer Vision or Pattern Recognition in other areas use them~\citep{Criminisi2013} with a significant enhancement of the classification performances~\citep{Gu2012}.
 
