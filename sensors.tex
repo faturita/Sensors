@@ -469,7 +469,7 @@ f =  {\bigg \{ w_{i} \bigg \}}_{1}^{D}
 
 \subsection{Permutation Entropy - PE}
 
-Bond and Pompe Permutation Entropy has been extensively used in EEG processing, with applications on Anesthesia, Sleep Stage evaluation and increasingly for Epilepsy pre-ictal detection \citep{Bandt2002}.  This method generates a code based on the orderly arrangement of sequential samples, and then derives a metric which is based on the number of times each sequence is found on the signal.  This numeric value can be calculated as information entropy~\citep{Nicolaou2010}. Let's consider a signal on a window of length $W$ represented by 
+Bond and Pompe Permutation Entropy has been extensively used in EEG processing, with applications on Anesthesia, Sleep Stage evaluation and increasingly for Epilepsy pre-ictal detection \citep{Bandt2002}.  This method generates a code based on the orderly arrangement of sequential samples, and then derives a metric which is based on the number of times each sequence is found along the signal.  This numeric value can be calculated as information entropy~\citep{Nicolaou2010}. Let's consider a signal on a window of length $W$ represented by 
 
 \begin{equation}
 (x_1,x_2,...,x_{W})
@@ -499,14 +499,14 @@ p_i = \frac{1}{k} \sum_{s=1}^{k} \left[ \pi_{s} = \pi_{i} \right]
 \label{eq:pe4}
 \end{equation}
 
-\noindent with $1 \leq i \leq m!$. The Iverson Bracket $ \left[ \cdot \right] $ resolves to $1$ when their logical proposition argument is true, $0$ otherwise. Therefore, for each $i$ only those ordinal elements $\pi_{s}$ that were effectively found along the signal are counted to estimate $p_i$, and zero elsewhere.  The empirical permutation entropy can be estimated from this histogram as,
+\noindent with $1 \leq i \leq m!$. The Iverson Bracket $ \left[ \cdot \right] $ resolves to $1$ when their logical proposition argument is true, $0$ otherwise. Therefore, for each $i$ only those ordinal elements $\pi_{s}$ that were effectively found along the signal are counted to estimate $p_i$, and zero elsewhere.  The empirical permutation entropy can be calculated from this histogram as,
 
 \begin{equation}
 H(\textbf{p}) = \sum_{i=1}^{m!} p_{i} \; log \frac{1}{p_{i}}.
 \label{eq:pe5}
 \end{equation}
 
-The implemented code was derived from~\citep{Unakafova2013}, and the model description from \citep{Berger2017}.  This procedure will produce a scalar number for the given signal window of size $W$.  To derive a feature, a sliding window procedure must be implemented.  Thus, the length of the feature is $N - (W + \tau (m - 1)) + 1$.
+The implemented code was derived from~\citep{Unakafova2013}, and the model description from \citep{Berger2017}.  This procedure produces a scalar number for the given signal window of size $W$.  To derive a feature, a sliding window procedure must be implemented.  Thus, the length of the feature is $N - (W + \tau (m - 1)) + 1$.
 
 \begin{equation}
 f =  {\bigg \{ H(\textbf{p})_{u} \bigg \}}_{1}^{N - (W + \tau (m - 1)) + 1}
@@ -587,7 +587,7 @@ The first step of the algorithm is the plot generation based on single-channel E
 \label{eq:sift1}
 \end{equation}
 
-\noindent with $\delta$ being the signal magnification factor and $\bar{x}$ and $\sigma_{x}$, the mean and standard deviation of $x$ on the signal segment.  The width of the image is determined based on the $1$-second length size of the segment window in sample units. This corresponds to the sampling frequency $F_s$ of the EEG signal segment. The width is adjusted by multiplying by the magnification factor $\delta$, 
+\noindent with $\delta$ being the signal magnification factor and $\bar{x}$ and $\sigma_{x}$, the mean and standard deviation of $x$ on the signal segment.  The width of the image is determined based on the $1$-second length size of the segment in sample units. This corresponds to the sampling frequency $F_s$ of the EEG signal segment. The width is adjusted by multiplying by the magnification factor $\delta$, 
 
 \begin{equation}
 w = \delta \; F_s
@@ -618,9 +618,9 @@ I(z_1,z_2) = \left\{ \begin{array}{rl}
 \label{eq:sift6}
 \end{equation}
 
-\noindent where $z_1$ and $z_2$ are the image coordinates values.  These points are interpolated using the Bresenham algorithm.
+\noindent where $z_1$ and $z_2$ are the image coordinates values.  These points are interpolated using the Bresenham algorithm~\citep{Ramele2016}.
 
-Once the plot is generated, the plot's center is used to localize the center of the SIFT patch. This region of the image, where the signal's most important salient waveform should be located, is divided in a grid of $4 x 4$ block and the bidimensional gradient vectors are calculated on each one of them.  Therefore, for each block within the patch, a histogram of the gradient orientations, 8 circular orientations, are calculated.  This histogram is concatenated for all the 16 blocks and a feature is thus formed:
+Once the plot is generated, its center is used to localize the center of the SIFT patch. This region of the image, where the signal's most important salient waveform should be located, is divided in a grid of $4 x 4$ block and the bidimensional gradient vectors are calculated on each one of them.  Therefore, for each block within the patch, a histogram of the gradient orientations, 8 circular orientations, are calculated.  This histogram is concatenated for all the 16 blocks and a feature is thus formed:
 
 \begin{equation}
 f = {\bigg \{ h(i,j,\theta) \bigg \}}_{(0,0,0)}^{(3,3,315)}
@@ -645,12 +645,19 @@ In order to verify this in a controlled procedure, a real P300 ERP template, obt
 The experiments are as follows:
 
 \begin{itemize}
-\item Experiment 1 - Pseudo-Real Dataset Classification Performance: the letter classification performance of each one of these methods applied on the artificially generated pseudo-real dataset.
-\item Experiment 2 - Latency Noise: Uniform noise is added to the ERP template latency, i.e. to the temporal location where it is injected into the EEG stream.  The latency lag ranges from $0$ to $40\%$ of the $1s$ of the window size. 
-\item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b components of the ERP template is randomly altered.  This component is subtracted from the original template.  The subtraction percentage is obtained from a uniform distribution.  Additionally the subtracted curve is warped in a Gaussian window of 800 ms.
+\item Experiment 1 - Pseudo-Real Dataset Classification Performance: the letter classification performance of each one of these methods on the artificially generated pseudo-real dataset.
+\item Experiment 2 - Latency Noise:  Instead of superimposing the P300 ERP over the EEG trace at the exact locations where stimulus onsets are situated, an artificial latency lag is added.  This value is obtained from a uniform distribution ranging from $0$ to $40\%$ of the $1s$ of the window size~\citep{DaPelo2018}.
+\item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b component of the ERP template is randomly altered.  This component is subtracted from the original template.  The subtraction percentage is obtained from a uniform distribution.  Additionally the subtracted curve is warped in a Gaussian window of 800 ms.
+
+
+
 \end{itemize}
 
-These are executed using 3-fold cross validation procedure. Finally results for the same methods while performing an offline BCI Simulation of the dataset  IIb of the BCI Competition II (2003).
+The classification method Support Vector Machine SVM~\citep{Kaper2004} is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions.  
+
+All these experiments are executed using 3-fold cross validation procedure that preserves the structure of the letter identification trials. Spelling letters are scrambled while the order and group of each intensification sequence is preserved.
+
+Finally the performance at letter identifications for these same methods is evaluated by performing an offline BCI Simulation on the Dataset IIb of the BCI Competition II (2003)~\citep{Blankertz2002}.
 
 \subsubsection{Pseudo-Real Dataset Generation}
 
@@ -736,7 +743,6 @@ Thus, the letter identification performance can be obtained by measuring the acc
 \label{fig:dictionaryfig}
 \end{figure}
 
-Finallly, the classification method Support Vector Machine SVM is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method is bla bla bla due to the reason bla bla bla.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
