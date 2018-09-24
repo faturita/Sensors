@@ -414,11 +414,11 @@ According to the defined criteria, the algorithms that will be evaluated are as 
 %\item Local Binary Patterns (1-D LNBP, 1D-LBP and LBP)
 \end{itemize}
 
-All these methods provide a feature $ f $~\footnote{The notation $\{\}_{1}^{n} $ will be used to describe the concatenation of scalar values to form a multidimensional feature vector $f$}  that can be used as a template. These algorithms are based on metrics that are extracted from the shape of the single channel digital EEG signal $x(n)$, with $n$ varying from $1$ to the length $N$ of the EEG segment in sample points.  These features are used to create dictionaries or template databases.  Finally, these templates provide the basis for the pattern matching algorithm and offline classification. These algorithm were implemented on MATLAB 2014a (Mathworks Inc., Natick, MA, USA). 
+All these methods provide a feature $ f $~\footnote{The notation $f=\{f_i\}_{1}^{n} $ or $f=\{f_i\}_{i \in J}^{} $  will be used to describe the concatenation of scalar values to form a multidimensional feature vector $f=\{f_1,f_2,...,f_n\}$.}  that can be used as a template. These algorithms are based on metrics that are extracted from the shape of the single channel digital EEG signal $x(n)$, with $n$ varying from $1$ to the length $N$ of the EEG segment in sample points.  These features are used to create dictionaries or template databases.  Finally, these templates provide the basis for the pattern matching algorithm and offline classification. These algorithm were implemented on MATLAB 2014a (Mathworks Inc., Natick, MA, USA). 
 
 \subsection{Matching Pursuit - MP 1 and MP 2}
 
-\textit{Pursuit} algorithms refer, in their many variants, as blind source separation \citep{Vincent2010} techniques that assume the EEG signal as a linear combination of different sparse sources extracted from a template's dictionaries.  Matching Pursuit \textit{MP}~\citep{Mallat1993}, the most representative of this algorithms, is a greedy variant that decomposes a signal into a linear combination of waveforms, called atoms, that are well localized in time and frequency \citep{ChandranKS2016}.  Given a signal, this optimization technique, tries to find the indexes of $m$ atoms and their weights (contributions) that minimize,
+\textit{Pursuit} algorithms refer, in their many variants, as blind source separation \citep{Vincent2010} techniques that assume the EEG signal as a linear combination of different sparse sources extracted from a template's dictionaries.  Matching Pursuit \textit{MP}~\citep{Mallat1993}, the most representative of these algorithms, is a greedy variant that decomposes a signal into a linear combination of waveforms, called atoms, that are well localized in time and frequency \citep{ChandranKS2016}.  Given a signal, this optimization technique, tries to find the indexes of $m$ atoms and their weights (contributions) that minimize,
 
 
 \begin{equation}
@@ -426,7 +426,7 @@ All these methods provide a feature $ f $~\footnote{The notation $\{\}_{1}^{n} $
 \label{eq:mperror}
 \end{equation}
 
-\noindent which is the error between the signal and their approximation constructed by the weighted $w_i$ atoms $g_{i}$, and calculating the euclidean norm ${\left\lVert \cdot \right\rVert}_{2}$.  The algorithm goes by first setting the approximating signal $\tilde{x}_{0}$  as the original signal itself,  
+\noindent which is the error between the signal and its approximation constructed by the weighted $w_i$ atoms $g_{i}$, and calculating the euclidean norm ${\left\lVert \cdot \right\rVert}_{2}$.  The algorithm goes by first setting the approximating signal $\tilde{x}_{0}$  as the original signal itself,  
 
 \begin{equation}
 \tilde{x}_{0}(n) = x(n)
@@ -450,7 +450,7 @@ w_{k} =  \frac{\sum_{n=1}^{N} \tilde{x}_{k-1}(n) \; g_{k}(n)}{  {\left\lVert  g_
 \label{eq:mp4}
 \end{equation}
 
-\noindent with $k$ representing the index of the selected atom $g_{k}$ and $\left\lVert \cdot \right\rVert$ its norm.  Finally the contribution of each atom is subtracted from the next approximation~\citep{Cohen2014,Sanei2007, Mallat1993}
+\noindent with $k$ representing the index of the selected atom $g_{k}$ and $\left\lVert \cdot \right\rVert$ its euclidean norm.  Finally the contribution of each atom is subtracted from the next approximation~\citep{Cohen2014,Sanei2007, Mallat1993}
 
 \begin{equation}
 \tilde{x}_{k}(n)=  \tilde{x}_{k-1}(n) - w_{k} g_{k} (n)
@@ -478,7 +478,7 @@ Bond and Pompe Permutation Entropy has been extensively used in EEG processing, 
 \label{eq:pesignal}
 \end{equation}
 
-and resampled by $\tau$ intervals, starting from the sampling point $n$, doing
+\noindent and resampled by $\tau$ intervals, starting from the sampling point $n$, doing
 
 \begin{equation}
 (x_n,x_{n+\tau},x_{n+2 \tau}...,x_{n+(m-1)\tau}).
@@ -492,7 +492,7 @@ This sequence is of order $m$, which is the number of sample points used to deri
 \label{eq:pe3}
 \end{equation}
 
-\noindent with $k = W-(m-1) \tau$.  The probability density function \textit{pdf} for all the available permutations of order $m$ should be $ \textbf{p} = (p_1,p_2,...,p_{m!}) $ with $ \sum_{1}^{m!} p_{i} = 1 $.
+\noindent with $k = W-(m-1) \tau$.  The probability density function \textit{pdf} for all the available permutations of order $m$ should be $ \textbf{p} = (p_1,p_2,...,p_{m!}) $ with $ \sum_{i=1}^{m!} p_{i} = 1 $.
 
 Hence, the time series window is mapped to a new set of $k$ ordinal elements, and the \textit{pdf} can be calculated by the empirical permutation entropy,
 
@@ -508,14 +508,14 @@ H(\textbf{p}) = \sum_{i=1}^{m!} p_{i} \; log \frac{1}{p_{i}}.
 \label{eq:pe5}
 \end{equation}
 
-The implemented code was derived from~\citep{Unakafova2013}, and the model description from \citep{Berger2017}.  This procedure produces a scalar number for the given signal window of size $W$.  To derive a feature, a sliding window procedure must be implemented to cover an entire segment of length $N$.  Thus, the length of the feature is $N - (W + \tau (m - 1)) + 1$.
+The implemented code was derived from~\citep{Unakafova2013}, and the model description from \citep{Berger2017}.  This procedure produces a scalar number for the given signal window of size $W$.  To derive a feature, a sliding window procedure must be implemented to cover an entire segment of length $N$.  Thus, the length of the feature is $N - (W + \tau (m - 1))$.
 
 \begin{equation}
-f =  {\bigg \{ H(\textbf{p})_{u} \bigg \}}_{1}^{N - (W + \tau (m - 1)) + 1}
+f =  {\bigg \{ H(\textbf{p})_{u} \bigg \}}_{W + \tau  m}^{N}.
 \label{eq:pe6}
 \end{equation}
 
-\noindent with $u$ varying on a sample by sample basis along the signal but excluding the first window.
+\noindent with $u$ varying on a sample by sample basis along the signal, starting from the specified index.
 
 \subsection{Slope Horizontal Chain Code - SHCC}
 
@@ -552,23 +552,23 @@ m = sign \bigg (  \frac{N-1}{\Delta} \bigg )  \bigg \lfloor \left\lvert \frac{N-
 This resampling produces a new sequence of values,
 
 \begin{equation}
-e = \left[ (x',y')_{1}, ...,(x',y')_{s}, ..., (x',y')_{G} \right].
+e' = \left[ (x',y')_{1}, ...,(x',y')_{s}, ..., (x',y')_{G} \right].
 \label{eq:shcc5}
 \end{equation}
 
 The next step is the normalization of each ordered-pair as vectors $\textbf{x'} = (x'_{1},...,x'_{G})$ and $\textbf{y'} = (y'_{1},...,y'_{G})$ according to
 
 \begin{equation}
-\hat{\textbf{x}} = \frac{( \textbf{x'} - \min(\textbf{x'}) \textbf{1} )}{\max(\textbf{x'}) - \min(\textbf{x'})} 
+\hat{\textbf{x}} = \frac{\textbf{x'} - \min(\textbf{x'}) \textbf{1} }{\max(\textbf{x'}) - \min(\textbf{x'})} 
 \label{eq:shcc6}
 \end{equation}
 
 \begin{equation}
-\hat{\textbf{y}} = \frac{( \textbf{y'} - \min(\textbf{y'}) \textbf{1} )}{\max(\textbf{y'}) - \min(\textbf{y'})} 
+\hat{\textbf{y}} = \frac{ \textbf{y'} - \min(\textbf{y'}) \textbf{1}}{\max(\textbf{y'}) - \min(\textbf{y'})} 
 \label{eq:shcc7}
 \end{equation}
 
-\noindent with $\textbf{1}$ being the vector of length $G$ with all their components equal to $1$.  This operation effectively normalize the components $\hat{x}_{s},\hat{y}_{s} \in [0,1]$.\\
+\noindent with $\textbf{1}$ being the vector of length $G$ with all their components equal to $1$.  Hence, the scalar components $\hat{x}_{s}$ of $\hat{\textbf{x}}$, and $\hat{y}_{s}$ of $\hat{\textbf{y}}$, with $s$ varying between $1$ and $G$ are effectively normalized to $\hat{x}_{s},\hat{y}_{s} \in [0,1]$. \\
 
 Finally, the feature is constructed by calculating the point-to-point slope against the horizontal plane,
 
@@ -599,7 +599,7 @@ w = \delta \; F_s
 \noindent whereas the height is calculated based on the peak-to-peak amplitude of the signal within the segment,
 
 \begin{equation}
-h = ( \max_{n} \tilde{x}(n) - \min_{n} \tilde{x}(n)).
+h = \max_{n} \tilde{x}(n) - \min_{n} \tilde{x}(n).
 \label{eq:sift4}
 \end{equation}
 
@@ -620,16 +620,16 @@ I(z_1,z_2) = \left\{ \begin{array}{rl}
 \label{eq:sift6}
 \end{equation}
 
-\noindent where $z_1$ and $z_2$ are the image coordinates values.  These points are interpolated using the Bresenham algorithm~\citep{Ramele2016}.
+\noindent where $z_1$ and $z_2$ are the image coordinates values, $255$ represents white and $0$ is the background black color of the plot.  These points are interpolated using the Bresenham algorithm~\citep{Ramele2016}.
 
 Once the plot is generated, its center is used to localize the center of the SIFT patch. This region of the image, where the signal's most important salient waveform should be located, is divided in a grid of $4 x 4$ block and the bidimensional gradient vectors are calculated on each one of them.  Therefore, for each block within the patch, a histogram of the gradient orientations, 8 circular orientations, are calculated.  This histogram is concatenated for all the 16 blocks and a feature is thus formed:
 
 \begin{equation}
-f = {\bigg \{ h(i,j,\theta) \bigg \}}_{(0,0,0)}^{(3,3,315)}
+f = {\bigg \{ \bigg \{  \bigg \{ h(i,j,\theta) \bigg \}_{i \in I }  \bigg \}_{j \in I} \bigg \}_{\theta \in \Theta} }
 \label{eq:sift7}
 \end{equation}
 
-\noindent with $i$ and $j$ varying between $0$ and $3$, localizing the 16 blocks within the grid. The angles $\theta$ are the eight possible equidistant values between $0$ and $315$.  This vector is normalized, clamped to $0.2$, and re-normalized again.   Details of the method can be found on \citep{Ramele2016,Lowe2004}.  It was implemented using the VLFeat  \citep{Vedaldi2010} public Computer Vision libraries.
+\noindent with $i$ and $j$ varying belonging to $I = \left[0,3 \right] $ localizing the 16 blocks within the grid. The angles $\theta$ that belong to $\Theta$ are the eight possible equidistant values between $0$ and $315$.  This vector is normalized, clamped to $0.2$, and re-normalized again.   Details of the method can be found on \citep{Ramele2016,Lowe2004}.  It was implemented using the VLFeat  \citep{Vedaldi2010} public Computer Vision libraries.
 
 %\subsection{Merger of Increasing and Decreasing Sequences}
 
@@ -648,15 +648,15 @@ The experiments are as follows:
 
 \begin{itemize}
 \item Experiment 1 - Letter Identification Performance: the letter identification performance of each one of these methods on the artificially generated pseudo-real dataset.
-\item Experiment 2 - Latency Noise:  Instead of superimposing the P300 ERP over the EEG trace at the exact locations where stimulus onsets are situated, an artificial latency lag is added.  The lagging value is picked from a uniform distribution ranging from $0$ to $40\%$ of the $1s$ segment size~\citep{DaPelo2018}.
-\item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b component of the ERP template is randomly altered.  This component is subtracted from the original template.  The subtraction percentage is drawn from a uniform distribution.  Additionally the subtracted curve is multiplied by a Gaussian window of $800$ ms.  This avoids adding any discontinuity into the artificial generated signal.
+\item Experiment 2 - Latency Noise:  Instead of superimposing the P300 ERP over the EEG trace at the exact locations where stimulus onsets are situated, an artificial latency lag is added.  The lagging value is picked from a uniform distribution $U(0,0.4)$ [s] ranging from $0$ to $0.4$ of the $1s$ segment size~\citep{DaPelo2018}.
+\item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b component of the ERP template is randomly altered.  This component is defined to be located from the sample point $37$ up to $249$ which is around $840$ ms.  This component multiplied by a gain factor is subtracted from the original template.  This gain factor between $0$ and $1$ is drawn from a uniform distribution $U(0,1)$.  Additionally the subtracted curve is multiplied by a Gaussian window with a support of the same length~\citep{Harris1978}.  This avoids adding any discontinuity into the artificial generated signal.
 \end{itemize}
 
-The classification method Support Vector Machine SVM~\citep{Kaper2004} with a linear kernel, is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions.  
+The classification method Support Vector Machine SVM with a linear kernel, is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions~\citep{Kaper2004}. 
 
-All these experiments are executed using two fold cross validation procedure that preserves the structure of the letter identification trials. Spelling letters are scrambled while the order and group of each intensification sequence is preserved.
+All these experiments are executed using cross validation procedure dividing the letter to spell in two sets, preserving the structure of the letter identification trials. Spelling letters are scrambled while the order and group of each intensification sequence is preserved.
 
-Finally the performance at letter identifications for these same methods is evaluated by performing an offline BCI Simulation on the Dataset IIb of the BCI Competition II (2003)~\citep{Blankertz2002}.
+Finally the performance at letter identifications for these same methods is evaluated by performing an offline BCI Simulation on the Dataset IIb of the BCI Competition II (2003)~\citep{Blankertz2002}.  The protocol of this dataset is very similar to what was used to obtain the pseudo-real dataset.  The sampling frequency of this dataset is $240$, the number of letters are $73$ where the first $42$ are used to create the template dictionary for all the methods and the remaining $31$ are used to test the character recognition rate performance.  Additionally, in this dataset the number of available intensification number sequences is $15$.  
 
 \subsubsection{Pseudo-Real Dataset Generation}
 
@@ -669,7 +669,7 @@ The participant is instructed to passively watch the flashing screen while not f
 
 %This P300 Speller protocol consist in the flashing of 35 trails of 35 letters (7 words of 5 letter) where the intensification sequence of 6 rows and 6 columns is repeated 10 times for each letter.  More details can be found on the published work of \citep{Riccio2013}.
 
-Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MNE library~\citep{Gramfort2013}.  Channel $S$ represents the twelve different stimulus markers (columns or rows) while channel $L$ represent the label (\textit{True} vs \textit{False}).  \textit{False} segments are marked as a square signal and \textit{True} segments are identified by the double-amplitude square signals.  Subfigure (a) shows the signals before the ERP template is superimposed while subfigure (b) shows the same signals with the superimposed ERP template.  At first-sight, differences are really hard to spot visually.  Subfigures (c) and (d) show only one second of channels Cz and L from the same segment.  The superimposed ERP can be devised enclosed by the vertical bars, around $31.5$s, where in (d) the peak is slightly bigger.  Figure~\ref{fig:gaincheck} shows the obtained ensemble average ERPs as result of superimposing the template signal into the EEG stream, time-locked to the stimulus onset.   These 12 point-to-point averaged segments correspond to the first trial of the EEG stream.
+Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MNE library~\citep{Gramfort2013}.  Channel $S$ represents the twelve different stimulus markers (columns or rows) while channel $L$ represent the label (\textit{True} vs \textit{False}).  Labels are represented by square signals.  \textit{False} segments are marked with single amplitude square signals while \textit{True} segments are identified by double-amplitude square signals.  Subfigure (a) shows the signals before the ERP template is superimposed while subfigure (b) shows the same signals with the superimposed ERP template.  At first-sight, differences are really hard to spot visually.  Subfigures (c) and (d) show only one second of channels Cz and L from the same segment.  The superimposed ERP can be devised enclosed by the vertical bars, around $31.5$s, where in (d) the peak is slightly bigger.  Figure~\ref{fig:gaincheck} shows the obtained ensemble average ERPs as result of superimposing the template signal into the EEG stream, time-locked to the stimulus onset.   These 12 point-to-point averaged segments correspond to the first trial of the EEG stream.
 
 %The original signal-to-noise ratio was calculated as Hue 2010.
 
@@ -702,7 +702,7 @@ Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MN
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\linewidth]{images/GainCheck.eps}
-\caption{Point-to-point averaged signals for the first letter identification trial.  The ERP was superimposed on classes 3 and 9.  Class 3 was obtained while averaging the segments where the row of the speller matrix was intensified whereas class 9 was calculated from the intensification of the corresponding column.}
+\caption{Point-to-point averaged signals for the first letter identification trial.  The ERP is superimposed on classes 3 and 9.  Class 3 is obtained while averaging the segments where the row of the speller matrix is intensified whereas class 9 is calculated from the intensification of the corresponding column.}
 \label{fig:gaincheck}
 \end{figure}
 
@@ -712,17 +712,17 @@ Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MN
 
 The same classification algorithm based on k-nearest neighbors is used for all the methods~\citep{Boiman2008}.   The experiment is composed of $35$ trials to spell $7$ words of $5$ letters each.  Each trial is composed of $10$ intensification sequences of the $6$ columns and $6$ rows of the Speller Matrix.  Fifteen trials are used to build the dictionary of templates, extracting the averaged EEG segments for the row and column that already contain the P300 ERP, hence shielding $30$ different templates per channel.  Figure~\ref{fig:dictionaryfig} shows the set of templates while using the first $15$ trials of the dataset.
 
-Described algorithms produce a feature $f$ for each EEG segment.  The aim of the classification procedure is to identify for the remaining $20$ trials which of the 6 features $f$ that were obtained for row intensification and which of the 6 features for column intensifications are the ones that elicited the P300 response on the averaged EEG segment. The row number of the matrix can be obtained by doing
+Described algorithms produce a feature $f$ for each EEG segment.  The aim of the classification procedure is to identify for the remaining $20$ trials which of the 6 features $f$ that were obtained for row intensification, labeled by $\{ 1,...,6 \}$, and which of the 6 features for column intensification, named $\{ 7,...,12 \}$ are the ones that elicited the P300 response on the averaged EEG segment. The row number of the matrix can be obtained by doing
 
 \begin{equation}
-\hat{row} = \arg \min_{u \in \{1,\dots,6\}} \sum_{q_i=1}^{k} \left\lVert f_u - q_i \right\rVert ^2
+\hat{row} = \arg \min_{u \in \{1,\dots,6\}} \sum_{i=1}^{k} \left\lVert f_u - q_i \right\rVert ^2
 \label{eq:multiclassificationrow}
 \end{equation}
 
 \noindent with $q_i$ being the set of k-nearest neighbors of the feature $f_u$ with $u$ varying from $1$ to $6$.  The parameter $k$ represents the number of neighbors chosen from the dictionary of templates.  The column can be obtained in the same way,
 
 \begin{equation}
-\hat{col} = \arg \min_{u \in \{7,\dots,12\}} \sum_{q_i=1}^{k} \left\lVert f_u - q_i \right\rVert ^2.
+\hat{col} = \arg \min_{u \in \{7,\dots,12\}} \sum_{i=1}^{k} \left\lVert f_u - q_i \right\rVert ^2.
 \label{eq:multiclassificationcol}
 \end{equation}
 
@@ -747,15 +747,17 @@ Thus, the letter identification performance can be obtained by measuring the acc
 \section{Results}
 \label{section:results}
 
-Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{tab:results} shows the  performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance is attained.   Figure \ref{fig:performancetest} shows the performance curves for six algorithms.  Each one represents the percentage of letters that is actually predicted by the algorithms using a cross-validation procedure.  As previously described the data is continuously divided in two folds, where the first 15 letters are used to derive the dictionary of templates while the remaining 20 letters are used to measure the letter identification performance. This is repeated one hundred times, and performances averaged.   Figure \ref{fig:performancetestlatency} shows the same results for the Experiment 2, where a noisy latency lag was included.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained for the Experiment 3, when the amplitude of the P3b component of the template is randomly attenuated.  Furthermore, results obtained for the dataset BCI Competition 2003 IIb are shown in Figures \ref{fig:performancebcicompetition} and in Table~\ref{tab:bcicompetitionresults}.
+Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{tab:results} shows the  performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance is attained.   Figure \ref{fig:performancetest} shows the performance curves for six algorithms.  Each one represents the percentage of letters that is actually predicted by the algorithms using a cross-validation procedure.  As previously described the data is continuously divided in two sets, where the first 15 letters are used to derive the dictionary of templates while the remaining 20 letters are used to measure the letter identification performance. This is repeated one hundred times, and performances averaged.   Figure \ref{fig:performancetestlatency} shows the same results for the Experiment 2, where a noisy latency lag was included.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained for the Experiment 3, when the amplitude of the P3b component of the template is randomly attenuated.  Furthermore, results obtained for the dataset BCI Competition 2003 IIb are shown in Figures \ref{fig:performancebcicompetition} and in Table~\ref{tab:bcicompetitionresults}.
 
 \begin{table}[H]
-\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, the control algorithms SVM Support Vector Machines is included for comparison.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
+\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, the control algorithm SVM Support Vector Machines is included for comparison.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
 \centering
 %% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
 \begin{tabular}{ccccc}
 \toprule
-\textbf{Method}	& \textbf{Channel} &  \textbf{Performance} & \textbf{Perf w/Latency noise}	& \textbf{Perf w/Amplitude Noise}\\
+\textbf{Method}	& \textbf{Channel} &   \multicolumn{3}{c}{Performance} \\
+%\cline{3-5} \\
+ 	&  &  \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}\\
 \midrule
 MP 1 & PO8  & $67\%$ & $15\%$ & $50\%$\\
 MP 2 & PO7 & $24\%$ & $6\%$ & $10\%$\\
@@ -829,9 +831,7 @@ Using a straightforward dictionary of templates for \textit{MP-1} proved more be
 
 The methods \textit{MP-1}, \textit{SIFT}, \textit{SHCC} performed much better than the other algorithms, including \textit{SVM}, even when the latency and the amplitudes are altered.  Latency noise on the other hand, reduces the information contained in the signal, mainly due to the invalidation of the SNR enhancement performed by the signal averaging procedure.  This reduction impacts on the obtained performance for all the methods, almost equally.
 
-Regarding results produced for the public and real dataset of P300 ERP from the Berlin BCI Competition II (2003), the obtained performance is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$.  It is also similar to the performance obtained for the Experiment 3, which represents coincidentally a more realistic scenario.
-
-However, it is bellow of values obtained by the winners of that competition (perfect performance).  Despite of this, it is important to remark that the algorithms presented here analyze the single-channel waveform structure of the signal which cannot be easily done in a multichannel approach~\citep{Gribonval2008}.  
+Regarding results produced for the public and real dataset of P300 ERP from the Berlin BCI Competition II (2003), the obtained performance is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$.  It is also similar to the performance obtained for the Experiment 3, which represents coincidentally a more realistic scenario.  It is important to remark that the algorithms presented here analyze the single-channel waveform structure of the signal~\citep{Gribonval2008}.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
