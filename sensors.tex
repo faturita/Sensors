@@ -629,7 +629,7 @@ f = {\bigg \{ \bigg \{  \bigg \{ h(i,j,\theta) \bigg \}_{i \in I }  \bigg \}_{j 
 \label{eq:sift7}
 \end{equation}
 
-\noindent with $i$ and $j$ varying belonging to $I = \left[0,3 \right] $ localizing the 16 blocks within the grid. The angles $\theta$ that belong to $\Theta$ are the eight possible equidistant values between $0$ and $315$.  This vector is normalized, clamped to $0.2$, and re-normalized again.   Details of the method can be found on \citep{Ramele2016,Lowe2004}.  It was implemented using the VLFeat  \citep{Vedaldi2010} public Computer Vision libraries.
+\noindent with $i$ and $j$ varying belonging to $I = \{ 0,1,2,3 \} $ localizing the 16 blocks within the grid. The angles $\theta$ that belong to $\Theta$ are the eight possible equidistant values between $0$ and $315$.  This vector is normalized, clamped to $0.2$, and re-normalized again.   Details of the method can be found on \citep{Ramele2016,Lowe2004}.  It was implemented using the VLFeat  \citep{Vedaldi2010} public Computer Vision libraries.
 
 %\subsection{Merger of Increasing and Decreasing Sequences}
 
@@ -649,7 +649,7 @@ The experiments are as follows:
 \begin{itemize}
 \item Experiment 1 - Letter Identification Performance: the letter identification performance of each one of these methods on the artificially generated pseudo-real dataset.
 \item Experiment 2 - Latency Noise:  Instead of superimposing the P300 ERP over the EEG trace at the exact locations where stimulus onsets are situated, an artificial latency lag is added.  The lagging value is picked from a uniform distribution $U(0,0.4)$ [s] ranging from $0$ to $0.4$ of the $1s$ segment size~\citep{DaPelo2018}.
-\item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b component of the ERP template is randomly altered.  This component is defined to be located from the sample point $37$ up to $249$ which is around $840$ ms.  This component multiplied by a gain factor is subtracted from the original template.  This gain factor between $0$ and $1$ is drawn from a uniform distribution $U(0,1)$.  Additionally the subtracted curve is multiplied by a Gaussian window with a support of the same length~\citep{Harris1978}.  This avoids adding any discontinuity into the artificial generated signal.
+\item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b component of the ERP template is randomly altered.  This component is defined to be located from the stimulus onset between $148$ ms up to $996$ ms which is around $840$ ms long.  This waveform element, multiplied by a gain factor, is subtracted from the original template.  This gain factor between $0$ and $1$ is drawn from a uniform distribution $U(0,1)$.  Additionally this subtracted waveform is multiplied by a Gaussian window with a support of the same length~\citep{Harris1978}.  This avoids adding any discontinuity into the artificial generated signal.
 \end{itemize}
 
 The classification method Support Vector Machine SVM with a linear kernel, is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions~\citep{Kaper2004}. 
@@ -747,7 +747,7 @@ Thus, the letter identification performance can be obtained by measuring the acc
 \section{Results}
 \label{section:results}
 
-Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{tab:results} shows the  performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance is attained.   Figure \ref{fig:performancetest} shows the performance curves for six algorithms.  Each one represents the percentage of letters that is actually predicted by the algorithms using a cross-validation procedure.  As previously described the data is continuously divided in two sets, where the first 15 letters are used to derive the dictionary of templates while the remaining 20 letters are used to measure the letter identification performance. This is repeated one hundred times, and performances averaged.   Figure \ref{fig:performancetestlatency} shows the same results for the Experiment 2, where a noisy latency lag was included.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained for the Experiment 3, when the amplitude of the P3b component of the template is randomly attenuated.  Furthermore, results obtained for the dataset BCI Competition 2003 IIb are shown in Figures \ref{fig:performancebcicompetition} and in Table~\ref{tab:bcicompetitionresults}.
+Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{tab:results} shows the  performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance is attained.   Figure \ref{fig:performancetest} shows the performance curves for six algorithms.  Each one represents the percentage of letters that is actually predicted by the algorithms using a cross-validation procedure.  As previously described the data is continuously divided in two sets, where the first 15 letters are used to derive the dictionary of templates while the remaining 20 letters are used to measure the letter identification performance. This is repeated one hundred times, and performances averaged.   Figure \ref{fig:performancetestlatency} shows the same results for the Experiment 2, where a noisy latency lag was included.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained for the Experiment 3, when the amplitude of the P3b component of the template is randomly attenuated.  Furthermore, results obtained for the dataset BCI Competition 2003 IIb are shown in Figures \ref{fig:performancebcicompetition} and in Table~\ref{tab:bcicompetitionresults}.  For this experiment the number of available intensification sequences is 15.
 
 \begin{table}[H]
 \caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, the control algorithm SVM Support Vector Machines is included for comparison.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
@@ -773,7 +773,7 @@ SVM     & PO8  & $78\%$ & $7\%$ & $53\%$\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/CrossPerformanceTest.eps}
-\caption{Speller performance obtained for each method.  Y-axis shows performance accuracy while X-axis shows the number of intensification sequences used to calculate the point-to-point signal average.}
+\caption{Speller performance obtained for each method for the Experiment 1.  Y-axis shows performance accuracy while X-axis shows the number of intensification sequences used to calculate the point-to-point signal average.}
 \label{fig:performancetest}
 \end{figure}
 
@@ -781,7 +781,7 @@ SVM     & PO8  & $78\%$ & $7\%$ & $53\%$\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/CrossPerformanceTestLatency.eps}
-\caption{Speller performance obtained for each method while latencies were artificially added to each single-intensification segment.  The achieved performance is significantly reduced for all methods. Y-axis shows letter identification performance while X-axis shows the number of intensification sequences used to calculate the ensemble average.}
+\caption{Speller performance obtained for each method while latencies are artificially added to each single-intensification segment corresponding to the Experiment 2.  The achieved performance is significantly reduced for all methods. Y-axis shows letter identification performance while X-axis shows the number of intensification sequences used to calculate the ensemble average.}
 \label{fig:performancetestlatency}
 \end{figure}
 
@@ -789,14 +789,14 @@ SVM     & PO8  & $78\%$ & $7\%$ & $53\%$\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/CrossPerformanceTestAmplitude.eps}
-\caption{Speller performance obtained while the amplitudes of the P3b component of the superimposed ERP is randomly reduced. Y-axis shows performance accuracy while X-axis shows the number of intensification sequences.}
+\caption{Speller performance obtained for the Experiment 3 while the amplitudes of the P3b component of the superimposed ERP is randomly reduced. Y-axis shows performance accuracy while X-axis shows the number of intensification sequences.}
 \label{fig:performancetestamplitude}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/PerformanceBCICompetition.eps}
-\caption{Speller performance obtained for the dataset IIb of the BCI Competition II (2003) for each one of the algorithms.  An offline BCI Simulation is performed using the first $42$ trials as training and the remaining $31$ as testing.  The horizontal axis show the number of intensification sequences, from $0$ to $15$ for this dataset, while the vertical axis show the performance rate.}
+\caption{Speller performance obtained for the Dataset IIb of the BCI Competition II (2003) for each one of the algorithms.  An offline BCI Simulation is performed using the first $42$ trials as training and the remaining $31$ as testing.  The horizontal axis show the number of intensification sequences, from $0$ to $15$ for this dataset, while the vertical axis show the performance rate.}
 \label{fig:performancebcicompetition}
 \end{figure}
 
@@ -825,13 +825,13 @@ SVM     & C1  & $32\%$ \\
 \section{Discussion}
 \label{section:discussion}
 
-All the methods show a significant reduction of performance when latency noise is added, and at the same time all the methods show some resistance to noise in peak amplitudes of the main component.
+A significant reduction of performance was found when latency noise is added (Experiment 1 vs 2, Wilcoxon rank sum test, one tail, rejected towards greater with $p=0.0022$).  The latency noise reduces the information contained in the averaged signal, mainly due to the invalidation of the SNR enhancement performed by the signal averaging procedure.  This reduction alters the obtained shape of the waveform of the ERP and impacts on the performances regardless of the method. On the other hand, all the algorithms show some resistance to noise in peak amplitudes of the main component (Experiment 1 vs 3,Wilcoxon rank sum test, one tail, accepted with $p=0.05$).
 
-Using a straightforward dictionary of templates for \textit{MP-1} proved more beneficial in terms of performance than the standard approach of using a Hilbert base of Wavelets atoms on \textit{MP-2}.  Either applying latency noise or amplitude noise, the method based on the signal's templates instead of using their coefficients achieve much better performance values.
+A two-way balanced Quade test was performed to evaluate the performance's differences for the three experiments and for the six methods.  Difference among the method's performances were found with $p=0.0019$.  The methods \textit{SHCC}, \textit{SIFT}, \textit{MP-1} performed much better than the other algorithms, including \textit{SVM}.  With multiple comparisons to a level of $0.05$ significant differences are found between \textit{SHCC} vs MP-1,MP-2, PE and SVM, between \textit{SIFT} vs. MP-2 and PE, and between \textit{SVM} and MP-2.
 
-The methods \textit{MP-1}, \textit{SIFT}, \textit{SHCC} performed much better than the other algorithms, including \textit{SVM}, even when the latency and the amplitudes are altered.  Latency noise on the other hand, reduces the information contained in the signal, mainly due to the invalidation of the SNR enhancement performed by the signal averaging procedure.  This reduction impacts on the obtained performance for all the methods, almost equally.
+Additionally, using a straightforward dictionary of templates for \textit{MP-1} proved more beneficial in terms of performance than the approach of using a Hilbert base of Wavelets atoms on \textit{MP-2} (significant differences between MP-1 vs MP-2).  Either applying latency noise or amplitude noise, the method based on the signal's templates instead of using their coefficients achieve much better character identification rates.  
 
-Regarding results produced for the public and real dataset of P300 ERP from the Berlin BCI Competition II (2003), the obtained performance is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$.  It is also similar to the performance obtained for the Experiment 3, which represents coincidentally a more realistic scenario.  It is important to remark that the algorithms presented here analyze the single-channel waveform structure of the signal~\citep{Gribonval2008}.  
+Regarding results produced for the public and real dataset of P300 ERP from the Berlin BCI Competition II (2003), the obtained performance is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$~\citep{Kathner2017}.  It is also similar to the performance obtained for the Experiment 3, which represents coincidentally the more realistic scenario for the pseudo-real dataset.  It is important to remark that the algorithms presented here analyze the waveform structure of a single-channel signal~\citep{Gribonval2008}.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
@@ -839,7 +839,9 @@ Regarding results produced for the public and real dataset of P300 ERP from the 
 
 The purpose of this work is threefold, (1) raise awareness about the utility of using automatic waveform-based methods to study EEG signals, (2) to provide an overview of the state-of-the-art of those methods, and (3) to compare those methods and verify if it is possible to obtain acceptable classification performances based exclusively on the signal's waveform.
 
-We verified that similar performance results are obtained for the methods \textit{MP-1}, \textit{SIFT} and \textit{SHCC} and that it is possible to obtain discriminating information from the underlying signal based exclusively on an automated method of processing the waveforms.  This brings the possibility to use these techniques to implement intelligible automatic detection procedures due to the fact that they are based on metrics which can be visually verified.
+We verified that similar performance results are obtained for the methods \textit{SHCC}, \textit{SIFT} and \textit{MP-1} and that it is possible to obtain discriminating information from the underlying signal based exclusively on an automated method of processing the waveforms.  This brings the possibility to use these techniques to implement intelligible automatic detection procedures due to the fact that they are based on metrics which can be visually verified.  
+
+Further work should be conducted in terms of a multichannel meaningful extension of these waveform-based methods~\citep{Gribonval2008}. Moreover, the possibilities of finding overcomplete dictionaries for matching pursuit sparse representation based on obtained signal templates, could also be considered an area of future improvement.
 
 %How much is it possible to classify and implement a P300 ERP Speller using only the waveform structure of the signal ? Which algorithm perform better at this even when segment latency variations and component amplitudes issues are present ?
 
