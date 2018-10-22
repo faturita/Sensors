@@ -148,7 +148,9 @@ In contrast, automatic processing, or quantitative EEG (qEEG), was based first o
 
 Hence, the traditional and knowledgeable approach was mainly overshadow particularly in BCI Research, and the waveform of the EEG was replaced by pragmatic procedures that were difficult to link to existing clinical EEG knowledge.  We aim to help fix this gap by providing a review of the methods which emphasize the waveform, the shape of the EEG signal and which can decode them in a supervised and semi-automated procedure.
 
-The aim of this study is threefold: first to review current literature of EEG processing techniques which are based on analysis of the waveform.  The second is to evaluate and study these methods by analyzing its classification performance against a pseudo-real dataset. And third, to verify their applicability to a real and public dataset.  We believe that the importance of waveform analysis methods, as described here, is that by using this methodology, collaboration could be fostered because there is a clear description and characterization of the signal waveform, where the extensive literature which explores clinical EEG can be reviewed from the same shared perspective~\citep{Nijboer2009,Wei2017}. 
+The aim of this study is threefold: first to review current literature of EEG processing techniques which are based on analysis of the waveform.  The second is to evaluate and study these methods by analyzing its classification performance against a pseudo-real dataset. And third, to verify their applicability to a real and public dataset.  
+
+%We believe that the importance of waveform analysis methods, as described here, is that by using this methodology, collaboration could be fostered because there is a clear description and characterization of the signal waveform, where the extensive literature which explores clinical EEG can be reviewed from the same shared perspective~\citep{Nijboer2009,Wei2017}. 
 
 This article unfolds as follows: Section \ref{EEG} will provide a brief introduction to EEG and the particularities of the EEG waveform characterization.  Section \ref{Algorithms} will explain the algorithms based on the waveform that will be analyzed.  In Section \ref{Experimental} the experimentation procedure will be explained.  Results will be presented in Section \ref{section:results} and finally Discussion and Conclusions will be established in the final sections.
 
@@ -580,7 +582,7 @@ f = \bigg \{  \frac{\hat{y}_{s}-\hat{y}_{s-1}}{\hat{x}_{s}-\hat{x}_{s-1}}  \bigg
 
 \subsection{Scale Invariant Feature Transform - SIFT}
 
-SIFT~\citep{Lowe2004} is a very successful feature extraction technique from Computer Vision .  It has a biomimetic inspiration on how the visual cortex analyze images based on orientations~\citep{cogprints561}.  This method has been used in \citep{Ramele2016} to analyze EEG signals based on their plots on 2D images.
+SIFT~\citep{Lowe2004} is a very successful feature extraction technique from Computer Vision .  It has a biomimetic inspiration on how the visual cortex analyze images based on orientations~\citep{Edelman1997}.  This method has been used in \citep{Ramele2016} to analyze EEG signals based on their plots on 2D images.
 
 The first step of the algorithm is the plot generation based on single-channel EEG segments $ x(n) $.  Hence, this signal is normalized by the z-score~\citep{Zhang2013}: 
 
@@ -639,8 +641,6 @@ f = {\bigg \{ \bigg \{  \bigg \{ h(i,j,\theta) \bigg \}_{i \in I }  \bigg \}_{j 
 \label{Experimental}
 
 Farwell and Donchin P300 Speller \citep{Farwell1988} is one the most used BCI paradigms to implement a thought translation device and to send commands to a computer in the form of selected letters, similar to typing on a virtual keyboard.  This procedure exploits a cognitive phenomena raised by the oddball paradigm: along the EEG trace of a person which is focusing on a sequence of two different visual flashing stimulus, a particular and distinctive transient component is found each time the expected stimulus flashes.  This is cleverly utilized in the P300 Speller, where rows and columns of a 6x6 matrix flashes randomly but only the flashing of a column or row where the letter that a user is focusing will trigger concurrently the P300 ERP along the EEG trace.
-
-Is it possible to classify and implement a P300 ERP Speller using only the waveform structure of the signal ? Which algorithm perform better at this even when segment latency variations and component amplitudes issues are present ?
 
 In order to verify this in a controlled procedure, a real P300 ERP template, obtained from a public dataset, is superimposed into a distinct EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. Along the EEG stream, the markers information was used to localize the \textit{True} segments where the P300 should have been found, and those timing locations are used to superimpose the extracted ERP waveform.  By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to similar procedures used in other works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
 

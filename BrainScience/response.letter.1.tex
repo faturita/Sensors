@@ -1,0 +1,305 @@
+\documentclass[journal,onecolumn,12pt]{IEEEtran} 
+
+\usepackage{amsmath,amssymb,bm}
+\usepackage{amsthm, amsfonts}	
+\usepackage{bm,bbm}
+\usepackage[normalem]{ulem}
+\usepackage{color}
+\usepackage{fancybox}
+\usepackage{url,booktabs}
+\usepackage[round]{natbib}
+
+\usepackage{xr}
+
+
+
+\title{Reply to Reviewer's Comments on\\
+''EEG Waveform Analysis of P300 ERP with applications to Brain Computer Interfaces''}
+\author{}
+
+\begin{document}
+
+\maketitle
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+We are grateful to the reviewer for pointing out relevant issues in our manuscript.
+
+In the following, we discuss how we dealt with each raised issue. 
+
+\vskip+1ex
+\noindent \dotfill
+
+\section*{\fbox{Reviewer \#1 Transcript:}}
+
+The paper is an interesting research paper and presents an analysis of the P300 ERP. The authors provide a literature review of the current methods used to detect EEG patterns and conduct three experiments to identify the P300 ERP in EEG recordings. The paper is well-organized. The paper should incorporate the following comments before its acceptance for publication:
+
+ 
+
+1. The major concern is that the experiments have been conducted with only one participant. The authors should collect more data in this study. In other studies cited in the paper by authors,  two and 16 participants were recruited.
+
+ 
+
+2. It is strongly recommended that the authors should re-check some paragraphs of the manuscript, correct any grammatical and syntactic errors and improve the scientific language. In some cases, it was hard to follow the meaning. (e.g. Page 2, Paragraph 4, Line 51-54, Page 11, Paragraph 3, Line 343-345)
+
+ 
+
+3. In the Introduction section the authors refer to BCI applications; however, no scientific studies are reported. Also, the literature section should be revised with recent publication. Below are some scientific studies that is suggested to be included for BCI applications: 
+
+ 
+
+a. Cruz, A., Pires, G., & Nunes, U. J. (2018). Double ErrP Detection for Automatic Error Correction in an ERP-Based BCI Speller. IEEE Transactions on Neural Systems and Rehabilitation Engineering, 26(1), 26-36.
+
+ 
+
+b. Tzimourta, K.D., Tsoulos, I., Bilero, T., Tzallas, A., Tsipouras, M., Giannakeas, N. (2018). Direct Assessment of Alcohol Consumption in Mental State Using Brain Computer Interfaces and Grammatical Evolution. Inventions, 3(3), 51.
+
+ 
+
+c. Kevric, J., & Subasi, A. (2016). The impact of Mspca signal de-noising in real-time wireless brain computer interface system. Southeast Europe Journal of Soft Computing, 4(1).
+
+ 
+
+and for sleep studies: 
+
+ 
+
+d. Boostani R, Karimzadeh F, Nami M (2017) A comparative review on sleep stage classification methods in patients and healthy individuals. Computer methods and programs in biomedicine 140: 77-91.
+
+ 
+
+e. Dimitriadis, S. I., Salis, C., & Linden, D. (2018). A novel, fast and efficient single-sensor automatic sleep-stage classification based on complementary cross-frequency coupling estimates. Clinical Neurophysiology, 129(4), 815-828.
+
+ 
+
+4. In the literature section, Table I briefly presents the proposed methods followed by other authors; however, there is no text describing the table. The authors should include a paragraph describing each method and the recent findings concisely, in order to present better the literature review. 
+
+ 
+
+5. In Figure 2 please insert the y-axis title to clearly present ERP template.
+
+ 
+
+6. The Results section is not well-presented. The authors are advised to include a paragraph before Table 2, Table 3 and Fig. 6-8 presenting the obtained results (best/worst channel performance and algorithm performance for each experiment) and then discuss the results in the Discussion section. Please revise excessive descriptions in the captions of Table 2, Table 3 and Fig. 6-8.
+
+ 
+
+7. “the obtained character identification rate is above theoretical chance level, and for some algorithms close to the usable threshold of 70%” (Page 19, Paragraph 2, Line 465-466) What is the obtained character identification rate in other scientific studies? Is the obtained result (70%) of this study comparable to others?
+
+ 
+
+8. In the Discussion section a table presenting the statistical analysis results would present better the results and would facilitate the reader.
+
+
+\subsection*{\ovalbox{General Comments}}
+I have read the manuscript "EEG characterization and classification based on Histogram of Gradients of Signal Plots" with great interest since its title promised a solution to an important problem. In spite of presenting an interesting methodology and some interesting issues related to EEG characterization, I consider the manuscript is not ready for publication. 
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you for your comments and observations. We have modified several points according to your recommendations, we hope the article is now better suited for publication. 
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+2.1) the title is misleading since a first, and naive, read suggest being able to classify and characterize any EEG with their different components (i.e., P200, P300, P600, N100, N200, N400 to name a few). Clearly, the title does not match the content since the authors focus on the P300
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you for the observation. The title of the article was changed accordingly to your suggestion.  
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+2.2) there is evidence of the benefits of working with these signals P300, but, is the proposed method extensible to other signals?, this is not clear from the manuscript. 
+
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you very much for your comment.  We published in~\citep{Ramele2016} the application of the same method to identify rhythmic EEG events like Visual Occipital Alpha Waves and to classify Motor Imagery.  We are also working on unpublished material where we are analyzing the same approach for the detection of K-Complexes and classification of  SSVEP patterns but the results are in progress.  We added this information on the article (Introduction and Conclusion, section 3).  We hope this new information enriches the article and clarifies this point.
+
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+\subsection*{\ovalbox{Third Paragraph}}
+
+3.1) Another issue with the manuscript is its mathematical vagueness. For example, the variable T is used as a vector or two-tuple but its notation is different from the notation the authors use for vectors
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you for the observation.  We worked hard to improve all the mathematical description of the method. The issue with variable T was fixed and we improved on the font styling to differentiate vectors and scalars.  Section 1.1 was modified as well as section 1.2.3.  The mathematical terminology were corrected all along the article. We hope we have full addressed this point. }
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+3.2) Moreover, there is something wrong in equation (4)
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+We appreciate a lot your truthful comment.  Equation (4) is very important for us because it is the essence of the method.  %We based that equation on the description of how the histogram of oriented gradients is calculated published in Vedaldi and Szeliski, Computer Vision and Algorithms.  
+We reviewed the equation, corrected their terms and we hope it is now more clear.
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+3.3) and something inconsistent between equations (7) and (8)
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+We have revised the manuscript and modified equations (7) and (8) (now (8) and (9)) which are located on Section 1.2.3 (Parameters).  We added more information on the text and specified subscript indexes to avoid the inconsistency.
+We thank you for noticing this.
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+3.4) Also, the authors go back and forth the digital space and the continuous space and although there is an equivalence, the manuscript could benefit from a clearer explanation. 
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you for the observation.  We modified all equations to emphasize the point that they are calculated in digital space, particularly on equation (4). We also added that image gradients are also calculated using finite differences, and added information about the support of each equation to explain that they are actually calculated in digital space.
+With this, we hope we have full addressed your point.
+ }
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+\subsection*{\ovalbox{Fourth Paragraph}}
+
+4.1) Another issue that I find worrisome is the design of experiments. It seems that the number of subjects is rather low, it would be interesting to know why the authors decided to use such a subset.
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you for your comment. The original dataset was published as the 008-2014 dataset at the BNCI-Horizon website, which is very important in BCI Research.  As far as we are aware of, experiments on this dataset of ALS patients has not been published by any independent group.
+In order to address this issue, we included a new own dataset with the same experimental conditions that we generated ourselves, on healthy subjects.  We published this dataset on the Kaggle platform for replication.
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+4.3) Also, the authors speculate that their results are not that good because they did not take into account the latency and magnitude of the signals, there is previous evidence in the literature that the P300 suffers from these, and other, problems and, thus, one wonders why the authors did not anticipate such problems. 
+
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you for your comments.  We added more detailed information that address this issue. First in Section 1.1.4  we included information about the signal averaging procedure.  In Section 1.2.3 we added the parameters that were used.  More importantly, in Section 2 we added information and references about the tests that we did to address latency and amplitude issues.  We included in Section 3 information about future and current works where we are also dealing with these problems.
+We hope we full addressed your remarks.
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+
+\subsection*{\ovalbox{Fifth Paragraph}}
+
+5.1) it seems the authors assume that the readers have some previous deep knowledge of some topics such as that some channels should carry more or better information without a previous reference.
+
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you for your suggestion. The Results section was modified to clarify the expectation about the EEG channels where a visual P300 oddball paradigm generates stronger signals.  We also added references.
+We hope we  have addressed your point with this.
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+5.2)  issue has to do with the way the manuscript is written
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you a lot for this important comment.  We re-read all the manuscript and asked  colleagues to proofread the article.  They gave us interesting suggestions that helped us to improve different sections.  We would be very pleased if you find it now easier to read it.
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+
+5.3) sometimes is very difficult to follow the ideas the authors want to convey, an example can be found in the paragraph containing equation (5)
+
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you very much for this information.  We reviewed completely that equation (it is now equation (6) and equation (7)). We included a step-by-step procedure that describes the proposed algorithm and we added a schematic chart in Figure 3.
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+\bibliographystyle{mdpi}
+\bibliography{article}
+
+\end{document}
