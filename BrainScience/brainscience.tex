@@ -827,6 +827,38 @@ SVM     & C1  & $32\%$ \\
 
 A significant reduction of performance was found when latency noise is added (Experiment 1 vs 2, Wilcoxon rank sum test, one tail, with $p=0.0022$).  The latency noise reduces the information contained in the averaged signal, mainly due to the invalidation of the SNR enhancement performed by the signal averaging procedure.  This reduction alters the obtained shape of the waveform of the ERP and impacts on the performances regardless of the method. On the other hand, all the algorithms show some resistance to noise in peak amplitudes of the main component. This is shown by the similarities of obtained results between the Experiment 1 and 3 (Wilcoxon rank sum test, two tails, not rejected with $p=0.1797$).
 
+\begin{table}[H]
+\caption{Statistical Analysis Tests }
+\centering
+%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
+\begin{tabular}{ccc}
+\toprule
+\textbf{Comparison}	& \textbf{Statistical Method} &   \textbf{p-value} \\
+\midrule
+Experiment 1 vs. 2 & Wilcoxon rank sum test, one tail  & $0.0022$ \\
+Experiment 1 vs. 3 & Wilcoxon rank sum test, two tails not rejected & $0.1797$ \\
+\bottomrule
+\end{tabular}
+\label{tab:statisticalanalysis1}
+\end{table}
+
+
+\begin{table}[H]
+\caption{Statistical Analysis Tests  - Multiple comparisons}
+\centering
+%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
+\begin{tabular}{ccc}
+\toprule
+\textbf{Comparison}	& \textbf{Statistical Method} &   \textbf{p-value} \\
+\midrule
+SHCC & MP-1, MP-2  & $0.05$ \\
+SIFT   & MP-2, PE       & $0.1797$ \\
+SVM   & MP-2             & $0.1797$ \\
+\bottomrule
+\end{tabular}
+\label{tab:statisticalanalysis2}
+\end{table}
+
 A two-way balanced Quade test was performed to evaluate the performance's differences for the three experiments and for the six methods.  Difference among the method's letter identification rates were found with $p=0.0019$.  The methods \textit{SHCC}, \textit{SIFT}, \textit{MP-1} performed much better than the other algorithms, including \textit{SVM}.  By making multiple comparisons at a level  $0.05$, significant differences are found between \textit{SHCC} vs MP-1,MP-2, PE and SVM, between \textit{SIFT} vs. MP-2 and PE, and between \textit{SVM} and MP-2.
 
 Additionally, using a straightforward dictionary of templates for \textit{MP-1} proved more beneficial in terms of performance than the approach of using a Hilbert base of Wavelets atoms on \textit{MP-2} (significant differences between MP-1 vs MP-2).  Either applying latency noise or amplitude noise, the method based on the signal's templates instead of using their coefficients achieve much better character identification rates.  
