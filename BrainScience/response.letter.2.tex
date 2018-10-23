@@ -1,8 +1,42 @@
+\documentclass[journal,onecolumn,12pt]{IEEEtran} 
+
+\usepackage{amsmath,amssymb,bm}
+\usepackage{amsthm, amsfonts}	
+\usepackage{bm,bbm}
+\usepackage[normalem]{ulem}
+\usepackage{color}
+\usepackage{fancybox}
+\usepackage{url,booktabs}
+\usepackage[round]{natbib}
+
+\usepackage{xr}
+
+
+
+\title{Reply to Reviewer's Comments on\\
+''EEG Waveform Analysis of P300 ERP with applications to Brain Computer Interfaces''}
+\author{}
+
+\begin{document}
+
+\maketitle
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+We are grateful to the reviewer for pointing out relevant issues in our manuscript.
+
+In the following, we discuss how we dealt with each raised issue. 
+
+\vskip+1ex
+\noindent \dotfill
+
+\section*{\fbox{Reviewer \#2 Transcript:}}
+
 This manuscript presents findings that contrast the performance of a selection of BCI classification methods in a single subject database. All in all, I find several aspects of this paper quite interesting, particularly its attempt to assess the impact of latency and component amplitude variation on classification performance. However, overall, I fear the range/scope of the paper is too limited to make a significant contribution to the literature.
 
 1. Abstract, while automated analysis of EEG data certainly has significant potential with regards to the future of clinical EEG research, it is too soon to unqualifiedly state that these methods as they are “outshine the research done by the clinical EEG community.” Some aspects of the introduction also veer towards hyperbole on occasion and may be better received if they were more conservatively stated.
 
-2. Several notable papers in the domain of P300-BCI work should be referenced (e.g., Rakotomamonjy & Guigue, 2008) as well as other prior efforts to evaluate P300-BCI classification methods (e.g., Manyakov, Chumerin, Combaz & Hulle, 2011; Oweis, Hamdi, Ghazali & Lwissy, 2013).
+2. Several notable papers in the domain of P300-BCI work should be referenced (e.g., Rakotomamonjy \& Guigue, 2008) as well as other prior efforts to evaluate P300-BCI classification methods (e.g., Manyakov, Chumerin, Combaz \& Hulle, 2011; Oweis, Hamdi, Ghazali \& Lwissy, 2013).
 
 4. Page 12, Lines 383-394. It should be noted that the dataset from which the template ERP subject was drawn from was an ALS patient dataset. It is currently unclear why Subject Number 8 and trial number 2 was selected out of all the subjects and trials in the BNCI-Horizon database.
 
@@ -11,3 +45,129 @@ This manuscript presents findings that contrast the performance of a selection o
 6. The separate manipulation of latency, as well as amplitude noise, is interesting and if extended may in and of itself prove to be an interesting manuscript in and of itself (e.g. contrasting the impact of a range of different latency variations and amplitude noise on BCI classification ability), true EEG data almost invariantly involves not only a mix of both noise sources but other sources such as cognitive fatigue, systematic task stimuli adaptation etc. Thus all three experiments represent assessments of isolated aspects of noise which would be interesting if expanded on in a more expansive simulation set (see point 4 and summary) but currently are too limited in scope to draw strong conclusions regarding the expected inter-component performance in real-world data.
 
 It seems as though the entire study is built on the classification of a single active P300 BCI-Speller template from an ALS participant into a single null-EEG stream of a healthy subject performing a passive-viewing version of a BCI-Speller task. The generalizability of these results are thus difficult, if not impossible to assess. Given that assessments of classification methods for P300 BCI interfaces are fairly common (e.g. Manyakov et al., 2011; Oweis et al. 2013; Krusienski et al. 2010), it is unclear what the value of another contrast of classification methods is to the field. The assessment of the impact of sources of noise is interesting (see point 6), but would need to be expanded on considerably to be of practical value. Furthermore, while this manuscript frequently emphasizes the value of BCI to the clinical field. However, most clinicians are generally uninterested in classifying the presence/absence of a P300 response, arguably the most obvious cognitive ERP component extant. Instead, the focus in that area is instead on subtler dynamics in the EEG signal such as frequency slowing, triphasic waves, and generalized ictal activity. Indeed, the introduction of this manuscript mentions several EEG components of value which notably does not include the P300 in its list. If demonstrating clinical utility is of interest, it would seem more appropriate to target the classification of these subtler elements with a larger sample set and broader response ERP pool.
+
+\subsection*{\ovalbox{General Comments}}
+This manuscript presents findings that contrast the performance of a selection of BCI classification methods in a single subject database. All in all, I find several aspects of this paper quite interesting, particularly its attempt to assess the impact of latency and component amplitude variation on classification performance. However, overall, I fear the range/scope of the paper is too limited to make a significant contribution to the literature.
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+
+
+
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+1. Abstract, while automated analysis of EEG data certainly has significant potential with regards to the future of clinical EEG research, it is too soon to unqualifiedly state that these methods as they are “outshine the research done by the clinical EEG community.” Some aspects of the introduction also veer towards hyperbole on occasion and may be better received if they were more conservatively stated.
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+We have now included more participants to this experiment.
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+2. Several notable papers in the domain of P300-BCI work should be referenced (e.g., Rakotomamonjy \& Guigue, 2008) as well as other prior efforts to evaluate P300-BCI classification methods (e.g., Manyakov, Chumerin, Combaz \& Hulle, 2011; Oweis, Hamdi, Ghazali \& Lwissy, 2013).
+
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+Thank you very much for your comment.  We published in~\citep{Ramele2016} the application of the same method to identify rhythmic EEG events like Visual Occipital Alpha Waves and to classify Motor Imagery.  We are also working on unpublished material where we are analyzing the same approach for the detection of K-Complexes and classification of  SSVEP patterns but the results are in progress.  We added this information on the article (Introduction and Conclusion, section 3).  We hope this new information enriches the article and clarifies this point.
+
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+4. Page 12, Lines 383-394. It should be noted that the dataset from which the template ERP subject was drawn from was an ALS patient dataset. It is currently unclear why Subject Number 8 and trial number 2 was selected out of all the subjects and trials in the BNCI-Horizon database.
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+
+
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+5. Integrating the template ERP signal into a Null-EEG stream and assuming everything is there except the P300 ERP component is probably an untenable assumption. As indicated in the manuscript itself, for instance, the null-EEG stream is a passive task. While the non-P300 trials in an active task contain additional activity associated with processes including target stimuli anticipation, active task focus, cognitive fatigue, etc. This is not true of the Null-EEG stream. Furthermore, combining and subsequently classifying EEG data from two different subjects is questionable at best given the physiological differences between the two. Differences in recording condition, equipment and task stimuli should also be considered. Collectively, these factors make it difficult to assess the value of the classification results observed on this study.
+
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+6. The separate manipulation of latency, as well as amplitude noise, is interesting and if extended may in and of itself prove to be an interesting manuscript in and of itself (e.g. contrasting the impact of a range of different latency variations and amplitude noise on BCI classification ability), true EEG data almost invariantly involves not only a mix of both noise sources but other sources such as cognitive fatigue, systematic task stimuli adaptation etc. Thus all three experiments represent assessments of isolated aspects of noise which would be interesting if expanded on in a more expansive simulation set (see point 4 and summary) but currently are too limited in scope to draw strong conclusions regarding the expected inter-component performance in real-world data.
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+
+}
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+It seems as though the entire study is built on the classification of a single active P300 BCI-Speller template from an ALS participant into a single null-EEG stream of a healthy subject performing a passive-viewing version of a BCI-Speller task. The generalizability of these results are thus difficult, if not impossible to assess. Given that assessments of classification methods for P300 BCI interfaces are fairly common (e.g. Manyakov et al., 2011; Oweis et al. 2013; Krusienski et al. 2010), it is unclear what the value of another contrast of classification methods is to the field. The assessment of the impact of sources of noise is interesting (see point 6), but would need to be expanded on considerably to be of practical value. Furthermore, while this manuscript frequently emphasizes the value of BCI to the clinical field. However, most clinicians are generally uninterested in classifying the presence/absence of a P300 response, arguably the most obvious cognitive ERP component extant. Instead, the focus in that area is instead on subtler dynamics in the EEG signal such as frequency slowing, triphasic waves, and generalized ictal activity. Indeed, the introduction of this manuscript mentions several EEG components of value which notably does not include the P300 in its list. If demonstrating clinical utility is of interest, it would seem more appropriate to target the classification of these subtler elements with a larger sample set and broader response ERP pool.
+
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+%
+\begin{quotation}
+{\color{blue}
+
+
+With this, we hope we have full addressed your point.
+ }
+\end{quotation}
+%
+\vskip+1ex
+\noindent \dotfill
+\vskip+1ex
+
+
+\bibliographystyle{mdpi}
+\bibliography{article}
+
+\end{document}
