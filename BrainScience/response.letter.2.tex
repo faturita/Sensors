@@ -55,7 +55,7 @@ This manuscript presents findings that contrast the performance of a selection o
 \begin{quotation}
 {\color{blue}
 
-
+We would like to honestly thank the Reviewer for this absolutely excellent and detailed review.  We have modified the experiments and several parts of the manuscript in order to make it more suitable for publication.  The list of changes can be found at the end of this letter.
 
 }
 \end{quotation}
@@ -64,7 +64,7 @@ This manuscript presents findings that contrast the performance of a selection o
 \noindent \dotfill
 \vskip+1ex
 
-1. Abstract, while automated analysis of EEG data certainly has significant potential with regards to the future of clinical EEG research, it is too soon to unqualifiedly state that these methods as they are “outshine the research done by the clinical EEG community.” Some aspects of the introduction also veer towards hyperbole on occasion and may be better received if they were more conservatively stated.
+1. Abstract, while automated analysis of EEG data certainly has significant potential with regards to the future of clinical EEG research, it is too soon to unqualifiedly state that these methods as they are "outshine the research done by the clinical EEG community." Some aspects of the introduction also veer towards hyperbole on occasion and may be better received if they were more conservatively stated.
 
 \vskip+1ex
 \noindent \dotfill
@@ -72,7 +72,7 @@ This manuscript presents findings that contrast the performance of a selection o
 %
 \begin{quotation}
 {\color{blue}
-We have now included more participants to this experiment.
+We apologize for this mistake.  We definitely selected an incorrect wording because the message that we aimed to convey was exactly the opposite.  We have modified the abstract to emphasize the message and the idea that we failed to transmit in our original manuscript.
 }
 \end{quotation}
 %
@@ -89,8 +89,7 @@ We have now included more participants to this experiment.
 %
 \begin{quotation}
 {\color{blue}
-Thank you very much for your comment.  We published in~\citep{Ramele2016} the application of the same method to identify rhythmic EEG events like Visual Occipital Alpha Waves and to classify Motor Imagery.  We are also working on unpublished material where we are analyzing the same approach for the detection of K-Complexes and classification of  SSVEP patterns but the results are in progress.  We added this information on the article (Introduction and Conclusion, section 3).  We hope this new information enriches the article and clarifies this point.
-
+These important references were added to the manuscript.  Thank you for pointing them out.
 }
 \end{quotation}
 %
@@ -107,6 +106,9 @@ Thank you very much for your comment.  We published in~\citep{Ramele2016} the ap
 \begin{quotation}
 {\color{blue}
 
+This is a very important comment.  The reason we selected that particular trial and subject was because our manuscript stressed the importance of the waveform, the shape of the ERP.  The obtained P300 waveform of Subject Number 8, trial 2 was the most prototypical that we've found along the BNCI-Horizon dataset of ALS patients. The analysis was performed by visual observation.  We have now added also 4 more templates for the Active part of the pseudo-real dataset.
+
+We have now included this reason on the manuscript which was mistakenly omitted on our first version.
 
 }
 \end{quotation}
@@ -125,6 +127,12 @@ Thank you very much for your comment.  We published in~\citep{Ramele2016} the ap
 \begin{quotation}
 {\color{blue}
 
+The recording conditions of both datasets are exactly the same.  The EEG device, though not the same exact model, is from the same manufacturer and the sampling frequency is as close as possible. All the preprocessing stage was implemented according to~\citep{Riccio2013}.  
+
+Following Reviewer comments, the pseudo-real dataset is now divided in two.  First, we've replicated the experiment conducted by~\cite{Riccio2013} et al on 4 healthy subjects performing an active-modality P300 copy-spelling task while using the P300-Based BCI Speller. We also extended the original single null-EEG stream to 4 subjects while performing the passive-modality where the letter to copy-spell is not informed to the user and the subject is unaware of how the matrix works.
+
+Regarding the active-modality, for each subject a the most prototypical P300 waveform template is selected and extracted.  This template is superimposed to each segment marked as hit on the EEG stream.  The baseline was obtained by picking randomly any no hit segment for the same subject.
+
 }
 \end{quotation}
 %
@@ -140,6 +148,8 @@ Thank you very much for your comment.  We published in~\citep{Ramele2016} the ap
 %
 \begin{quotation}
 {\color{blue}
+
+The purpose of these experiments were to assess the incidence of the most common source of noise in the generation of the P300, to the shape of the obtained waveform of the P300, "how the averaged signal looked-like".
 
 }
 \end{quotation}
@@ -157,8 +167,10 @@ It seems as though the entire study is built on the classification of a single a
 \begin{quotation}
 {\color{blue}
 
+We would like to emphasize that the purpose of this work was to raise awareness about the automatic procedures that can analyze EEG signals by their waveforms, mimicking what traditionally EEG physicians performed on the clinical EEG.  As far as we are aware of, no work has addressed this topic in this form and we humbly believe it could be a contribution.  The Reviewer is right, but the objective of this manuscript was to establish the connection, and to focus on the goal of the BCI discipline to foster interaction between the clinical and BCI community.
 
-With this, we hope we have full addressed your point.
+We have modified the manuscript to emphasize these aspects.
+
  }
 \end{quotation}
 %
@@ -168,6 +180,6 @@ With this, we hope we have full addressed your point.
 
 
 \bibliographystyle{mdpi}
-\bibliography{article}
+\bibliography{brainscience}
 
 \end{document}
