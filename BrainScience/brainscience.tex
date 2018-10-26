@@ -756,33 +756,34 @@ Thus, the letter identification performance can be obtained by measuring the acc
 
 Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{tab:results} shows the  performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance is attained.   Figure \ref{fig:performancetest} shows the performance curves for six algorithms.  Each one represents the percentage of letters that is actually predicted by the algorithms using a cross-validation procedure.  As previously described the data is continuously divided in two sets, where the first 15 letters are used to derive the dictionary of templates while the remaining 20 letters are used to measure the letter identification performance. This is repeated one hundred times, and performances averaged.   
 
-\begin{table}[H]
-\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, the control algorithm SVM Support Vector Machines is included for comparison.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
-\centering
-%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
-\begin{tabular}{ccccc}
-\toprule
-\textbf{Method}	& \textbf{Channel} &   \multicolumn{3}{c}{Performance} \\
-%\cline{3-5} \\
- 	&  &  \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}\\
-\midrule
-MP 1 & PO8  & $67\%$ & $15\%$ & $50\%$\\
-MP 2 & PO7 & $24\%$ & $6\%$ & $10\%$\\
-SIFT  & PO8 & $91\%$ & $18\%$ & $66\%$\\
-PE     & Cz & $61\%$ & $9\%$ & $32\%$\\
-SHCC & P4 & $98\%$ & $31\%$ & $80\%$\\
-SVM     & PO8  & $78\%$ & $7\%$ & $53\%$\\
-\bottomrule
-\end{tabular}
-\label{tab:results}
-\end{table}
+%\begin{table}[H]
+%\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, the control algorithm SVM Support Vector Machines is included for comparison.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
+%\centering
+%%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
+%\begin{tabular}{c|cccc|cccc|cccc|cccc|cccc|cccc|cccc|cccc}
+%\toprule
+%\textbf{Method}	& \multicolumn{4}{c}{Subject 1} & \multicolumn{4}{c}{Subject 2} & \multicolumn{4}{c}{Subject 3} & \multicolumn{4}{c}{Subject 4} & \multicolumn{4}{c}{Subject 5} & \multicolumn{4}{c}{Subject 6} & \multicolumn{4}{c}{Subject 7} & \multicolumn{4}{c}{Subject 8} \\
+%%\cline{3-5} \\
+% 	&  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}\\
+%\midrule
+%MP 1 & PO8  & $67\%$ & $15\%$ & $50\%$  & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$   \\
+%MP 2 & PO7 & $24\%$ & $6\%$ & $10\%$  & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ \\
+%SIFT  & PO8 & $91\%$ & $18\%$ & $66\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ \\
+%PE     & Cz & $61\%$ & $9\%$ & $32\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ \\
+%SHCC & P4 & $98\%$ & $31\%$ & $80\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ \\
+%SVM     & PO8  & $78\%$ & $7\%$ & $53\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ \\
+%\bottomrule
+%\end{tabular}
+%\label{tab:results}
+%\end{table}
 
 
 Figure \ref{fig:performancetestlatency} shows the same results for the Experiment 2, where a noisy latency lag was included.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained for the Experiment 3, when the amplitude of the P3b component of the template is randomly attenuated.  
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=15cm]{images/CrossPerformanceTest.eps}
+\includegraphics[width=7.5cm]{images/1-1.eps}
+\includegraphics[width=7.5cm]{images/2-1.eps}
 \caption{Speller performance obtained for each method for the Experiment 1.  Y-axis shows performance accuracy while X-axis shows the number of intensification sequences used to calculate the point-to-point signal average.}
 \label{fig:performancetest}
 \end{figure}
@@ -790,7 +791,8 @@ Figure \ref{fig:performancetestlatency} shows the same results for the Experimen
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=15cm]{images/CrossPerformanceTestLatency.eps}
+\includegraphics[width=7.5cm]{images/1-2.eps}
+\includegraphics[width=7.5cm]{images/2-2.eps}
 \caption{Speller performance obtained for each method while latencies are artificially added to each single-intensification segment corresponding to the Experiment 2.  The achieved performance is significantly reduced for all methods. Y-axis shows letter identification performance while X-axis shows the number of intensification sequences used to calculate the ensemble average.}
 \label{fig:performancetestlatency}
 \end{figure}
@@ -798,7 +800,8 @@ Figure \ref{fig:performancetestlatency} shows the same results for the Experimen
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=15cm]{images/CrossPerformanceTestAmplitude.eps}
+\includegraphics[width=7.5cm]{images/1-3.eps}
+\includegraphics[width=7.5cm]{images/2-3.eps}
 \caption{Speller performance obtained for the Experiment 3 while the amplitudes of the P3b component of the superimposed ERP is randomly reduced. Y-axis shows performance accuracy while X-axis shows the number of intensification sequences.}
 \label{fig:performancetestamplitude}
 \end{figure}
