@@ -286,7 +286,7 @@ Moreover, EEG data acquisition is a key procedure during the assessment of patie
 
 Waveform characterization is the method in which analysis has been performed for Event Related Potentials.  Evoked Potentials (EPs) and Event Related Potentials (ERPs) are transient signal elements that may arise as a brain response to an external visual, tactile or auditory stimulus.  ERPs are regularly used to assess auditory response in infants.  They are extensively used and studied in Cognitive Neuroscience~\citep{Luck2005}.  ERPs are identified by their components which are recognizable signal shapes assigned to the observed waveform, that can be linked to some cognitive or measurable psychological process.   The P300 is one of the most studied ERP component in BCI because it can be used to implement a Speller application.  Hence, P300 ERPs are a target phenomena to study by automatic waveform recognition methods.
 
-Table~\ref{tab:methods} shows a list of depictions used to describe waveforms in the surveyed literature.  Epilepsy has been described by the nature of oscillatory characterization of their waves, like ripples and wiggles, imitating sawtooths or by their geometric shape.  For ERPs on the other hand, more elaborate indexes has been provided establishing relations between signal components amplitudes.  Finally, in sleep studies and ICU research areas is where the most complex indexes has been derived, particularly coupling signal properties like phase, amplitude and frequency.
+Table~\ref{tab:methods} shows a list of depictions used to describe waveforms in the surveyed literature.  Epilepsy has been described by the nature of oscillatory characterization of their waves, like ripples and wiggles, imitating sawtooths or by their geometric shape.  For ERPs on the other hand, more elaborate indexes has been provided, establishing relations between amplitudes of signal components.  Finally, Sleep studies and ICU research are areas where the most complex indexes has been derived, particularly the coupling of signal properties like phase, amplitude and frequency.
 
 %The clinical EEG patterns are identified by the shape of waveform amplitude plotted against time.
 
@@ -642,7 +642,11 @@ f = {\bigg \{ \bigg \{  \bigg \{ h(i,j,\theta) \bigg \}_{i \in I }  \bigg \}_{j 
 
 Farwell and Donchin P300 Speller \citep{Farwell1988,Rakotomamonjy2008} is one the most used BCI paradigms to implement a thought translation device and to send commands to a computer in the form of selected letters, similar to typing on a virtual keyboard.  This procedure exploits a cognitive phenomena raised by the oddball paradigm: along the EEG trace of a person which is focusing on a sequence of two different visual flashing stimulus, a particular and distinctive transient component is found each time the expected stimulus flashes.  This is cleverly utilized in the P300 Speller, where rows and columns of a 6x6 matrix flashes randomly but only the flashing of a column or row where the letter that a user is focusing will trigger concurrently the P300 ERP along the EEG trace.
 
-In order to verify this in a controlled procedure, a real P300 ERP template, obtained from a public dataset, is superimposed into a distinct EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. Along the EEG stream, the markers information was used to localize the \textit{True} segments where the P300 should have been found, and those timing locations are used to superimpose the extracted ERP waveform.  By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to similar procedures used in other works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
+The objective of the following experiments is to assess the performance of the algorithms that aim to recognize the shape of the P300 waveform, obtained after averaging signal segments.  This performance is evaluated by processing a pseudo-real dataset with two modalities where subtle alterations on the latency and amplitude of the P300 component are simulated in a controlled environment.
+
+First for a passive modality, a real P300 ERP template, obtained from a public dataset, is superimposed into a distinct EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. Along the EEG stream, the markers information was used to localize the \textit{True} segments where the P300 should have been found, and those timing locations are used to superimpose the extracted ERP waveform.  By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to similar procedures used in other works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
+
+Second, an active-modality is also used, where a P300-Based BCI experiment is performed on four subjects, but the signal segments are modified to produce the desired P300 response, but based on information extracted from the same subject.
 
 The experiments are as follows:
 
@@ -652,11 +656,9 @@ The experiments are as follows:
 \item Experiment 3 - Component Amplitude Noise: the amplitude of the main P3b component of the ERP template is randomly altered.  This component is defined to be located from the stimulus onset between $148$ ms up to $996$ ms which is around $840$ ms long.  This waveform element, multiplied by a gain factor, is subtracted from the original template.  This gain factor between $0$ and $1$ is drawn from a uniform distribution $U(0,1)$.  Additionally this subtracted waveform is multiplied by a Gaussian window with a support of the same length~\citep{Harris1978}.  This avoids adding any discontinuity into the artificial generated signal.
 \end{itemize}
 
-The classification method Support Vector Machine SVM with a linear kernel, is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions~\citep{Kaper2004}. 
-
 All these experiments are executed using cross validation procedure dividing the letter to spell in two sets, preserving the structure of the letter identification trials. Spelling letters are scrambled while the order and group of each intensification sequence is preserved.
 
-Finally the performance at letter identifications for these same methods is evaluated by performing an offline BCI Simulation on the Dataset IIb of the BCI Competition II (2003)~\citep{Blankertz2002}.  The protocol of this dataset is very similar to what was used to obtain the pseudo-real dataset.  The sampling frequency of this dataset is $240$, the number of letters are $73$ where the first $42$ are used to create the template dictionary for all the methods and the remaining $31$ are used to test the character recognition rate performance.  Additionally, in this dataset the number of available intensification number sequences is $15$.  
+Finally the performance at letter identifications for these same methods is evaluated by performing an offline BCI Simulation on the Dataset IIb of the BCI Competition II (2003)~\citep{Blankertz2002}.  The protocol of this dataset is very similar to what was used to obtain the pseudo-real dataset.  The sampling frequency of this dataset is $240$, the number of letters are $73$ where the first $42$ are used to create the template dictionary for all the methods and the remaining $31$ are used to test the character recognition rate performance.  Additionally, in this dataset the number of available intensification number sequences is $15$.  The classification method Support Vector Machine SVM with a linear kernel, is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions~\citep{Kaper2004}. 
 
 \subsubsection{Pseudo-Real Dataset Generation}
 
@@ -688,7 +690,7 @@ Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MN
 \subfigure[The same eight-channel signal segment with the superimposed template.]{\includegraphics[width=.45\linewidth]{images/singlegain.eps}}
 \subfigure[EEG sample of Cz and L channel of the original EEG trace.]{\includegraphics[width=.45\linewidth]{images/nogainzoomhit.eps}}
 \subfigure[The same segment with the superimposed template.]{\includegraphics[width=.45\linewidth]{images/singlegainzoomhit.eps}}
-\caption{Eight-channel EEG signal without and with the superimposed ERP Template. The channel L, the mark which identifies where to superimpose the P300 ERP, is shown as well as the channel S which identifies the stimulus that was presented. On (c) and (d) the small variation that was introduced by the superimposition of the ERP can be seen enclosed by the vertical bars, where the slope of the bump on subfigure (d) is slightly bigger}
+\caption{Eight-channel EEG signal for Subject Number 1 of the psuedo-real dataset without and with the superimposed ERP Template. The channel L, the mark which identifies where to superimpose the P300 ERP, is shown as well as the channel S which identifies the stimulus that was presented. On (c) and (d) the small variation that was introduced by the superimposition of the ERP can be seen enclosed by the vertical bars, where the slope of the bump on subfigure (d) is slightly bigger}
 \label{fig:gains}
 \end{figure}
 
@@ -704,7 +706,7 @@ Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MN
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\linewidth]{images/GainCheck.eps}
-\caption{Point-to-point averaged signals for the first letter identification trial.  The ERP is superimposed on classes 3 and 9.  Class 3 is obtained while averaging the segments where the row of the speller matrix is intensified whereas class 9 is calculated from the intensification of the corresponding column.}
+\caption{Point-to-point averaged signals.  These are extracted from the first letter identification trial of the Subject 1 of the psuedo-real dataset.  The ERP is superimposed on classes 3 and 9.  Class 3 is obtained while averaging the segments where the row of the speller matrix is intensified whereas class 9 is calculated from the intensification of the corresponding column.}
 \label{fig:gaincheck}
 \end{figure}
 
@@ -712,7 +714,7 @@ Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MN
 
 \paragraph{Active modality}
 
-The experiment conducted by~\citep{Riccio2013} is replicated on 4 healthy subjects, performing a copy-spelling task with feedback.  In this case, to construct the pseudo-real dataset each template must first be obtained from each subject.  The most prototypical P300 waveform template is selected by visual observation as well.  This template is superimposed to each segment marked as hit on the EEG stream.  The baseline of each segment, on the other hand, is obtained by picking randomly any no hit segment for the same subject.
+The experiment conducted by~\citep{Riccio2013} is replicated on 4 healthy subjects, performing a copy-spelling task with feedback.  In this case, to construct the pseudo-real dataset each template must first be obtained from each subject.  The most prototypical P300 waveform template is selected by visual observation.  This template is superimposed to each segment marked as \textit{True} on the EEG stream.  The baseline of each segment, on the other hand, is obtained by picking randomly any \textit{False} segment for the same subject.
 
 
 \subsubsection{Classification} \label{section:classification}
@@ -745,7 +747,7 @@ Thus, the letter identification performance can be obtained by measuring the acc
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/dictionary.eps}
-\caption{Coherently averaged signals containing the superimposed ERP.  Each one is extracted from the 15 first trials (2 signals from each trial, one belonging to the column flashing and the other to row flashing).  These are the templates used to build a dictionary per channel and that are used by the classification algorithm described in \ref{section:classification}.}
+\caption{Coherently averaged signals containing the superimposed ERP.  Each one is extracted from the EEG signal of the Subject 1 of the pseudo-real dataset.  These averaged signals correspond to the 15 first trials (2 signals from each trial, one belonging to the column flashing and the other to row flashing).  These are the templates used to build a dictionary per channel per subject and are used by the classification algorithm described in \ref{section:classification}.}
 \label{fig:dictionaryfig}
 \end{figure}
 
@@ -754,57 +756,55 @@ Thus, the letter identification performance can be obtained by measuring the acc
 \section{Results}
 \label{section:results}
 
-Results are shown in Table \ref{tab:results} and in Figure \ref{fig:performancetest},\ref{fig:performancetestlatency} and \ref{fig:performancetestamplitude}.  Table \ref{tab:results} shows the  performance while identifying each letter of the standard P300 Speller Matrix, and the channel where the best performance is attained.   Figure \ref{fig:performancetest} shows the performance curves for six algorithms.  Each one represents the percentage of letters that is actually predicted by the algorithms using a cross-validation procedure.  As previously described the data is continuously divided in two sets, where the first 15 letters are used to derive the dictionary of templates while the remaining 20 letters are used to measure the letter identification performance. This is repeated one hundred times, and performances averaged.   
-
-%\begin{table}[H]
-%\caption{Speller classification performance obtained for all the waveform-based algorithms: MP Matching Pursuit, SIFT Scale Invariant Feature Transform, PE Permutation Entropy and SHCC Slope Horizontal Code Chain. Additionally, the control algorithm SVM Support Vector Machines is included for comparison.  All the methods process the signal on a channel-by-channel basis, hence the best performing channel is also shown. In this case with absence of null-signals, it can be interpreted as the channel that adds less noise to the ERP template.  All the methods used $10$ intensification sequences to coherently average the trials to obtain the averaged signal. }
-%\centering
-%%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
-%\begin{tabular}{c|cccc|cccc|cccc|cccc|cccc|cccc|cccc|cccc}
-%\toprule
-%\textbf{Method}	& \multicolumn{4}{c}{Subject 1} & \multicolumn{4}{c}{Subject 2} & \multicolumn{4}{c}{Subject 3} & \multicolumn{4}{c}{Subject 4} & \multicolumn{4}{c}{Subject 5} & \multicolumn{4}{c}{Subject 6} & \multicolumn{4}{c}{Subject 7} & \multicolumn{4}{c}{Subject 8} \\
-%%\cline{3-5} \\
-% 	&  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}  &  \textbf{Channel} & \textbf{Experiment 1} & \textbf{Experiment 2}	& \textbf{Experiment 3}\\
-%\midrule
-%MP 1 & PO8  & $67\%$ & $15\%$ & $50\%$  & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$   \\
-%MP 2 & PO7 & $24\%$ & $6\%$ & $10\%$  & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ \\
-%SIFT  & PO8 & $91\%$ & $18\%$ & $66\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ \\
-%PE     & Cz & $61\%$ & $9\%$ & $32\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ \\
-%SHCC & P4 & $98\%$ & $31\%$ & $80\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ \\
-%SVM     & PO8  & $78\%$ & $7\%$ & $53\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ & PO8  & $67\%$ & $15\%$ & $50\%$ \\
-%\bottomrule
-%\end{tabular}
-%\label{tab:results}
-%\end{table}
-
-
-Figure \ref{fig:performancetestlatency} shows the same results for the Experiment 2, where a noisy latency lag was included.   Finally, Figure \ref{fig:performancetestamplitude} represents the performance values obtained for the Experiment 3, when the amplitude of the P3b component of the template is randomly attenuated.  
+Results for the first experiment are shown in Figures~\ref{fig:1-1}  and \ref{fig:2-1}. The performance while identifying each letter of the standard P300 Speller Matrix, and the channels where the best and worst performance is attained, is shown.   Each one represents the percentage of letters that is actually predicted by the algorithms using a cross-validation procedure.  As previously described the data is continuously divided in two sets, where the first 15 letters are used to derive the dictionary of templates while the remaining 20 letters are used to measure the letter identification performance. This is repeated one hundred times, and performances averaged.  Figure~\ref{fig:1-1} show the results for the passive modality while Figure~\ref{fig:2-1} shows the results for the active modality.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=7.5cm]{images/1-1.eps}
-\includegraphics[width=7.5cm]{images/2-1.eps}
-\caption{Speller performance obtained for each method for the Experiment 1.  Y-axis shows performance accuracy while X-axis shows the number of intensification sequences used to calculate the point-to-point signal average.}
-\label{fig:performancetest}
+\includegraphics[width=15cm]{images/1-1.eps}
+\caption{\textbf{Passive Modality - Experiment 1}:Speller performance curves obtained for each method for the four subjects that performed the active modality protocol.  Y-axis shows performance accuracy while X-axis shows the number of intensification sequences used to calculate the point-to-point signal average. The two curves show the performance for the best and worst performing channel. }
+\label{fig:1-1}
 \end{figure}
-
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=7.5cm]{images/1-2.eps}
-\includegraphics[width=7.5cm]{images/2-2.eps}
-\caption{Speller performance obtained for each method while latencies are artificially added to each single-intensification segment corresponding to the Experiment 2.  The achieved performance is significantly reduced for all methods. Y-axis shows letter identification performance while X-axis shows the number of intensification sequences used to calculate the ensemble average.}
-\label{fig:performancetestlatency}
+\includegraphics[width=15cm]{images/2-1.eps}
+\caption{\textbf{Active Modality - Experiment 1}:Speller performance curves obtained for each method for the four subjects that performed the active modality protocol.  Y-axis shows performance accuracy while X-axis shows the number of intensification sequences used to calculate the point-to-point signal average. The two curves show the performance for the best and worst performing channel. }
+\label{fig:2-1}
 \end{figure}
 
+
+Figures~\ref{fig:1-2} and ~\ref{fig:2-2}  shows the performance curves for five algorithms for the second experiment, where a noisy latency lag is included. Best and worst channels are also shown.  
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=7.5cm]{images/1-3.eps}
-\includegraphics[width=7.5cm]{images/2-3.eps}
-\caption{Speller performance obtained for the Experiment 3 while the amplitudes of the P3b component of the superimposed ERP is randomly reduced. Y-axis shows performance accuracy while X-axis shows the number of intensification sequences.}
-\label{fig:performancetestamplitude}
+\includegraphics[width=15cm]{images/1-2.eps}
+\caption{\textbf{Passive Modality - Experiment 2}: Performance curves for four subjects for the five algorithms while a random latency is included while superimposed the P300 signal template.}
+\label{fig:1-2}
 \end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=15cm]{images/2-2.eps}
+\caption{\textbf{Active Modality - Experiment 2}: Performance curves for four subjects for the five algorithms while a random latency is included while superimposed the P300 signal template.}
+\label{fig:2-2}
+\end{figure}
+
+Finally, Figure \ref{fig:1-3} and \ref{fig:2-3} represents the performance values obtained for the Experiment 3, when the amplitude of the P3b component of the template is randomly attenuated.  
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=15cm]{images/1-3.eps}
+\caption{\textbf{Passive Modality - Experiment 3}:Performance curves for four subjects for the five algorithms when he amplitude of the P3b component of the template is randomly attenuated. }
+\label{fig:1-3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=15cm]{images/2-3.eps}
+\caption{\textbf{Active Modality - Experiment 3}:Performance curves for four subjects for the five algorithms when the amplitude of the P3b component of the template is randomly attenuated. }
+\label{fig:2-3}
+\end{figure}
+
 
 Furthermore, results obtained for the dataset BCI Competition 2003 IIb are shown in Figures \ref{fig:performancebcicompetition} and in Table~\ref{tab:bcicompetitionresults}.  For this experiment the number of available intensification sequences is 15.
 
@@ -840,43 +840,45 @@ SVM     & C1  & $32\%$ \\
 \section{Discussion}
 \label{section:discussion}
 
-A significant reduction of performance was found when latency noise is added (Experiment 1 vs 2, Wilcoxon rank sum test, one tail, with $p=0.0022$).  The latency noise reduces the information contained in the averaged signal, mainly due to the invalidation of the SNR enhancement performed by the signal averaging procedure.  This reduction alters the obtained shape of the waveform of the ERP and impacts on the performances regardless of the method. On the other hand, all the algorithms show some resistance to noise in peak amplitudes of the main component. This is shown by the similarities of obtained results between the Experiment 1 and 3 (Wilcoxon rank sum test, two tails, not rejected with $p=0.1797$).
+%A significant reduction of performance was found when latency noise is added (Experiment 1 vs 2, Wilcoxon rank sum test, one tail, with $p=0.0022$).  The latency noise reduces the information contained in the averaged signal, mainly due to the invalidation of the SNR enhancement performed by the signal averaging procedure.  This reduction alters the obtained shape of the waveform of the ERP and impacts on the performances regardless of the method. On the other hand, all the algorithms show some resistance to noise in peak amplitudes of the main component. This is shown by the similarities of obtained results between the Experiment 1 and 3 (Wilcoxon rank sum test, two tails, not rejected with $p=0.1797$).
 
-\begin{table}[H]
-\caption{Statistical Analysis Tests }
-\centering
-%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
-\begin{tabular}{ccc}
-\toprule
-\textbf{Comparison}	& \textbf{Statistical Method} &   \textbf{p-value} \\
-\midrule
-Experiment 1 vs. 2 & Wilcoxon rank sum test, one tail  & $0.0022$ \\
-Experiment 1 vs. 3 & Wilcoxon rank sum test, two tails not rejected & $0.1797$ \\
-\bottomrule
-\end{tabular}
-\label{tab:statisticalanalysis1}
-\end{table}
+A significant reduction of performance was found when latency noise is added.  The latency noise reduces the information contained in the averaged signal, mainly due to the invalidation of the SNR enhancement performed by the signal averaging procedure.  This reduction alters the obtained shape of the waveform of the ERP and impacts on the performances regardless of the method. On the other hand, all the algorithms show some resistance to noise in peak amplitudes of the main component. This is shown by the similarities of obtained results between the Experiment 1 and 3.
+
+%\begin{table}[H]
+%\caption{Statistical Analysis Tests }
+%\centering
+%%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
+%\begin{tabular}{ccc}
+%\toprule
+%\textbf{Comparison}	& \textbf{Statistical Method} &   \textbf{p-value} \\
+%\midrule
+%Experiment 1 vs. 2 & Wilcoxon rank sum test, one tail  & $0.0022$ \\
+%Experiment 1 vs. 3 & Wilcoxon rank sum test, two tails not rejected & $0.1797$ \\
+%\bottomrule
+%\end{tabular}
+%\label{tab:statisticalanalysis1}
+%\end{table}
 
 
-\begin{table}[H]
-\caption{Statistical Analysis Tests  - Multiple comparisons}
-\centering
-%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
-\begin{tabular}{ccc}
-\toprule
-\textbf{Comparison}	& \textbf{Statistical Method} &   \textbf{p-value} \\
-\midrule
-SHCC & MP-1, MP-2  & $0.05$ \\
-SIFT   & MP-2, PE       & $0.1797$ \\
-SVM   & MP-2             & $0.1797$ \\
-\bottomrule
-\end{tabular}
-\label{tab:statisticalanalysis2}
-\end{table}
+%\begin{table}[H]
+%\caption{Statistical Analysis Tests  - Multiple comparisons}
+%\centering
+%%% \tablesize{} %% You can specify the fontsize here, e.g.  \tablesize{\footnotesize}. If commented out \small will be used.
+%\begin{tabular}{ccc}
+%\toprule
+%\textbf{Comparison}	& \textbf{Statistical Method} &   \textbf{p-value} \\
+%\midrule
+%SHCC & MP-1, MP-2  & $0.05$ \\
+%SIFT   & MP-2, PE       & $0.1797$ \\
+%SVM   & MP-2             & $0.1797$ \\
+%\bottomrule
+%\end{tabular}
+%\label{tab:statisticalanalysis2}
+%\end{table}
 
-A two-way balanced Quade test was performed to evaluate the performance's differences for the three experiments and for the six methods.  Difference among the method's letter identification rates were found with $p=0.0019$.  The methods \textit{SHCC}, \textit{SIFT}, \textit{MP-1} performed much better than the other algorithms, including \textit{SVM}.  By making multiple comparisons at a level  $0.05$, significant differences are found between \textit{SHCC} vs MP-1,MP-2, PE and SVM, between \textit{SIFT} vs. MP-2 and PE, and between \textit{SVM} and MP-2.
+%A two-way balanced Quade test was performed to evaluate the performance's differences for the three experiments and for the six methods.  Difference among the method's letter identification rates were found with $p=0.0019$.  The methods \textit{SHCC}, \textit{SIFT}, \textit{MP-1} performed much better than the other algorithms, including \textit{SVM}.  By making multiple comparisons at a level  $0.05$, significant differences are found between \textit{SHCC} vs MP-1,MP-2, PE and SVM, between \textit{SIFT} vs. MP-2 and PE, and between \textit{SVM} and MP-2.
 
-Additionally, using a straightforward dictionary of templates for \textit{MP-1} proved more beneficial in terms of performance than the approach of using a Hilbert base of Wavelets atoms on \textit{MP-2} (significant differences between MP-1 vs MP-2).  Either applying latency noise or amplitude noise, the method based on the signal's templates instead of using their coefficients achieve much better character identification rates.  
+Using a straightforward dictionary of templates for \textit{MP-1} proved more beneficial in terms of performance than the approach of using a Hilbert base of Wavelets atoms on \textit{MP-2}.  Either applying latency noise or amplitude noise, the method based on the signal's templates instead of using their coefficients achieve much better character identification rates.  
 
 Regarding results produced for the public and real dataset IIb of P300 ERP from the Berlin BCI Competition II (2003), the obtained character identification rate is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$~\citep{Kathner2017}.  When the character identification rate reaches this level of performance, the usage of word predicting algorithms allows to implement practical speller applications.  Results for this competition have shown perfect classification with tailored algorithm.  This level is also similar to the performance obtained for the Experiment 3, which represents coincidentally the more realistic scenario for the pseudo-real dataset.  It is important to remark that the algorithms presented here analyze the waveform structure of a single-channel signal~\citep{Rakotomamonjy2008,Gribonval2008}.  
 
