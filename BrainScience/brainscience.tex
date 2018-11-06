@@ -140,7 +140,7 @@ At the center of all this hype, we can find a hundredth year old technology, roc
 
 EEG sensors are wearable~\citep{Puce2017} non-invasive, portable and mobile~\citep{DeVos2014}, with excellent temporal resolution, and acceptable spatial resolution~\citep{Hartman2005}.  This humble diagnosis device is been transformed into currently the best approach to detect, out-of-the lab in an ambulatory context, information from the Central Nervous System and to use that information to volitionally drive cars, steer drones, write emails, control wheelchairs or to assess alcohol consumption~\citep{Yuste2017,KevricJasmin2016,Tzimourta2018,Cruz2018}.
 
-The clinical and historical tactic to analyze EEG signals is based on detecting visual patterns out of the EEG trace or polygraph\citep{Hartman2005}: multichannel signals are extracted and continuously plotted over a piece of paper. Electroencephalographers or Electroencephalography technician decode and detect patterns along the signals by visually inspecting them~\citep{Schomer2010}.   Nowadays clinical EEG still remains a visually interpreted test~\citep{Hartman2005}.
+The clinical and historical tactic to analyze EEG signals is based on detecting visual patterns out of the EEG trace or polygraph~\citep{Hartman2005}: multichannel signals are extracted and continuously plotted over a piece of paper. Electroencephalographers or Electroencephalography technician decode and detect patterns along the signals by visually inspecting them~\citep{Schomer2010}.   Nowadays clinical EEG still remains a visually interpreted test~\citep{Hartman2005}.
 
 %In contrast, automatic processing, or quantitative EEG (qEEG), was based first on analog electronic devices~\citep{Jestico1977} and later on computerized digital processing methods~\citep{Jansen1991}.  Complex procedures to decode the information associated with a clinical condition, or even some higher cognitive state \citep{Yuste2017}.  The best materialization of the automatic processing of EEG signals rests in the BCI discipline, where around $71.2\%$ is based on noninvasive EEG~\citep{Guger2017}.  
 
@@ -150,7 +150,7 @@ The aim of this study is threefold: first to review current literature of EEG pr
 
 %We believe that the importance of waveform analysis methods, as described here, is that by using this methodology, collaboration could be fostered because there is a clear description and characterization of the signal waveform, where the extensive literature which explores clinical EEG can be reviewed from the same shared perspective~\citep{Nijboer2009,Wei2017}. 
 
-This article unfolds as follows: Section \ref{EEG} will provide a brief introduction to EEG and the particularities of the EEG waveform characterization.  Section \ref{Algorithms} will explain the algorithms based on the waveform that will be analyzed.  In Section \ref{Experimental} the experimentation procedure will be explained.  Results will be presented in Section \ref{section:results} and finally Discussion and Conclusions will be established in the final sections.
+This article unfolds as follows: Section \ref{EEG} provides a brief introduction to EEG and the particularities of the EEG waveform characterization.  Section \ref{Algorithms} explains the algorithms waveform-based algorithms that are analyzed.  In Section \ref{Experimental} the experimentation procedure is explained.  Results are presented in Section \ref{section:results} and finally Discussion and Conclusions are expounded in the final sections.
 
 \section{Electroencephalography}
 \label{EEG}
@@ -661,6 +661,10 @@ All these experiments are executed using cross validation procedure dividing the
 Finally the performance at letter identifications for these same methods is evaluated by performing an offline BCI Simulation on the Dataset IIb of the BCI Competition II (2003)~\citep{Blankertz2002}.  The protocol of this dataset is very similar to what was used to obtain the pseudo-real dataset.  The sampling frequency of this dataset is $240$, the number of letters are $73$ where the first $42$ are used to create the template dictionary for all the methods and the remaining $31$ are used to test the character recognition rate performance.  Additionally, in this dataset the number of available intensification number sequences is $15$.  The classification method Support Vector Machine SVM with a linear kernel, is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions~\citep{Kaper2004}. 
 
 \subsubsection{Pseudo-Real Dataset Generation}
+
+
+BCI researcers seem to ignore the fact that these systems consist of a closed loop between the human and the mahine.  the human is typically considered as a static compliant entity that always performs what the experimenters asks for in a precise and consistent way.
+
 
 \paragraph{Passive Modality}
 
