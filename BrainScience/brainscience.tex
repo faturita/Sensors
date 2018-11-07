@@ -11,6 +11,8 @@
 %\SetWatermarkScale{1}
 \usepackage{subfigure} 
 
+\subfigcapmargin = 4pt
+
 %
 %--------------------
 % Class Options:
@@ -452,7 +454,7 @@ w_{k} =  \frac{\sum_{n=1}^{N} \tilde{x}_{k-1}(n) \; g_{k}(n)}{  {\left\lVert  g_
 \label{eq:mp4}
 \end{equation}
 
-\noindent with $k$ representing the index of the selected atom $g_{k}$ and $\left\lVert \cdot \right\rVert$ its euclidean norm.  Finally the contribution of each atom is subtracted from the next approximation~\citep{Cohen2014,Sanei2007, Mallat1993}
+\noindent with $k$ representing the index of the selected atom $g_{k}$ and ${\left\lVert \cdot \right\rVert}_{2}$ its euclidean norm.  Finally the contribution of each atom is subtracted from the next approximation~\citep{Cohen2014,Sanei2007, Mallat1993}
 
 \begin{equation}
 \tilde{x}_{k}(n)=  \tilde{x}_{k-1}(n) - w_{k} g_{k} (n)
@@ -487,7 +489,7 @@ Bond and Pompe Permutation Entropy has been extensively used in EEG processing, 
 \label{eq:pe2}
 \end{equation}
 
-This sequence is of order $m$, which is the number of sample points used to derive the ordinal element called $\pi$. There are $m!$ ways in which this sequence can be orderly arranged, according to the position that each sample point holds within the sequence in a strict order relationship.  For example if $m=3$, and the first sample point is the bigger, the second is the smaller and the third one is in the middle, the ordinal element $\pi$ corresponds to $(3,1,2)$. Thus, along the signal window there can be at most $k$ different ordinal (and overlapping) elements $\pi_{s}$
+This sequence is of order $m$, which is the number of sample points used to derive the ordinal element called $\pi$. There are $m!$ ways in which this sequence can be orderly arranged, according to the position that each sample point holds within the sequence in a decreasing order relationship~\citep{Keller2017}.  For example if $m=3$, and the first sample point is the bigger, the second is the smaller and the third one is in the middle, the ordinal element $\pi$ corresponds to $(1,3,2)$. Thus, along the signal window there can be at most $k$ different ordinal (and overlapping) elements $\pi_{s}$
 
 \begin{equation}
 (\pi_{1},\pi_{2},...,\pi_{k})
@@ -644,10 +646,14 @@ Farwell and Donchin P300 Speller \citep{Farwell1988,Rakotomamonjy2008} is one th
 
 The objective of the following experiments is to assess the performance of the algorithms that aim to recognize the shape of the P300 waveform, obtained after averaging signal segments.  This performance is evaluated by processing a pseudo-real dataset with two modalities where subtle alterations on the latency and amplitude of the P300 component are simulated in a controlled environment.
 
+The problem with any P300 experiment is that users are part of a closed loop with the BCI system and the human is typically considered as a static compliant entity that always performs what the experimenter asks for in a precise and consistent way.  Therefore, P300 experiments are often mined with null-signals.  These are EEG streams which are marked as hit but, because the subject was not particularly focused, or concentrated or so on, the real signal is not generated.   This lack of certainty may be in detriment of analysis of algorithms and can be misleading.   Similar experiments had address this same issue, particularly when benchmarking different algorithms.
+
+
 First for a passive modality, a real P300 ERP template, obtained from a public dataset, is superimposed into a distinct EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. Along the EEG stream, the markers information was used to localize the \textit{True} segments where the P300 should have been found, and those timing locations are used to superimpose the extracted ERP waveform.  By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to similar procedures used in other works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
 
 Second, an active-modality is also used, where a P300-Based BCI experiment is performed on four subjects, but the signal segments are modified to produce the desired P300 response, but based on information extracted from the same subject.
 
+\subsubsection{Experiments}
 The experiments are as follows:
 
 \begin{itemize}
@@ -661,10 +667,6 @@ All these experiments are executed using cross validation procedure dividing the
 Finally the performance at letter identifications for these same methods is evaluated by performing an offline BCI Simulation on the Dataset IIb of the BCI Competition II (2003)~\citep{Blankertz2002}.  The protocol of this dataset is very similar to what was used to obtain the pseudo-real dataset.  The sampling frequency of this dataset is $240$, the number of letters are $73$ where the first $42$ are used to create the template dictionary for all the methods and the remaining $31$ are used to test the character recognition rate performance.  Additionally, in this dataset the number of available intensification number sequences is $15$.  The classification method Support Vector Machine SVM with a linear kernel, is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions~\citep{Kaper2004}. 
 
 \subsubsection{Pseudo-Real Dataset Generation}
-
-
-BCI researcers seem to ignore the fact that these systems consist of a closed loop between the human and the mahine.  the human is typically considered as a static compliant entity that always performs what the experimenters asks for in a precise and consistent way.
-
 
 \paragraph{Passive Modality}
 
@@ -690,11 +692,11 @@ Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MN
 
 \begin{figure}[htb]
 \centering
-\subfigure[EEG trace of the original signal.]{\includegraphics[width=.45\linewidth]{images/nogain.eps}}
-\subfigure[The same eight-channel signal segment with the superimposed template.]{\includegraphics[width=.45\linewidth]{images/singlegain.eps}}
-\subfigure[EEG sample of Cz and L channel of the original EEG trace.]{\includegraphics[width=.45\linewidth]{images/nogainzoomhit.eps}}
+\subfigure[EEG trace of the original signal. The horizontal axis represents $10$ seconds of the EEG stream, from the $28$th second up to the $38$th.]{\includegraphics[width=.45\linewidth]{images/nogain.eps}}
+\subfigure[The same $10$-seconds eight-channel signal segment with the superimposed template.]{\includegraphics[width=.45\linewidth]{images/singlegain.eps}}
+\subfigure[EEG sample of Cz and L channel of the original EEG trace. Only $1$ second is shown here, at the $31$th second.]{\includegraphics[width=.45\linewidth]{images/nogainzoomhit.eps}}
 \subfigure[The same segment with the superimposed template.]{\includegraphics[width=.45\linewidth]{images/singlegainzoomhit.eps}}
-\caption{Eight-channel EEG signal for Subject Number 1 of the psuedo-real dataset without and with the superimposed ERP Template. The channel L, the mark which identifies where to superimpose the P300 ERP, is shown as well as the channel S which identifies the stimulus that was presented. On (c) and (d) the small variation that was introduced by the superimposition of the ERP can be seen enclosed by the vertical bars, where the slope of the bump on subfigure (d) is slightly bigger}
+\caption{Eight-channel EEG signal for Subject Number 1 of the pseudo-real dataset without and with the superimposed ERP Template. The channel L, the mark which identifies where to superimpose the P300 ERP, is shown as well as the channel S which identifies the stimulus that was presented. On (c) and (d) the small variation that was introduced by the superimposition of the ERP can be seen enclosed by the vertical bars, where the slope of the bump on subfigure (d) is slightly bigger}
 \label{fig:gains}
 \end{figure}
 
@@ -710,7 +712,7 @@ Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MN
 \begin{figure}[H]
 \centering
 \includegraphics[width=1.0\linewidth]{images/GainCheck.eps}
-\caption{Point-to-point averaged signals.  These are extracted from the first letter identification trial of the Subject 1 of the psuedo-real dataset.  The ERP is superimposed on classes 3 and 9.  Class 3 is obtained while averaging the segments where the row of the speller matrix is intensified whereas class 9 is calculated from the intensification of the corresponding column.}
+\caption{Point-to-point averaged signals.  These are extracted from the first letter identification trial of the Subject 1 of the pseudo-real dataset.  The ERP is superimposed on classes 3 and 9.  Class 3 is obtained while averaging the segments where the row of the speller matrix is intensified whereas class 9 is calculated from the intensification of the corresponding column.}
 \label{fig:gaincheck}
 \end{figure}
 
@@ -751,7 +753,7 @@ Thus, the letter identification performance can be obtained by measuring the acc
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/dictionary.eps}
-\caption{Coherently averaged signals containing the superimposed ERP.  Each one is extracted from the EEG signal of the Subject 1 of the pseudo-real dataset.  These averaged signals correspond to the 15 first trials (2 signals from each trial, one belonging to the column flashing and the other to row flashing).  These are the templates used to build a dictionary per channel per subject and are used by the classification algorithm described in \ref{section:classification}.}
+\caption{Coherently averaged signals segments of $1$-second length containing the superimposed ERP.  Vertical axis unit is $\mu V$.  Each one is extracted from the EEG signal of the Subject 1 of the pseudo-real dataset.  These averaged signals correspond to the 15 first trials (2 signals from each trial, one belonging to the column flashing and the other to row flashing).  These are the templates used to build a dictionary per channel per subject and are used by the classification algorithm described in \ref{section:classification}.}
 \label{fig:dictionaryfig}
 \end{figure}
 
@@ -884,7 +886,7 @@ A significant reduction of performance was found when latency noise is added.  T
 
 Using a straightforward dictionary of templates for \textit{MP-1} proved more beneficial in terms of performance than the approach of using a Hilbert base of Wavelets atoms on \textit{MP-2}.  Either applying latency noise or amplitude noise, the method based on the signal's templates instead of using their coefficients achieve much better character identification rates.  
 
-Regarding results produced for the public and real dataset IIb of P300 ERP from the Berlin BCI Competition II (2003), the obtained character identification rate is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$~\citep{Kathner2017}.  When the character identification rate reaches this level of performance, the usage of word predicting algorithms allows to implement practical speller applications.  Results for this competition have shown perfect classification with tailored algorithm.  This level is also similar to the performance obtained for the Experiment 3, which represents coincidentally the more realistic scenario for the pseudo-real dataset.  It is important to remark that the algorithms presented here analyze the waveform structure of a single-channel signal~\citep{Rakotomamonjy2008,Gribonval2008}.  
+Regarding results produced for the public and real dataset IIb of P300 ERP from the Berlin BCI Competition II (2003), the obtained character identification rate is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$~\citep{Neuper2003,Kathner2017}.  When the character identification rate reaches this level of performance, the usage of word predicting algorithms allows to implement practical speller applications.  Results for this competition have shown perfect classification with tailored algorithm.  This level is also similar to the performance obtained for the Experiment 3, which represents coincidentally the more realistic scenario for the pseudo-real dataset.  It is important to remark that the algorithms presented here analyze the waveform structure of a single-channel signal~\citep{Rakotomamonjy2008,Gribonval2008}.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
@@ -897,6 +899,8 @@ We verified that similar performance results are obtained for the methods \texti
 Further work should be conducted in terms of a multichannel meaningful extension of these waveform-based methods~\citep{Gribonval2008}. Moreover, the possibilities of finding overcomplete dictionaries for matching pursuit sparse representation based on obtained signal templates, could also be considered an area of future improvement.
 
 %How much is it possible to classify and implement a P300 ERP Speller using only the waveform structure of the signal ? Which algorithm perform better at this even when segment latency variations and component amplitudes issues are present ?
+
+waveform-based BCI system, which has an inherent intelligible property (REF), will foster a collaboration in a multidisciplinary environment and will ease the acceptance, and the usability and usefulness of a BCI device.   The reason being, for caregivers and medical staff, particularly those with the traditional knowledge of the clinical EEG which is based on waveforms, they will feel more natural the understanding of how the system is detecting signals.
 
 One of the main goals of the BCI discipline is to provide assistance to patients and to provide alternative tools to be used in diagnostics and rehabilitation procedure.  This requires a clinical focus which is often neglected in BCI research~\citep{Chavarriaga2017}.  At the same time, BCI reliability is yet an unfulfilled goal in this discipline~\citep{WolpawJonathanR2012}. The convenience of analyzing or including metrics about the shape of the EEG, is that clinical EEG diagnosis may support a vast set of already understood knowledge which is based on identifying EEG patterns by their shape and that can steer towards a more robust implementation of BCI devices.
 
