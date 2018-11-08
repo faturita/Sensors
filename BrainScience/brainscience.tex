@@ -642,25 +642,28 @@ f = {\bigg \{ \bigg \{  \bigg \{ h(i,j,\theta) \bigg \}_{i \in I }  \bigg \}_{j 
 \subsection{Experimental Protocol}
 \label{Experimental}
 
+%
+%\begin{itemize}
+%\item EEG Stream: the raw EEG streams for both modalities
+%\item Templates: P300 templates obtained either from the Subject Number 8 or from the same subject.
+%\item Pseudo-real dataset
+%\item null-signals
+%\end{itemize}
+%
 
-\begin{itemize}
-\item EEG Stream: the raw EEG streams for both modalities
-\item Templates: P300 templates obtained either from the Subject Number 8 or from the same subject.
-\item Pseudo-real dataset
-\item null-signals
-\end{itemize}
-
-The objective of the following experiments is to assess the performance of the algorithms that aim to recognize the shape of the P300 waveform, obtained after averaging signal segments.  This performance is evaluated by processing a pseudo-real dataset with two modalities where subtle alterations on the latency and amplitude of the P300 component are simulated in a controlled environment.  The experiments are performed by offline evaluation of the performance on a P300-Based BCI Speller application.
+The objective of the following experiments is to assess the performance of the algorithms that aim to recognize the shape of the P300 waveform, obtained after averaging signal segments.  This performance is evaluated by processing a pseudo-real dataset with two modalities where subtle alterations on the latency and amplitude of the P300 component are simulated in a controlled environment.  The experiments are performed by the offline evaluation of the performance on a P300-Based BCI Speller application.
 
 Farwell and Donchin P300 Speller~\citep{Farwell1988,Rakotomamonjy2008} is one the most used BCI paradigms to implement a thought translation device and to send commands to a computer in the form of selected letters, similar to typing on a virtual keyboard.  This procedure exploits a cognitive phenomena raised by the oddball paradigm~\citep{Luck2005}: along the EEG trace of a person which is focusing on a sequence of two different visual flashing stimulus, a particular and distinctive transient component is found each time the expected stimulus flashes.  This is cleverly utilized in the P300 Speller, where rows and columns of a 6x6 matrix flashes randomly but only the flashing of a column or row where the letter that a user is focusing will trigger concurrently the P300 ERP along the EEG trace.
 
-The problem with any P300 experiment is that the subjects that take part on the experiment are within the closed loop of the BCI system and the human is  not a static compliant entity that always performs what the experimenter asks for in a precise and consistent way~\citep{Chavarriaga2017}.  Therefore, P300 experiments are often mined with \textit{null-signals}.  These are EEG streams which are marked as hit but, because the subject was not particularly focused, or concentrated or so on, and the real signal is not generated.   This lack of certainty may be in detriment of analysis of algorithms and can be misleading or difficult to dealt with.   Similar experiments had address this same issue, particularly when benchmarking different algorithms.
+A problem with any P300 Speller is that the subjects that take part on the experiment are within the closed loop of the BCI system and the human is  not a static compliant entity that always performs what the experimenter asks for in a precise and consistent way~\citep{Chavarriaga2017}.  Therefore, P300 experiments are often mined with \textit{null-signals}.  These are EEG streams which are marked as having the signal component but, because the subject was not particularly focused, or concentrated, the real signal is not generated.   This lack of certainty may be in detriment of analysis of algorithms and can be misleading or difficult to deal with.   Similar experiments had addressed this same issue, particularly when benchmarking different algorithms~\citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
+
+To solve this issue a pseudo-real dataset is generated under two different modalities.  A passive modality and an active modality.
 
 \subsubsection{Passive Modality}
 
-First for a passive modality, a real P300 ERP template, obtained from a public dataset, is superimposed into a distinct EEG stream.  This trace was experimentally obtained by a subject which was observing the flashing of the stimulus matrix during a P300 Speller procedure but did not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. Along the EEG stream, the markers information was used to localize the \textit{True} segments where the P300 should have been found, and those timing locations are used to superimpose the extracted ERP waveform.  By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential in accordance to similar procedures used in other works \citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
+First for a passive modality, real P300 ERP templates obtained from a public dataset, are superimposed into a distinct EEG stream.  A set of template ERPs are acquired from the Subject Number $8$ of the public dataset 008-2014~\citep{Riccio2013} published on the BNCI-Horizon website \citep{Brunner2014} by IRCCS Fondazione Santa Lucia. On the other hand, the EEG traces where these templates are superimposed, are experimentally obtained by subjects which are observing the flashing of the stimulus matrix during a P300 Speller procedure but they do not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. Hence, along the EEG stream, the markers information is used to localize the \textit{True} segments where the P300 should be found, and those timing locations are used to superimpose the extracted ERP waveform.  By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential.
 
-In this case the template ERP is acquired from the Subject Number $8$ of the public dataset 008-2014~\citep{Riccio2013} published on the BNCI-Horizon website \citep{Brunner2014} by IRCCS Fondazione Santa Lucia. Segments from the EEG signal containing the ERP are extracted for the trial number $2$, and they are point-to-point coherently averaged.  This P300 ERP can be seen in Figure  \ref{fig:erptemplate1}.  This template is selected due to its shape which more closely resemble the prototypical P300 waveform~\citep{Rao2013,Clerc2016}.
+A sample P300 ERP obtained from the trial number $2$ of Subject 8 can be seen in Figure  \ref{fig:erptemplate1}.  The templates obtained by this processing this Subject's EEG signals are selected due to their shapes more closely resembling the prototypical P300 waveform~\citep{Rao2013,Clerc2016}.  Segments are extracted from the original dataset, and they are point-to-point coherently averaged.
 
 After the modification it was verified that the flickering effect of the 4 Hz signal is mantained and that alpha
 
