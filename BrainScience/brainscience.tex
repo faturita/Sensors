@@ -655,7 +655,7 @@ The objective of the following experiments is to assess the performance of the a
 
 Farwell and Donchin P300 Speller~\citep{Farwell1988,Rakotomamonjy2008} is one the most used BCI paradigms to implement a thought translation device and to send commands to a computer in the form of selected letters, similar to typing on a virtual keyboard.  This procedure exploits a cognitive phenomena raised by the oddball paradigm~\citep{Luck2005}: along the EEG trace of a person which is focusing on a sequence of two different visual flashing stimulus, a particular and distinctive transient component is found each time the expected stimulus flashes.  This is cleverly utilized in the P300 Speller, where rows and columns of a 6x6 matrix flashes randomly but only the flashing of a column or row where the letter that a user is focusing will trigger concurrently the P300 ERP along the EEG trace.
 
-A problem with any P300 Speller is that the subjects that take part on the experiment are within the closed loop of the BCI system and the human is  not a static compliant entity that always performs what the experimenter asks for in a precise and consistent way~\citep{Chavarriaga2017}.  Therefore, P300 experiments are often mined with \textit{null-signals}.  These are EEG streams which are marked as having the signal component but, because the subject was not particularly focused, or concentrated, the expected signal component is not generated.   This lack of certainty may be in detriment of any conducted analysis and can be misleading or difficult to deal with.   Previous works have addressed this same issue, particularly when benchmarking different algorithms~\citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
+A problem with the information produced by a P300 Speller is that the subjects that take part on the experiment are within the closed loop of the BCI system and the human is  not a static compliant entity that always performs what the experimenter asks for in a precise and consistent way~\citep{Chavarriaga2017}.  Therefore, P300 experiments data is often mined with \textit{null-signals}.  These are EEG streams which are marked as having the signal component but, because the subject was not particularly focused, or concentrated, the expected signal element is not generated.   This lack of certainty may be in detriment of any conducted analysis and can be misleading or difficult to deal with.   Previous works have addressed this same issue, particularly when benchmarking different algorithms~\citep{Ouyang2017,Jaskowski2000,QuianQuiroga2003}.
 
 In order to tackle this problem, a pseudo-real dataset based on an EEG stream is generated under two different modalities.  A passive modality and an active modality.
 
@@ -664,7 +664,7 @@ In order to tackle this problem, a pseudo-real dataset based on an EEG stream is
 
 Eight (8) healthy participants are recruited voluntarily and the experiment is conducted anonymously in accordance with the Declaration of Helsinki published by the World Health Organization.  No monetary compensation is handed out and they agree and sign a written informed consent.  This study is approved by the \textit{Departamento de Investigación y Doctorado, Instituto Tecnológico de Buenos Aires (ITBA)}.  The participants are healthy and have normal or corrected-to-normal vision and no history of neurological disorders. These voluntary subjects are aged between 20-40 years old.  EEG data is collected in a single recording session. Each subject is seated in a comfortable chair, with her/his vision aligned to a computer screen located one meter in front of her/him.  The handling and processing of the data and stimuli is conducted by the OpenVibe platform~\citep{Renard2010}.  Gel-based active electrodes (g.LADYbird, g.Tec, Austria) are used on locations Fz, Cz, Pz, Oz, P3,P4, PO7 and PO8 according to the 10-20 international system.  Reference is set to the right ear lobe and ground is preset as the AFz position.   Sampling frequency is set to 250 Hz.
 
-The experimental protocol is composed of $35$ trials to spell $7$ words of $5$ letters each.  Each trial is composed of $10$ intensification sequences of the $6$ columns and $6$ rows of the Speller Matrix.  This yields exactly $120$ intensifications of rows and columns per trial.  The duration of each intensification as well as the Inter-Stimulus Interval, the pause between stimulations, are set to $0.125$ seconds.  This provides a $4$ Hz frequency of flashes on the screen.  The initial pause and the inter-trial pauses are set to $20$ seconds.  The whole experiment lasts for around $1400$ seconds.  This produces an EEG stream which contains $4200$ marked sections where $3500$ of them are labeled as True and the remaining $700$ as False. 
+The experimental protocol is composed of $35$ trials to spell $7$ words of $5$ letters each.  Each trial is composed of $10$ intensification sequences of the $6$ columns and $6$ rows of the Speller Matrix.  This yields exactly $120$ intensifications of rows and columns per trial.  The duration of each intensification as well as the Inter-Stimulus Interval, the pause between stimulations, are set to $0.125$ seconds.  This provides a $4$ Hz frequency of flashes on the screen.  The initial pause and the inter-trial pauses are set to $20$ seconds.  The whole experiment lasts for around $1400$ seconds.  This produces an EEG stream which contains $4200$ marked sections where $3500$ of them are labeled as \textit{True} and the remaining $700$ as \textit{False}. 
 
 Four out of the eight participants are instructed to passively watch the flashing screen while not focusing on any particular letter. They do not receive any extra information on the screen.  None of them have any experience with a BCI device.  A questionnaire is handed out at the end of the experiment with questions about how the participant felt during it, without giving more details.  
 
@@ -672,21 +672,47 @@ The remaining four participants perform a copy-spelling task where the computer 
 
 \subsubsection{Passive Modality}
 
-First for a passive modality, real P300 ERP templates obtained from a public dataset, are superimposed into a distinct EEG stream.  A set of template ERPs are acquired from the Subject Number $8$ of the public dataset 008-2014~\citep{Riccio2013} published on the BNCI-Horizon website \citep{Brunner2014} by IRCCS Fondazione Santa Lucia. The experimental protocol implemented to produce this dataset is the same as the one described in Section~\ref{EEGStream}. On the other hand, the EEG traces where these templates are superimposed, are experimentally obtained by subjects which are observing the flashing of the stimulus matrix during a P300 Speller procedure but they do not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. Hence, along the EEG stream, the markers information is used to localize the \textit{True} segments where the P300 should be found, and those timing locations are used to superimpose the extracted ERP waveform.  By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of this evoked potential.
+First for a passive modality, real P300 ERP templates obtained from a public dataset, are superimposed into the generated EEG stream of 4 subjects.  A set of template ERPs is acquired from the Subject Number $8$ of the public dataset 008-2014~\citep{Riccio2013} published on the BNCI-Horizon website~\citep{Brunner2014} by IRCCS Fondazione Santa Lucia. The experimental protocol implemented to produce this dataset is the same as the one described in Section~\ref{EEGStream}. On the other hand, the EEG traces where these templates are superimposed, are experimentally obtained by subjects which are observing the flashing of the stimulus matrix during a P300 Speller procedure but they do not engage in focusing on any letter in particular. Everything is there, except the P300 ERP component. Hence, along the EEG stream, the markers information is used to localize the \textit{True} segments where the P300 should be found, and those timing locations are used to superimpose the extracted ERP waveform.  By implementing this pseudo-real approach, it is possible to effectively control null-signals and to adjust the shape of the evoked potential.
 
 A sample P300 ERP obtained from the trial number $2$ of Subject 8 can be seen in Figure  \ref{fig:erptemplate1}.  These templates are selected due to their shapes more closely resembling the prototypical P300 waveform~\citep{Rao2013,Clerc2016}.  They are produced by extracting segments for this subject and by point-to-point coherently average them.
 
 %After the modification it was verified that the flickering effect of the 4 Hz signal is mantained and that alpha
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=12cm]{images/erptemplate1.eps}
+\caption{ERP Template obtained from the coherent point-to-point ensemble average from the signals of Subject Number Eight of the BNCI Horizon public dataset 008-2014. The template is $1s$ long which is 256 sample points, and the eight channels are superimposed with different colors.  The P3b component can be seen around the sample index $150$ and $200$.}
+\label{fig:erptemplate1}
+\end{figure}
+
+
 \subsubsection{Active Modality}
 
 Second, an active modality is also implemented, where a P300-Based BCI Speller experiment is performed on four subjects. For this scenario, the signal segments are modified to guarantee the inclusion of a P300 component. However, in this case the templates are extracted from the same subject.  Hence, the EEG signal is preprocessed and labeled segments are extracted.  Segments labeled \textit{True} are coherently point-to-point averaged, and $70$ templates are produced from the whole set of $35$ trials.  
 
-Once templates are procured, a random \textit{False} segment for the same subject is obtained.  This is used as a baseline signal and is added to the template, conforming a new segment which contains one of the templates.  This procedure continues until the $700$ segments marked as \textit{True} are completed.  
+Once templates are procured, a random \textit{False} segment for the same subject is obtained.  This is used as a baseline signal and is added to the template, conforming a new segment which has a superimposed P300 template.  This procedure continues until the $700$ segments marked as \textit{True} are completed.  
 
 %The EEG stream contains $4200$ segments, which correspond to the preprocessed EEG data that was obtained coincidentally with the intensification of a row or column on the Speller Matrix.  
 
 
+Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MNE library~\citep{Gramfort2013}.  Channel $S$ represents the twelve different stimulus markers (columns or rows) while channel $L$ represent the label (\textit{True} vs \textit{False}).  Labels are represented by square signals.  \textit{False} segments are marked with single amplitude square signals while \textit{True} segments are identified by double-amplitude square signals.  Subfigure (a) shows the signals before the ERP template is superimposed while subfigure (b) shows the same signals with the superimposed ERP template.  At first-sight, differences are really hard to spot visually.  Subfigures (c) and (d) show only one second of channels Cz and L from the same segment.  The superimposed ERP can be devised enclosed by the vertical bars, around $31.5$s, where in (d) the peak is slightly bigger.  Figure~\ref{fig:gaincheck} shows the obtained ensemble average ERPs as result of superimposing the template signal into the EEG stream, time-locked to the stimulus onset.   These 12 point-to-point averaged segments correspond to the first trial of the EEG stream.
+
+\begin{figure}[htb]
+\centering
+\subfigure[EEG trace of the original signal. The horizontal axis represents $10$ seconds of the EEG stream, from the $28$th second up to the $38$th.]{\includegraphics[width=.45\linewidth]{images/nogain.eps}}
+\subfigure[The same $10$-seconds eight-channel signal segment with the superimposed template.]{\includegraphics[width=.45\linewidth]{images/singlegain.eps}}
+\subfigure[EEG sample of Cz and L channel of the original EEG trace. Only $1$ second is shown here, at the $31$th second.]{\includegraphics[width=.45\linewidth]{images/nogainzoomhit.eps}}
+\subfigure[The same segment with the superimposed template.]{\includegraphics[width=.45\linewidth]{images/singlegainzoomhit.eps}}
+\caption{Eight-channel EEG signal for Subject Number 1 of the pseudo-real dataset without and with the superimposed ERP Template. The channel L, the mark which identifies where to superimpose the P300 ERP, is shown as well as the channel S which identifies the stimulus that was presented. On (c) and (d) the small variation that was introduced by the superimposition of the ERP can be seen enclosed by the vertical bars, where the slope of the bump on subfigure (d) is slightly bigger}
+\label{fig:gains}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\linewidth]{images/GainCheck.eps}
+\caption{Point-to-point averaged signals.  These are extracted from the first letter identification trial of the Subject 1 of the pseudo-real dataset.  The ERP is superimposed on classes 3 and 9.  Class 3 is obtained while averaging the segments where the row of the speller matrix is intensified whereas class 9 is calculated from the intensification of the corresponding column.}
+\label{fig:gaincheck}
+\end{figure}
 
 \subsubsection{Experiments}
 The experiments are as follows:
@@ -699,46 +725,9 @@ The experiments are as follows:
 
 All these experiments are executed using cross validation procedure dividing the letter to spell in two sets, preserving the structure of the letter identification trials. Spelling letters are scrambled while the order and group of each intensification sequence is preserved.
 
-Finally the performance at letter identifications for these same methods is evaluated by performing an offline BCI Simulation on the Dataset IIb of the BCI Competition II (2003)~\citep{Blankertz2002}.  The protocol of this dataset is very similar to what was used to obtain the pseudo-real dataset.  The sampling frequency of this dataset is $240$, the number of letters are $73$ where the first $42$ are used to create the template dictionary for all the methods and the remaining $31$ are used to test the character recognition rate performance.  Additionally, in this dataset the number of available intensification number sequences is $15$.  The classification method Support Vector Machine SVM with a linear kernel, is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions~\citep{Kaper2004}. 
+Finally the performance at letter identifications for these same methods is evaluated by running an offline BCI Simulation on the Dataset IIb of the BCI Competition II (2003)~\citep{Blankertz2002}.  The protocol of this dataset is very similar to what was used to obtain the pseudo-real dataset.  The sampling frequency of this dataset is $240$, the number of letters are $73$ where the first $42$ are used to create the template dictionary for all the methods and the remaining $31$ are used to test the character recognition rate performance.  Additionally, in this dataset the number of available intensification number sequences is $15$.  The classification method Support Vector Machine SVM with a linear kernel, is added for comparison as control using a feature $f$ constructed by normalizing the signal on each channel~\citep{Krusienski2006}.  This method has been proved efficient in decoding P300 in several BCI Competitions~\citep{Kaper2004}. 
 
 %This P300 Speller protocol consist in the flashing of 35 trails of 35 letters (7 words of 5 letter) where the intensification sequence of 6 rows and 6 columns is repeated 10 times for each letter.  More details can be found on the published work of \citep{Riccio2013}.
-
-Figure~\ref{fig:gains} shows a $5s$ sample of the EEG trace obtained with the MNE library~\citep{Gramfort2013}.  Channel $S$ represents the twelve different stimulus markers (columns or rows) while channel $L$ represent the label (\textit{True} vs \textit{False}).  Labels are represented by square signals.  \textit{False} segments are marked with single amplitude square signals while \textit{True} segments are identified by double-amplitude square signals.  Subfigure (a) shows the signals before the ERP template is superimposed while subfigure (b) shows the same signals with the superimposed ERP template.  At first-sight, differences are really hard to spot visually.  Subfigures (c) and (d) show only one second of channels Cz and L from the same segment.  The superimposed ERP can be devised enclosed by the vertical bars, around $31.5$s, where in (d) the peak is slightly bigger.  Figure~\ref{fig:gaincheck} shows the obtained ensemble average ERPs as result of superimposing the template signal into the EEG stream, time-locked to the stimulus onset.   These 12 point-to-point averaged segments correspond to the first trial of the EEG stream.
-
-%The original signal-to-noise ratio was calculated as Hue 2010.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=12cm]{images/erptemplate1.eps}
-\caption{ERP Template obtained from the coherent point-to-point ensemble average from the signals of Subject Number Eight of the BNCI Horizon public dataset 008-2014. The template is $1s$ long which is 256 sample points, and the eight channels are superimposed with different colors.  The P3b component can be seen around the sample index $150$ and $200$.}
-\label{fig:erptemplate1}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-\subfigure[EEG trace of the original signal. The horizontal axis represents $10$ seconds of the EEG stream, from the $28$th second up to the $38$th.]{\includegraphics[width=.45\linewidth]{images/nogain.eps}}
-\subfigure[The same $10$-seconds eight-channel signal segment with the superimposed template.]{\includegraphics[width=.45\linewidth]{images/singlegain.eps}}
-\subfigure[EEG sample of Cz and L channel of the original EEG trace. Only $1$ second is shown here, at the $31$th second.]{\includegraphics[width=.45\linewidth]{images/nogainzoomhit.eps}}
-\subfigure[The same segment with the superimposed template.]{\includegraphics[width=.45\linewidth]{images/singlegainzoomhit.eps}}
-\caption{Eight-channel EEG signal for Subject Number 1 of the pseudo-real dataset without and with the superimposed ERP Template. The channel L, the mark which identifies where to superimpose the P300 ERP, is shown as well as the channel S which identifies the stimulus that was presented. On (c) and (d) the small variation that was introduced by the superimposition of the ERP can be seen enclosed by the vertical bars, where the slope of the bump on subfigure (d) is slightly bigger}
-\label{fig:gains}
-\end{figure}
-
-
-%\begin{figure}[H]
-%\centering
-%\includegraphics[width=12cm]{images/nogain.eps}
-%\includegraphics[width=12cm]{images/singlegain.eps}
-%\caption{Eight-channel EEG signal superimposed with the ERP Template.  (Left) EEG trace of the original signal. (Right) The same signal segment with the added template.}
-%\label{fig:doubleandtriplegain}
-%\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=1.0\linewidth]{images/GainCheck.eps}
-\caption{Point-to-point averaged signals.  These are extracted from the first letter identification trial of the Subject 1 of the pseudo-real dataset.  The ERP is superimposed on classes 3 and 9.  Class 3 is obtained while averaging the segments where the row of the speller matrix is intensified whereas class 9 is calculated from the intensification of the corresponding column.}
-\label{fig:gaincheck}
-\end{figure}
 
 %The averaging procedure aims to extract the superimposed ERP Template and cancel out everything else on each segment.  
 
@@ -781,7 +770,7 @@ Thus, the letter identification performance can be obtained by measuring the acc
 \section{Results}
 \label{section:results}
 
-Results for the first experiment are shown in Figures~\ref{fig:1-1}  and \ref{fig:2-1}. The performance while identifying each letter of the standard P300 Speller Matrix, and the channels where the best and worst performance is attained, is shown.   Each one represents the percentage of letters that is actually predicted by the algorithms using a cross-validation procedure.  As previously described the data is continuously divided in two sets, where the first 15 letters are used to derive the dictionary of templates while the remaining 20 letters are used to measure the letter identification performance. This is repeated one hundred times, and performances averaged.  Figure~\ref{fig:1-1} show the results for the passive modality while Figure~\ref{fig:2-1} shows the results for the active modality.
+Results for the first experiment are shown in Figures~\ref{fig:1-1}  and \ref{fig:2-1}. The performance while identifying each letter of the standard P300 Speller Matrix, and the channels where the best and worst performance is attained, is shown.   Each one represents the percentage of letters that is actually predicted by the algorithms using a cross-validation procedure.  As previously described the data is continuously divided in two sets, where the first 15 letters are used to derive the dictionary of templates while the remaining 20 letters are used to measure the letter identification performance. This is repeated one ten times, and performances averaged.  Figure~\ref{fig:1-1} show the results for the passive modality while Figure~\ref{fig:2-1} shows the results for the active modality.
 
 \begin{figure}[H]
 \centering
@@ -803,14 +792,14 @@ Figures~\ref{fig:1-2} and ~\ref{fig:2-2}  shows the performance curves for five 
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/1-2.eps}
-\caption{\textbf{Passive Modality - Experiment 2}: Performance curves for four subjects for the five algorithms while a random latency is included while superimposed the P300 signal template.}
+\caption{\textbf{Passive Modality - Experiment 2}: Performance curves for four subjects for the five algorithms when a random latency is included when superimposing the P300 signal template.}
 \label{fig:1-2}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=15cm]{images/2-2.eps}
-\caption{\textbf{Active Modality - Experiment 2}: Performance curves for four subjects for the five algorithms while a random latency is included while superimposed the P300 signal template.}
+\caption{\textbf{Active Modality - Experiment 2}: Performance curves for the four subjects for the five algorithms.  A random latency is included while superimposing the P300 signal template.}
 \label{fig:2-2}
 \end{figure}
 
@@ -849,10 +838,10 @@ Furthermore, results obtained for the dataset BCI Competition 2003 IIb are shown
 \toprule
 \textbf{Method}	& \textbf{Channel} &  \textbf{Performance} \\
 \midrule
-MP 1 & FC2  & $50\%$ \\
-MP 2 & CPz & $22\%$ \\
-SIFT  & Cz & $67\%$ \\
-PE     & PO8 & $22\%$ \\
+MP 1 & Cz  & $50\%$ \\
+MP 2 & FC1 & $22\%$ \\
+SIFT  & FC1 & $67\%$ \\
+PE     & CP1 & $22\%$ \\
 SHCC & Cz & $61\%$ \\
 SVM     & C1  & $32\%$ \\
 \bottomrule
@@ -905,7 +894,7 @@ A significant reduction of performance was found when latency noise is added.  T
 
 Using a straightforward dictionary of templates for \textit{MP-1} proved more beneficial in terms of performance than the approach of using a Hilbert base of Wavelets atoms on \textit{MP-2}.  Either applying latency noise or amplitude noise, the method based on the signal's templates instead of using their coefficients achieve much better character identification rates.  
 
-Regarding results produced for the public and real dataset IIb of P300 ERP from the Berlin BCI Competition II (2003), the obtained character identification rate is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$~\citep{Neuper2003,Kathner2017}.  When the character identification rate reaches this level of performance, the usage of word predicting algorithms allows to implement practical speller applications.  Results for this competition have shown perfect classification with tailored algorithm.  This level is also similar to the performance obtained for the Experiment 3, which represents coincidentally the more realistic scenario for the pseudo-real dataset.  It is important to remark that the algorithms presented here analyze the waveform structure of a single-channel signal~\citep{Rakotomamonjy2008,Gribonval2008}.  
+Regarding results produced for the public and real dataset IIb of P300 ERP from the Berlin BCI Competition II (2003), the obtained character identification rate is above theoretical chance level, and for some algorithms close to the usable threshold of $70\%$~\citep{Neuper2003,Kathner2017}.  When the character identification rate reaches this level of performance, the usage of word predicting algorithms allows to implement practical speller applications.  Results for this competition have shown perfect classification with tailored algorithms~\citep{Kundu2018}.  This level is also similar to the performance obtained for the Experiment 3, which represents coincidentally the more realistic scenario for the pseudo-real dataset.  It is important to remark that the algorithms presented here analyze the waveform structure of a single-channel signal~\citep{Rakotomamonjy2008,Gribonval2008}.  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
@@ -919,13 +908,11 @@ Further work should be conducted in terms of a multichannel meaningful extension
 
 %How much is it possible to classify and implement a P300 ERP Speller using only the waveform structure of the signal ? Which algorithm perform better at this even when segment latency variations and component amplitudes issues are present ?
 
-waveform-based BCI system, which has an inherent intelligible property (REF), will foster a collaboration in a multidisciplinary environment and will ease the acceptance, and the usability and usefulness of a BCI device.   The reason being, for caregivers and medical staff, particularly those with the traditional knowledge of the clinical EEG which is based on waveforms, they will feel more natural the understanding of how the system is detecting signals.
-
-One of the main goals of the BCI discipline is to provide assistance to patients and to provide alternative tools to be used in diagnostics and rehabilitation procedure.  This requires a clinical focus which is often neglected in BCI research~\citep{Chavarriaga2017}.  At the same time, BCI reliability is yet an unfulfilled goal in this discipline~\citep{WolpawJonathanR2012}. The convenience of analyzing or including metrics about the shape of the EEG, is that clinical EEG diagnosis may support a vast set of already understood knowledge which is based on identifying EEG patterns by their shape and that can steer towards a more robust implementation of BCI devices.
+%One of the main goals of the BCI discipline is to provide assistance to patients and to provide alternative tools to be used in diagnostics and rehabilitation procedure.  This requires a clinical focus which is often neglected in BCI research~\citep{Chavarriaga2017}.  At the same time, BCI reliability is yet an unfulfilled goal in this discipline~\citep{WolpawJonathanR2012}. The convenience of analyzing or including metrics about the shape of the EEG, is that clinical EEG diagnosis may support a vast set of already understood knowledge which is based on identifying EEG patterns by their shape and that can steer towards a more robust implementation of BCI devices.
 
 %The conventional clinical method of observing the waveform is understood to be subjective and laborious because results depend on the technicians' experience and expertise.   At the same time, it is a subjective time-consuming task, with long-learning curves, requires specialized personnel, and it has significant error rates~\citep{Tjepkema-Cloostermans2018}.  These problems has pushed for the adoption of more automated means of decoding the signals~\citep{Thakor2004}.   This trend pointed to the initial development of quantitative EEG, which however didn't replaced clinically the traditional approach which is still widespread: the Gold standard in clinical EEG is still \textit{Eye Ball}~\citep{Wulsin2011,Tjepkema-Cloostermans2018}.  
 
-We believe that the adoption of a \textit{hybrid} methodology which can process the signal automatically, but at the same time, maintains an inherent intelligible property~\citep{j2018challenge} that can be mapped to existing procedures, and above all, can maintain the clinician trust on the system behavior is beneficial to Clinical Practice, Neuroscience and BCI research. 
+We believe that the adoption of a \textit{hybrid} methodology which can process the signal automatically, but at the same time, maintains an inherent intelligible property~\citep{j2018challenge} that can be mapped to existing procedures, and above all, can maintain the clinician trust on the system behavior is beneficial to Clinical Practice, Neuroscience and BCI research.  Additionally, this may foster collaboration in a multidisciplinary environment and may ease the acceptance and translation of BCI technology~\citep{Chavarriaga2017}.   The reason being, for caregivers and medical staff, particularly those with the expertise of the clinical EEG which is based on waveforms, they may feel a natural understanding of how the system is performing.
 
 %These methods have the advantage that they can map a visual component with a clinical meaning to a feature with an objective representation. Compound classifiers or ensemble of features can be explored.  Successful approaches in Computer Vision or Pattern Recognition in other areas use them~\citep{Criminisi2013} with a significant enhancement of the classification performances~\citep{Gu2012}.
 
